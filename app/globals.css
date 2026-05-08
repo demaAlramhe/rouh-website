@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #f8f1df;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 239, 0.76), rgba(248, 241, 223, 0.96)),
+    radial-gradient(circle at 10% 6%, rgba(177, 126, 121, 0.2), transparent 30rem),
+    radial-gradient(circle at 88% 14%, rgba(90, 157, 176, 0.2), transparent 31rem),
+    radial-gradient(circle at 52% 52%, rgba(255, 255, 255, 0.32), transparent 34rem),
+    #f8f1df;
+  color: #321b22;
+  font-family: var(--font-cairo), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "kern";
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(90, 157, 176, 0.25);
+  color: #321b22;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(127, 42, 70, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 42, 70, 0.02) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 76%, transparent);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.luxury-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-card::before {
+  position: absolute;
+  inset: 1px;
+  pointer-events: none;
+  content: "";
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 34%);
+}
+
+.rouh-logo-mark {
+  display: block;
+  width: 2.9rem;
+  height: 4.4rem;
+  flex: 0 0 auto;
+  background-image: url("/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 248%;
+}
+
+@media (min-width: 640px) {
+  .rouh-logo-mark {
+    width: 3.2rem;
+    height: 4.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === Accessibility widget overrides === */
+.a11y-grayscale main,
+.a11y-grayscale header,
+.a11y-grayscale footer {
+  filter: grayscale(1);
+}
+
+.a11y-readableFont,
+.a11y-readableFont body {
+  font-family: "Tahoma", "Arial", "Trebuchet MS", system-ui, sans-serif !important;
+  letter-spacing: 0.01em;
+}
+
+.a11y-underlineLinks main a,
+.a11y-underlineLinks header a,
+.a11y-underlineLinks footer a {
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+  text-decoration-thickness: 1.5px !important;
+}
+
+.a11y-highlightHeadings main h1,
+.a11y-highlightHeadings main h2,
+.a11y-highlightHeadings main h3,
+.a11y-highlightHeadings main h4,
+.a11y-highlightHeadings footer h1,
+.a11y-highlightHeadings footer h2,
+.a11y-highlightHeadings footer h3,
+.a11y-highlightHeadings footer h4 {
+  outline: 2px dashed rgba(127, 42, 70, 0.45);
+  outline-offset: 8px;
+  border-radius: 6px;
+}
+
+.a11y-highlightInteractive main a,
+.a11y-highlightInteractive main button,
+.a11y-highlightInteractive header a,
+.a11y-highlightInteractive header button,
+.a11y-highlightInteractive footer a,
+.a11y-highlightInteractive footer button {
+  outline: 2px solid rgba(90, 157, 176, 0.55);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+.a11y-pauseAnimations *:not(.a11y-widget):not(.a11y-widget *),
+.a11y-pauseAnimations *:not(.a11y-widget):not(.a11y-widget *)::before,
+.a11y-pauseAnimations *:not(.a11y-widget):not(.a11y-widget *)::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.a11y-highContrast main,
+.a11y-highContrast header,
+.a11y-highContrast footer {
+  background: #000 !important;
+}
+
+.a11y-highContrast main *,
+.a11y-highContrast header *,
+.a11y-highContrast footer * {
+  background-image: none !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.a11y-highContrast main a,
+.a11y-highContrast main a *,
+.a11y-highContrast header a,
+.a11y-highContrast header a *,
+.a11y-highContrast footer a,
+.a11y-highContrast footer a * {
+  color: #ffd84d !important;
+}
+
+.a11y-highContrast main button,
+.a11y-highContrast header button,
+.a11y-highContrast footer button {
+  border: 1.5px solid #ffffff !important;
+}
+
+.a11y-highContrast main img,
+.a11y-highContrast header img,
+.a11y-highContrast footer img {
+  filter: contrast(1.15) brightness(1.05);
+}
