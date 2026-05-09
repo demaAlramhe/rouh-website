@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
-import { VideoFrame } from "@/components/ui/VideoFrame";
-import { assets, siteMeta } from "@/data/siteContent";
+import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
+import { siteMeta } from "@/data/siteContent";
+
+const FREE_WORKSHOP_VIDEO_ID = "8gFt-RCiFlI";
 
 export const metadata: Metadata = {
   title: "الورشة المجانية والكتيّب | Rouh by Aseel Omar",
@@ -15,53 +16,35 @@ export const metadata: Metadata = {
 export default function FreeWorkshopPage() {
   return (
     <>
-      <section className="relative overflow-hidden px-5 pb-16 pt-48 sm:px-8 lg:pb-24 lg:pt-44">
+      <section className="relative overflow-hidden px-5 pb-20 pt-48 sm:px-8 lg:pb-28 lg:pt-44">
         <div className="absolute inset-0 -z-10 bg-rouh-radial" />
         <div className="absolute inset-x-10 top-28 -z-10 h-px bg-gradient-to-l from-transparent via-rouh-wine/16 to-transparent" />
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="animate-reveal text-center lg:text-right">
-            <Badge>ورشة مجانية + كتيّب PDF</Badge>
-            <h1 className="text-balance mt-7 font-display text-[3.1rem] font-bold leading-[1.14] tracking-[-0.025em] text-rouh-ink sm:text-6xl">
-              بداية هادئة لفهم الترددات والعودة إلى حضورك الداخلي
-            </h1>
-            <p className="text-pretty mx-auto mt-6 max-w-2xl text-lg leading-9 text-rouh-ink/72 lg:mx-0">
-              هذه الصفحة مهيّأة لتضم فيديو الورشة المجانية، شرحًا مختصرًا، وكتيّبًا قابلًا
-              للتحميل. يمكن استبدال رابط الفيديو والملف لاحقًا من ملف المحتوى أو مجلد docs.
-            </p>
-            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <ButtonLink href={siteMeta.booklet} download>
-                تحميل الكتيّب المجاني
-              </ButtonLink>
-              <ButtonLink href="/#courses" variant="secondary">
-                مشاهدة الكورس الحالي
-              </ButtonLink>
-            </div>
-          </div>
+        <div className="pointer-events-none absolute left-1/2 top-[22%] -z-10 size-[min(32rem,88vw)] -translate-x-1/2 rounded-full bg-rouh-blue/12 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-[8%] left-1/2 -z-10 size-72 -translate-x-1/2 rounded-full bg-rouh-rose/14 blur-3xl" />
 
-          <div className="relative">
-            <div className="absolute -right-8 top-8 size-48 rounded-full bg-rouh-blue/18 blur-3xl" />
-            <div className="absolute -left-10 bottom-10 size-52 rounded-full bg-rouh-wine/14 blur-3xl" />
-            <div className="luxury-card relative rounded-[2.7rem] bg-premium-card p-3 shadow-glow ring-1 ring-white/75">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2.15rem]">
-                <Image
-                  src={assets.workshopCover}
-                  alt="غلاف الورشة المجانية"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 520px, 90vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-rouh-ink/48 via-transparent to-transparent" />
-                <div className="absolute bottom-7 right-5 max-w-xs rounded-[1.7rem] bg-rouh-sand/92 p-5 text-right shadow-petal ring-1 ring-white/70 backdrop-blur sm:right-7">
-                  <p className="font-display text-2xl font-bold text-rouh-wine">
-                    ورشة Rouh المجانية
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-rouh-ink/70">
-                    فيديو تمهيدي وكتيّب عملي كبداية لطيفة للرحلة.
-                  </p>
-                </div>
-              </div>
-            </div>
+        <div className="animate-reveal relative mx-auto max-w-3xl text-center">
+          <Badge>ورشة مجانية + كتيّب مرافق</Badge>
+          <h1 className="text-balance mt-8 font-display text-[3.1rem] font-bold leading-[1.14] tracking-[-0.025em] text-rouh-ink sm:text-[3.35rem] lg:text-6xl">
+            بداية هادئة للتعرّف إلى عالم الترددات والعودة إلى نفسك
+          </h1>
+          <div className="text-pretty mx-auto mt-8 max-w-2xl space-y-5 text-lg leading-9 text-rouh-ink/72">
+            <p>
+              في هذه الصفحة ستجدين الورشة المجانية مع الكتيّب المرافق،
+              <br />
+              لتعيشي تجربة أولى بسيطة وملهمة مع الترددات والصوت.
+            </p>
+            <p>
+              مساحة لطيفة تساعدك على الفهم، الهدوء، والاقتراب أكثر من هذا العالم بخطوة مريحة
+              وواضحة.
+            </p>
+          </div>
+          <div className="mt-11 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <ButtonLink href={siteMeta.booklet} download>
+              تحميل الكتيّب المجاني
+            </ButtonLink>
+            <ButtonLink href="/#courses" variant="secondary">
+              مشاهدة الكورس الحالي
+            </ButtonLink>
           </div>
         </div>
       </section>
@@ -69,10 +52,14 @@ export default function FreeWorkshopPage() {
       <SectionShell
         eyebrow="فيديو الورشة"
         title="شاهدي الورشة في مساحة هادئة"
-        description="اتركي هنا رابط التضمين للفيديو عندما يصبح جاهزًا."
+        description="اضغطي على المعاينة للاستماع والمشاهدة في نافذة هادئة دون إزعاج بقية الصفحة."
         className="pt-8"
       >
-        <VideoFrame title="فيديو الورشة المجانية" />
+        <VideoPreviewLightbox
+          videoId={FREE_WORKSHOP_VIDEO_ID}
+          title="فيديو الورشة المجانية"
+          caption="شاهدي الورشة عندما تكونين جاهزة — اضغطي للتشغيل"
+        />
       </SectionShell>
 
       <SectionShell

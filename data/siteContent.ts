@@ -8,7 +8,7 @@ export const siteMeta = {
   instagram: "https://www.instagram.com/_aseelomar_?igsh=OWN2bHp6ZmIwdWRm",
   booklet: "/docs/free-booklet.pdf",
   paymentUrl: "https://example.com/payment",
-  courseUrl: "https://example.com/current-course",
+  courseUrl: "/frontal-course",
 };
 
 export const assets = {
@@ -64,7 +64,7 @@ export const journeyItems = [
 export const soundJourney = {
   title: "رحلة صوت… تعيدكِ إلى نفسك وسط ضجيج العالم الخارجي 🍃",
   text: "في Rouh، نستخدم الترددات العلاجية والطاسات التبتية لنخلق مساحة من الهدوء، الحضور، والوعي… مساحة تلامس الروح بلطف وتترك أثرًا حقيقيًا في الداخل",
-  videoUrl: "",
+  videoId: "tisi5HDtkCY",
 };
 
 export const offerings = [
@@ -85,7 +85,7 @@ export const offerings = [
     cta: "الدفع والحجز",
     secondaryCta: "معرفة المزيد",
     href: siteMeta.paymentUrl,
-    secondaryHref: siteMeta.courseUrl,
+    secondaryHref: "/frontal-course",
   },
   {
     title: "الكورس الأونلاين",

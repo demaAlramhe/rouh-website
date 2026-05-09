@@ -2,7 +2,7 @@ import Image from "next/image";
 import { assets, soundJourney } from "@/data/siteContent";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
-import { VideoFrame } from "@/components/ui/VideoFrame";
+import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
 
 export function SoundJourneySection() {
   return (
@@ -40,7 +40,11 @@ export function SoundJourneySection() {
               </ButtonLink>
             </div>
           </div>
-          <VideoFrame title="فيديو الرحلة الصوتية" embedUrl={soundJourney.videoUrl} />
+          <VideoPreviewLightbox
+            videoId={soundJourney.videoId}
+            title="فيديو الرحلة الصوتية"
+            caption="اضغطي للتشغيل والمشاهدة في مساحة هادئة"
+          />
         </div>
       </div>
     </SectionShell>
