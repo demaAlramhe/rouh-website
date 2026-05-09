@@ -16,6 +16,7 @@ export const assets = {
   profile: "/images/aseel-profile.jpg",
   rose: "/images/rose-reference.jpg",
   hero: "/images/hero-image.jpg",
+  bookletCover: "/images/booklet-cover.png",
   workshopCover: "/images/workshop-cover.jpg",
   individualSession: "/images/session-individual.jpg",
   couplesSession: "/images/session-couples.jpg",

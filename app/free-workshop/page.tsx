@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
+import { BookletPdfLightbox } from "@/components/ui/BookletPdfLightbox";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
-import { siteMeta } from "@/data/siteContent";
+import { assets, siteMeta } from "@/data/siteContent";
 
 const FREE_WORKSHOP_VIDEO_ID = "8gFt-RCiFlI";
 
@@ -16,56 +17,63 @@ export const metadata: Metadata = {
 export default function FreeWorkshopPage() {
   return (
     <>
-      <section className="relative overflow-hidden px-5 pb-20 pt-48 sm:px-8 lg:pb-28 lg:pt-44">
+      <section className="relative overflow-hidden px-5 pb-14 pt-48 sm:px-8 lg:pb-16 lg:pt-44">
         <div className="absolute inset-0 -z-10 bg-rouh-radial" />
         <div className="absolute inset-x-10 top-28 -z-10 h-px bg-gradient-to-l from-transparent via-rouh-wine/16 to-transparent" />
-        <div className="pointer-events-none absolute left-1/2 top-[22%] -z-10 size-[min(32rem,88vw)] -translate-x-1/2 rounded-full bg-rouh-blue/12 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-[8%] left-1/2 -z-10 size-72 -translate-x-1/2 rounded-full bg-rouh-rose/14 blur-3xl" />
+        <div className="pointer-events-none absolute left-1/2 top-[14%] -z-10 size-[min(28rem,85vw)] -translate-x-1/2 rounded-full bg-rouh-blue/11 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-[8%] left-1/2 -z-10 size-64 -translate-x-1/2 rounded-full bg-rouh-rose/12 blur-3xl" />
 
         <div className="animate-reveal relative mx-auto max-w-3xl text-center">
           <Badge>ورشة مجانية + كتيّب مرافق</Badge>
-          <h1 className="text-balance mt-8 font-display text-[3.1rem] font-bold leading-[1.14] tracking-[-0.025em] text-rouh-ink sm:text-[3.35rem] lg:text-6xl">
-            بداية هادئة للتعرّف إلى عالم الترددات والعودة إلى نفسك
+          <h1 className="text-balance mt-5 font-display text-[2.35rem] font-bold leading-[1.18] tracking-[-0.02em] text-rouh-ink sm:text-5xl lg:text-[3.05rem]">
+            ابدئي رحلتك المجانية مع الترددات والصوت
           </h1>
-          <div className="text-pretty mx-auto mt-8 max-w-2xl space-y-5 text-lg leading-9 text-rouh-ink/72">
-            <p>
-              في هذه الصفحة ستجدين الورشة المجانية مع الكتيّب المرافق،
-              <br />
-              لتعيشي تجربة أولى بسيطة وملهمة مع الترددات والصوت.
-            </p>
-            <p>
-              مساحة لطيفة تساعدك على الفهم، الهدوء، والاقتراب أكثر من هذا العالم بخطوة مريحة
-              وواضحة.
-            </p>
-          </div>
-          <div className="mt-11 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href={siteMeta.booklet} download>
-              تحميل الكتيّب المجاني
-            </ButtonLink>
-            <ButtonLink href="/#courses" variant="secondary">
-              مشاهدة الكورس الحالي
-            </ButtonLink>
-          </div>
+          <p className="text-pretty mx-auto mt-4 max-w-xl text-base leading-8 text-rouh-ink/72 sm:text-lg sm:leading-9">
+            شاهدي الورشة المجانية وحمّلي الكتيّب المرافق لتتعرّفي بشكل أوضح على هذا العالم،
+            وتبدئي بخطوة لطيفة نحو الهدوء والحضور الداخلي.
+          </p>
+        </div>
+
+        <div className="relative mx-auto mt-8 max-w-7xl sm:mt-10">
+          <article className="luxury-card overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10">
+            <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12 lg:gap-x-14">
+              {/* RTL: عمود أول يمين = الكتيّب (~ثُلث) */}
+              <BookletPdfLightbox
+                className="order-2 lg:order-none"
+                pdfUrl={siteMeta.booklet}
+                coverSrc={assets.bookletCover}
+                coverAlt="غلاف الكتيّب المرافق للورشة المجانية"
+                heading="الكتيّب المرافق للورشة"
+                modalTitle="معاينة الكتيّب — الورشة المجانية"
+              />
+
+              {/* عمود ثانٍ يسار = الفيديو (~ثُلثان) */}
+              <div className="order-1 flex min-w-0 flex-col lg:order-none">
+                <p className="text-center text-xs font-bold tracking-[0.22em] text-rouh-blue">
+                  فيديو الورشة
+                </p>
+                <h2 className="text-balance mt-2 text-center font-display text-2xl font-bold text-rouh-ink sm:text-3xl">
+                  شاهدي الورشة المجانية
+                </h2>
+                <p className="text-pretty mt-2 text-center text-sm leading-7 text-rouh-ink/58">
+                  مساحة واسعة للمشاهدة — اضغطي للتشغيل في نافذة هادئة.
+                </p>
+                <VideoPreviewLightbox
+                  className="mt-5"
+                  videoId={FREE_WORKSHOP_VIDEO_ID}
+                  title="فيديو الورشة المجانية"
+                />
+              </div>
+            </div>
+          </article>
         </div>
       </section>
-
-      <SectionShell
-        eyebrow="فيديو الورشة"
-        title="شاهدي الورشة في مساحة هادئة"
-        description="اضغطي على المعاينة للاستماع والمشاهدة في نافذة هادئة دون إزعاج بقية الصفحة."
-        className="pt-8"
-      >
-        <VideoPreviewLightbox
-          videoId={FREE_WORKSHOP_VIDEO_ID}
-          title="فيديو الورشة المجانية"
-          caption="شاهدي الورشة عندما تكونين جاهزة — اضغطي للتشغيل"
-        />
-      </SectionShell>
 
       <SectionShell
         eyebrow="بعد الورشة"
         title="اختاري الخطوة التالية في رحلتك"
         description="هذه الصفحة تربط الورشة المجانية بمسارات Rouh المدفوعة بطريقة واضحة وناعمة."
+        className="pt-4"
       >
         <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-10">

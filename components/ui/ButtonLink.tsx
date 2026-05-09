@@ -20,18 +20,26 @@ const variantClasses: Record<ButtonVariant, string> = {
     "bg-[linear-gradient(135deg,#fffaf0,#f8f1df)] text-rouh-ink shadow-[0_16px_36px_rgba(50,27,34,0.13),inset_0_1px_0_rgba(255,255,255,0.85)] ring-1 ring-white/70 hover:-translate-y-1.5 hover:bg-white",
 };
 
+function shouldUseNativeAnchor(href: string, download?: AnchorHTMLAttributes<HTMLAnchorElement>["download"]) {
+  if (href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) return true;
+  if (download != null && download !== false) return true;
+  const path = href.split("?")[0] ?? href;
+  return /\.pdf$/i.test(path);
+}
+
 export function ButtonLink({
   href,
   children,
   variant = "primary",
   className = "",
+  download,
   ...props
 }: ButtonLinkProps) {
   const classes = `group relative isolate inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-sm font-bold tracking-[-0.01em] transition duration-300 ease-out after:absolute after:inset-y-0 after:-right-1/2 after:-z-10 after:w-1/2 after:skew-x-[-18deg] after:bg-white/22 after:opacity-0 after:blur-md after:transition after:duration-500 hover:after:right-[120%] hover:after:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rouh-blue ${variantClasses[variant]} ${className}`;
 
-  if (href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+  if (shouldUseNativeAnchor(href, download)) {
     return (
-      <a href={href} className={classes} {...props}>
+      <a href={href} className={classes} download={download} {...props}>
         {children}
       </a>
     );
