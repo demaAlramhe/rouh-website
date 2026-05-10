@@ -7,7 +7,7 @@ import { SectionShell } from "@/components/ui/SectionShell";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
 import { assets, siteMeta } from "@/data/siteContent";
 
-const FREE_WORKSHOP_VIDEO_ID = "8gFt-RCiFlI";
+const FREE_WORKSHOP_VIDEO_ID = "tisi5HDtkCY";
 
 export const metadata: Metadata = {
   title: "الورشة المجانية والكتيّب | Rouh by Aseel Omar",
@@ -87,8 +87,8 @@ export default function FreeWorkshopPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={siteMeta.paymentUrl}>الدفع والحجز</ButtonLink>
-              <ButtonLink href="/#contact" variant="secondary">
-                أسئلة قبل التسجيل
+              <ButtonLink href={siteMeta.courseUrl} variant="secondary">
+                تعرّفي أكثر على الكورس
               </ButtonLink>
             </div>
           </article>

@@ -195,3 +195,23 @@ body::before {
 .a11y-highContrast footer img {
   filter: contrast(1.15) brightness(1.05);
 }
+
+/* Horizontal course gallery strip — thin, soft scrollbar */
+.gallery-h-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 42, 70, 0.32) transparent;
+}
+
+.gallery-h-scroll::-webkit-scrollbar {
+  height: 7px;
+}
+
+.gallery-h-scroll::-webkit-scrollbar-thumb {
+  background: rgba(127, 42, 70, 0.28);
+  border-radius: 999px;
+}
+
+.gallery-h-scroll::-webkit-scrollbar-track {
+  background: rgba(50, 27, 34, 0.06);
+  border-radius: 999px;
+}

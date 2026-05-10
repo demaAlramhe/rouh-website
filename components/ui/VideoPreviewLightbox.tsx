@@ -10,6 +10,12 @@ type VideoPreviewLightboxProps = {
   posterSrc?: string;
   caption?: string;
   className?: string;
+  /**
+   * Muted inline player: autoplays only after the user has scrolled/wheeled/touched the page and
+   * this block is sufficiently in view; unmounts when it leaves the viewport (pauses). Does not
+   * autoplay on first paint even if the block is already visible.
+   */
+  autoPlayWhenVisible?: boolean;
 };
 
 function PlayGlyph({ className = "" }: { className?: string }) {
@@ -31,9 +37,14 @@ export function VideoPreviewLightbox({
   posterSrc,
   caption,
   className = "",
+  autoPlayWhenVisible = false,
 }: VideoPreviewLightboxProps) {
   const [open, setOpen] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [hasUserScrolled, setHasUserScrolled] = useState(false);
+  /** After a tap, reload embed with sound (browsers block unmuted autoplay without a gesture). */
+  const [inlineSoundOn, setInlineSoundOn] = useState(false);
   const [posterUrl, setPosterUrl] = useState(
     posterSrc ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
   );
@@ -41,8 +52,15 @@ export function VideoPreviewLightbox({
   const dialogId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const openRef = useRef<HTMLButtonElement>(null);
+  const viewportTargetRef = useRef<HTMLDivElement>(null);
 
   const embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  const inlineMutedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1`;
+  const inlineUnmutedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1&controls=1`;
+
+  const shouldPlayInline =
+    autoPlayWhenVisible && inView && hasUserScrolled && !open;
+  const inlineActiveSrc = inlineSoundOn ? inlineUnmutedSrc : inlineMutedSrc;
 
   const close = useCallback(() => {
     setOpen(false);
@@ -69,47 +87,108 @@ export function VideoPreviewLightbox({
     };
   }, [open, close]);
 
+  useEffect(() => {
+    if (!autoPlayWhenVisible) return;
+    const markScrolled = () => setHasUserScrolled(true);
+    window.addEventListener("scroll", markScrolled, { passive: true });
+    window.addEventListener("wheel", markScrolled, { passive: true });
+    window.addEventListener("touchmove", markScrolled, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", markScrolled);
+      window.removeEventListener("wheel", markScrolled);
+      window.removeEventListener("touchmove", markScrolled);
+    };
+  }, [autoPlayWhenVisible]);
+
+  useEffect(() => {
+    if (!autoPlayWhenVisible) return;
+    const el = viewportTargetRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting && entry.intersectionRatio >= 0.32);
+      },
+      { threshold: [0, 0.32, 0.55, 0.85], rootMargin: "0px 0px -6% 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [autoPlayWhenVisible]);
+
+  useEffect(() => {
+    if (!shouldPlayInline) setInlineSoundOn(false);
+  }, [shouldPlayInline]);
+
   const onPosterError = () => {
     setPosterUrl(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`);
   };
 
   return (
     <div className={className}>
-      <div className="luxury-card relative overflow-hidden rounded-[2.25rem] shadow-glow ring-1 ring-white/35">
-        <div className="relative aspect-video bg-rouh-ink">
+      <div
+        ref={viewportTargetRef}
+        className="luxury-card relative overflow-hidden rounded-[2.25rem] shadow-glow ring-1 ring-white/35"
+      >
+        <div className="relative aspect-video bg-black">
+          {/* Poster stays under the iframe so scroll-autoplay never shows an empty frame while YouTube loads */}
           <Image
             src={posterUrl}
             alt=""
             fill
-            className="object-cover"
+            className="z-0 object-cover"
             sizes="(min-width: 1024px) 1024px, 100vw"
             priority={false}
             onError={onPosterError}
           />
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-rouh-ink/72 via-rouh-ink/18 to-rouh-blue/10"
-            aria-hidden
-          />
-          <button
-            ref={openRef}
-            type="button"
-            onClick={openModal}
-            className="group absolute inset-0 flex flex-col items-center justify-center gap-4 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-rouh-ink/40"
-            aria-haspopup="dialog"
-            aria-expanded={open}
-            aria-controls={dialogId}
-          >
-            <span className="sr-only">تشغيل الفيديو: {title}</span>
-            <span
-              className="relative grid size-[4.25rem] place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition duration-300 group-hover:scale-105 group-hover:bg-white/26 group-hover:ring-white/60 sm:size-[4.75rem]"
-              aria-hidden
-            >
-              <PlayGlyph className="ms-1 size-9 opacity-95 sm:size-10" />
-            </span>
-            <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
-              {title}
-            </span>
-          </button>
+          {!shouldPlayInline ? (
+            <>
+              <div
+                className="absolute inset-0 z-[1] bg-gradient-to-t from-rouh-ink/72 via-rouh-ink/18 to-rouh-blue/10"
+                aria-hidden
+              />
+              <button
+                ref={openRef}
+                type="button"
+                onClick={openModal}
+                className="group absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-rouh-ink/40"
+                aria-haspopup="dialog"
+                aria-expanded={open}
+                aria-controls={dialogId}
+              >
+                <span className="sr-only">تشغيل الفيديو: {title}</span>
+                <span
+                  className="relative grid size-[4.25rem] place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition duration-300 group-hover:scale-105 group-hover:bg-white/26 group-hover:ring-white/60 sm:size-[4.75rem]"
+                  aria-hidden
+                >
+                  <PlayGlyph className="ms-1 size-9 opacity-95 sm:size-10" />
+                </span>
+                <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
+                  {title}
+                </span>
+              </button>
+            </>
+          ) : (
+            <>
+              <iframe
+                key={inlineActiveSrc}
+                className="absolute inset-0 z-[3] h-full w-full bg-black"
+                style={{ border: 0 }}
+                src={inlineActiveSrc}
+                title={title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+              {!inlineSoundOn ? (
+                <button
+                  type="button"
+                  onClick={() => setInlineSoundOn(true)}
+                  className="absolute left-1/2 top-4 z-[4] -translate-x-1/2 rounded-full bg-white/18 px-5 py-2.5 text-sm font-bold text-white shadow-[0_14px_44px_rgba(0,0,0,0.4)] ring-1 ring-white/45 backdrop-blur-md transition duration-300 hover:bg-white/28 hover:ring-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/75"
+                >
+                  تشغيل الصوت
+                </button>
+              ) : null}
+            </>
+          )}
         </div>
       </div>
 

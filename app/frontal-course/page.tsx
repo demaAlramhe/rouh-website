@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { FrontalCourseGallerySection } from "@/components/sections/FrontalCourseGallerySection";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
 import { siteMeta } from "@/data/siteContent";
 
-const FRONTAL_COURSE_VIDEO_ID = "tisi5HDtkCY";
+const FRONTAL_COURSE_VIDEO_ID = "BSBgYBJi9jQ";
 
 export const metadata: Metadata = {
   title: "كورس فن العلاج بالطاسات التبتية | Rouh by Aseel Omar",
@@ -29,7 +30,7 @@ function BulletList({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="relative pr-7 text-pretty leading-8 before:absolute before:right-0 before:top-[0.55em] before:size-2 before:rounded-full before:bg-gradient-to-br before:from-rouh-blue before:to-rouh-wine/80"
+          className="relative pr-7 text-pretty leading-[1.75] before:absolute before:right-0 before:top-[0.55em] before:size-2 before:rounded-full before:bg-gradient-to-br before:from-rouh-blue before:to-rouh-wine/80"
         >
           {item}
         </li>
@@ -47,7 +48,7 @@ export default function FrontalCoursePage() {
         <div className="absolute -left-24 top-1/3 -z-10 size-72 rounded-full bg-rouh-blue/12 blur-3xl" />
         <div className="absolute -right-16 bottom-24 -z-10 size-64 rounded-full bg-rouh-rose/16 blur-3xl" />
 
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-4xl text-center sm:max-w-[42rem]">
           <p className="animate-reveal font-display text-xl font-bold text-rouh-ink sm:text-2xl">
             رحلة استرخاء مجانية برفقة الترددات
           </p>
@@ -60,10 +61,8 @@ export default function FrontalCoursePage() {
             كورس فن العلاج بالطاسات التبتية
           </h1>
 
-          <p className="text-pretty mx-auto mt-8 max-w-2xl text-lg leading-9 text-rouh-ink/74">
-            تعلمي كيف تستخدمي الصوت والترددات
-            <br />
-            لدعم الاسترخاء، التوازن، والحضور العلاجي بوعي ومهنية 🤍
+          <p className="text-pretty mx-auto mt-8 max-w-2xl text-lg leading-[1.85] text-rouh-ink/74 sm:max-w-[36rem]">
+            تعلمي كيف تستخدمي الصوت والترددات لدعم الاسترخاء، التوازن، والحضور العلاجي بوعي ومهنية 🤍
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
@@ -83,13 +82,14 @@ export default function FrontalCoursePage() {
           <VideoPreviewLightbox
             videoId={FRONTAL_COURSE_VIDEO_ID}
             title="لمحة من رحلة الكورس — العلاج بالطاسات التبتية"
-            caption="شاهدي الفيديو في مساحة هادئة — اضغطي للتشغيل"
+            caption="يُشغَّل تلقائيًا بصمت عند التمرير — اضغطي «تشغيل الصوت» أعلى الفيديو أو من مشغّل YouTube لسماع الصوت"
+            autoPlayWhenVisible
           />
         </div>
       </div>
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
-        <div className="mx-auto max-w-3xl space-y-14">
+        <div className="mx-auto max-w-4xl space-y-14">
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
             <div className="flex items-center gap-3 text-rouh-wine">
               <span className="text-2xl" aria-hidden>
@@ -99,30 +99,20 @@ export default function FrontalCoursePage() {
                 مقدمة الكورس
               </h2>
             </div>
-            <div className="mt-8 space-y-6 text-pretty text-lg leading-9 text-rouh-ink/72">
+            <div className="mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink/72">
               <p>
-                الساوند هيلينغ مش بس صوت…
-                <br />
-                هو مساحة تهدئة، حضور، وتنظيم للجسد والجهاز العصبي 🌿
+                الساوند هيلينغ مش بس صوت… هو مساحة تهدئة، حضور، وتنظيم للجسد والجهاز العصبي 🌿
               </p>
               <p>
-                بهالأكاديمية رح تتعلمي كيف تستخدمي الطاسات التبتية
-                <br />
-                بشكل عملي ومهني،
-                <br />
-                لتدعمي نفسك ومتعالجينك عبر الترددات والصوت بوعي وثقة.
+                بهالأكاديمية رح تتعلمي كيف تستخدمي الطاسات التبتية بشكل عملي ومهني، لتدعمي نفسك
+                ومتعالجينك عبر الترددات والصوت بوعي وثقة.
               </p>
               <p>
-                نؤمن إنو الصوت مش بس يُسمَع…
-                <br />
-                هو شيء بينلمَس بالجسد والمشاعر،
-                <br />
-                وبيساعد الإنسان يرجع لحاله الطبيعية 🌿
+                نؤمن إنو الصوت مش بس يُسمَع… هو شيء بينلمَس بالجسد والمشاعر، وبيساعد الإنسان يرجع
+                لحاله الطبيعية 🌿
               </p>
               <p>
-                وهدفنا نخرّج معالِجات يشتغلوا بحضور، إحساس،
-                <br />
-                وفهم أعمق لتأثير الصوت على الإنسان.
+                وهدفنا نخرّج معالِجات يشتغلوا بحضور، إحساس، وفهم أعمق لتأثير الصوت على الإنسان.
               </p>
             </div>
           </article>
@@ -188,10 +178,8 @@ export default function FrontalCoursePage() {
                 "مساحة تساعدكِ تطوري ثقتك وحضورك كمعالِجة 🤍",
               ]}
             />
-            <p className="text-pretty mt-10 rounded-[1.5rem] bg-rouh-sand/55 px-6 py-5 text-lg leading-9 text-rouh-ink/76 ring-1 ring-rouh-wine/10">
-              يشمل الكورس ملف تدريبي، شهادة مشاركة،
-              <br />
-              ودعم ومتابعة بعد انتهاء الكورس.
+            <p className="text-pretty mt-10 rounded-[1.5rem] bg-rouh-sand/55 px-6 py-5 text-lg leading-[1.85] text-rouh-ink/76 ring-1 ring-rouh-wine/10">
+              يشمل الكورس ملف تدريبي، شهادة مشاركة، ودعم ومتابعة بعد انتهاء الكورس.
             </p>
           </article>
 
@@ -201,14 +189,9 @@ export default function FrontalCoursePage() {
             <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
               المهنيّة بالكورس
             </h2>
-            <p className="text-pretty mt-8 text-lg leading-9 text-rouh-ink/72">
-              من المهم إلنا إنكِ تتعلمي الساوند هيلينغ
-              <br />
-              بطريقة واعية، مهنية، وعميقة…
-              <br />
-              مش بس كيف تعزفي الطاسات،
-              <br />
-              بل كيف تستخدميها بمسؤولية وحضور حقيقي 🤍
+            <p className="text-pretty mt-8 text-lg leading-[1.85] text-rouh-ink/72">
+              من المهم إلنا إنكِ تتعلمي الساوند هيلينغ بطريقة واعية، مهنية، وعميقة… مش بس كيف تعزفي
+              الطاسات، بل كيف تستخدميها بمسؤولية وحضور حقيقي 🤍
             </p>
             <p className="mt-6 font-bold text-rouh-ink">لذلك بالكورس رح نتعلّم:</p>
             <BulletList
@@ -229,24 +212,14 @@ export default function FrontalCoursePage() {
             <h2 className="relative font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
               الجانب الشخصي بالكورس
             </h2>
-            <div className="relative mt-8 space-y-6 text-pretty text-lg leading-9 text-rouh-ink/72">
+            <div className="relative mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink/72">
               <p>
-                الكورس ليس فقط تعلّم تقنيات…
-                <br />
-                بل أيضًا تجربة شخصية تساعدكِ تتواصلي أكثر مع إحساسك،
-                <br />
-                تطوري حضورك وثقتك،
-                <br />
-                وتعيشي تأثير الصوت والترددات على حالتك الداخلية بشكل حقيقي 🤍
+                الكورس ليس فقط تعلّم تقنيات… بل أيضًا تجربة شخصية تساعدكِ تتواصلي أكثر مع إحساسك، تطوري
+                حضورك وثقتك، وتعيشي تأثير الصوت والترددات على حالتك الداخلية بشكل حقيقي 🤍
               </p>
               <p>
-                رح تعيشي مساحة فيها هدوء، إصغاء، وحضور،
-                <br />
-                ونؤمن إنو جزء كبير من تأثير العلاج…
-                <br />
-                مش بس بالأدوات أو الترددات،
-                <br />
-                بل بحضورك والطاقة اللي بتخلقيها داخل الجلسة.
+                رح تعيشي مساحة فيها هدوء، إصغاء، وحضور، ونؤمن إنو جزء كبير من تأثير العلاج… مش بس
+                بالأدوات أو الترددات، بل بحضورك والطاقة اللي بتخلقيها داخل الجلسة.
               </p>
             </div>
           </article>
@@ -282,19 +255,12 @@ export default function FrontalCoursePage() {
                 <h3 className="font-display text-xl font-bold text-rouh-wine">
                   هل يجب أن أكون موسيقية؟
                 </h3>
-                <p className="text-pretty mt-4 text-lg leading-9 text-rouh-ink/72">
-                  أبدًا 🤍
-                  <br />
-                  ما بتحتاجي أي خبرة موسيقية أو معرفة سابقة.
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink/72">
+                  أبدًا 🤍 ما بتحتاجي أي خبرة موسيقية أو معرفة سابقة.
                 </p>
-                <p className="text-pretty mt-4 text-lg leading-9 text-rouh-ink/72">
-                  الكورس مصمم بطريقة بسيطة وعملية،
-                  <br />
-                  لكن بنفس الوقت بمهنية ووضوح،
-                  <br />
-                  حتى تتعلمي استخدام الطاسات والترددات
-                  <br />
-                  بشكل صحيح، واعي، وآمن.
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink/72">
+                  الكورس مصمم بطريقة بسيطة وعملية، لكن بنفس الوقت بمهنية ووضوح، حتى تتعلمي استخدام
+                  الطاسات والترددات بشكل صحيح، واعي، وآمن.
                 </p>
               </div>
 
@@ -302,12 +268,9 @@ export default function FrontalCoursePage() {
                 <h3 className="font-display text-xl font-bold text-rouh-wine">
                   هل يمكنني العمل بعد الكورس؟
                 </h3>
-                <p className="text-pretty mt-4 text-lg leading-9 text-rouh-ink/72">
-                  نعم.
-                  <br />
-                  الكورس يمنحكِ أساسًا عمليًا ونظريًا
-                  <br />
-                  يساعدكِ على البدء بتقديم جلسات فردية وجماعية.
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink/72">
+                  نعم. الكورس يمنحكِ أساسًا عمليًا ونظريًا يساعدكِ على البدء بتقديم جلسات فردية
+                  وجماعية.
                 </p>
               </div>
             </div>
@@ -332,15 +295,21 @@ export default function FrontalCoursePage() {
           </article>
 
           <SectionDivider />
+        </div>
 
-          <article className="luxury-card rounded-[2.4rem] bg-ink-glow p-8 text-white shadow-glow ring-1 ring-white/20 sm:p-12">
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">الخاتمة</h2>
-            <p className="text-pretty mt-8 text-lg leading-9 text-white/88">
-              إذا كنتِ تشعرين بنداء تجاه الصوت والترددات…
-              <br />
-              ربما هذه بداية طريق جديد لكِ
+        <FrontalCourseGallerySection className="mt-14 lg:mt-16" />
+
+        <div className="mx-auto mt-14 max-w-4xl space-y-14 lg:mt-16">
+          <SectionDivider />
+
+          <article className="luxury-card rounded-[2.4rem] bg-ink-glow p-8 text-center text-white shadow-glow ring-1 ring-white/20 sm:p-12">
+            <h2 className="text-balance font-display text-3xl font-bold sm:text-4xl">
+              الخاتمة
+            </h2>
+            <p className="text-pretty mx-auto mt-7 max-w-2xl text-lg leading-[1.85] text-white/88 sm:mt-8 sm:max-w-[36rem]">
+              إذا كنتِ تشعرين بنداء تجاه الصوت والترددات… ربما هذه بداية طريق جديد لكِ
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-9 flex flex-col items-center gap-3.5 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
               <ButtonLink href={siteMeta.paymentUrl}>الدفع والحجز</ButtonLink>
               <ButtonLink href="/" variant="light">
                 العودة للرئيسية

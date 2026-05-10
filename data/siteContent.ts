@@ -13,7 +13,7 @@ export const siteMeta = {
 
 export const assets = {
   logo: "/images/logo.png",
-  profile: "/images/aseel-profile.jpg",
+  profile: "/images/img3.jpeg",
   rose: "/images/rose-reference.jpg",
   hero: "/images/hero-image.jpg",
   bookletCover: "/images/booklet-cover.png",
@@ -65,7 +65,7 @@ export const journeyItems = [
 export const soundJourney = {
   title: "رحلة صوت… تعيدكِ إلى نفسك وسط ضجيج العالم الخارجي 🍃",
   text: "في Rouh، نستخدم الترددات العلاجية والطاسات التبتية لنخلق مساحة من الهدوء، الحضور، والوعي… مساحة تلامس الروح بلطف وتترك أثرًا حقيقيًا في الداخل",
-  videoId: "tisi5HDtkCY",
+  videoId: "8gFt-RCiFlI",
 };
 
 export const offerings = [
@@ -84,9 +84,9 @@ export const offerings = [
       "مسار تدريبي حضوري عميق لمن ترغب بتعلّم استخدام الطاسات التبتية والترددات العلاجية بمهنية، وعي، وحضور.",
     price: "السعر يضاف لاحقًا",
     cta: "الدفع والحجز",
-    secondaryCta: "معرفة المزيد",
+    secondaryCta: "تعرّفي أكثر على الكورس",
     href: siteMeta.paymentUrl,
-    secondaryHref: "/frontal-course",
+    secondaryHref: siteMeta.courseUrl,
   },
   {
     title: "الكورس الأونلاين",

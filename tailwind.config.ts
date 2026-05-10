@@ -49,11 +49,16 @@ const config: Config = {
           "0%": { transform: "translateX(120%)" },
           "100%": { transform: "translateX(-120%)" },
         },
+        videoFadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
         float: "float 7s ease-in-out infinite",
         reveal: "reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both",
         shimmer: "shimmer 3.8s ease-in-out infinite",
+        videoFadeIn: "videoFadeIn 0.65s ease-out forwards",
       },
     },
   },
