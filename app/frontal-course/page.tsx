@@ -83,6 +83,7 @@ export default function FrontalCoursePage() {
             videoId={FRONTAL_COURSE_VIDEO_ID}
             title="لمحة من رحلة الكورس — العلاج بالطاسات التبتية"
             caption="اضغطي «تشغيل الصوت» أعلى الفيديو أو من مشغّل YouTube لسماع الصوت"
+            orientation="portrait"
             autoPlayWhenVisible
           />
         </div>

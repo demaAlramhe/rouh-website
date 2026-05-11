@@ -54,12 +54,12 @@ export function BookletPdfLightbox({
 
   return (
     <div className={`flex flex-col ${className}`}>
-      {/* يطابق ارتفاع سطر «فيديو الورشة» لمحاذاة العناوين أفقياً */}
+      {/* يطابق ارتفاع سطر «فيديو الرحلة» لمحاذاة العناوين أفقياً */}
       <p
         className="invisible pointer-events-none select-none text-center text-xs font-bold tracking-[0.22em] text-rouh-blue"
         aria-hidden
       >
-        فيديو الورشة
+        فيديو الرحلة
       </p>
       <h2 className="text-balance mt-2 text-center font-display text-2xl font-bold text-rouh-ink sm:text-3xl">
         {heading}

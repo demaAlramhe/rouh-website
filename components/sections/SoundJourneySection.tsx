@@ -29,14 +29,14 @@ export function SoundJourneySection() {
             </p>
             <div className="mt-8 rounded-[1.9rem] bg-white/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/70 backdrop-blur">
               <h3 className="font-display text-2xl font-bold text-rouh-wine">
-                ابدئي من الورشة المجانية
+                ابدئي من رحلة استرخاء مجانية
               </h3>
               <p className="mt-3 leading-8 text-rouh-ink/70">
                 شاهدي الفيديو، حمّلي الكتيّب المجاني، وتعرّفي على الخطوة التالية في الكورس
                 الوجاهي.
               </p>
               <ButtonLink href="/free-workshop" className="mt-6">
-                الانتقال للورشة والكتيّب
+                الانتقال للرحلة والكتيّب
               </ButtonLink>
             </div>
           </div>

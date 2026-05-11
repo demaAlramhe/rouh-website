@@ -10,12 +10,12 @@ export function CtaSection() {
           خذي لحظة هادئة، وافتحي باب العودة إلى نفسك
         </h2>
         <p className="text-pretty mx-auto mt-5 max-w-2xl text-lg leading-9 text-white/75">
-          الورشة المجانية والكتيّب هما نقطة بداية لطيفة قبل اختيار الجلسة أو المسار التدريبي
+          رحلة استرخاء مجانية والكتيّب هما نقطة بداية لطيفة قبل اختيار الجلسة أو المسار التدريبي
           الأنسب لكِ.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <ButtonLink href="/free-workshop" variant="light">
-            ابدئي بالورشة المجانية
+            ابدئي رحلة استرخاء مجانية
           </ButtonLink>
           <ButtonLink href="/#contact" variant="ghost" className="bg-white/10 text-white ring-white/20 hover:bg-white/18">
             تواصلي مع أسيل

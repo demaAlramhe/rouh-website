@@ -30,7 +30,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ButtonLink href="/free-workshop" className="px-4 py-2.5 text-xs sm:px-5 sm:text-sm">
-            الورشة المجانية
+            رحلة استرخاء مجانية
           </ButtonLink>
         </div>
         </div>

@@ -10,8 +10,8 @@ import { assets, siteMeta } from "@/data/siteContent";
 const FREE_WORKSHOP_VIDEO_ID = "tisi5HDtkCY";
 
 export const metadata: Metadata = {
-  title: "الورشة المجانية والكتيّب | Rouh by Aseel Omar",
-  description: "صفحة الورشة المجانية من Rouh مع فيديو تمهيدي وكتيّب PDF قابل للتحميل.",
+  title: "رحلة استرخاء مجانية والكتيّب | Rouh by Aseel Omar",
+  description: "صفحة رحلة استرخاء مجانية من Rouh مع فيديو تمهيدي وكتيّب PDF قابل للتحميل.",
 };
 
 export default function FreeWorkshopPage() {
@@ -24,12 +24,12 @@ export default function FreeWorkshopPage() {
         <div className="pointer-events-none absolute bottom-[8%] left-1/2 -z-10 size-64 -translate-x-1/2 rounded-full bg-rouh-rose/12 blur-3xl" />
 
         <div className="animate-reveal relative mx-auto max-w-3xl text-center">
-          <Badge>ورشة مجانية + كتيّب مرافق</Badge>
+          <Badge>رحلة استرخاء مجانية + كتيّب مرافق</Badge>
           <h1 className="text-balance mt-5 font-display text-[2.35rem] font-bold leading-[1.18] tracking-[-0.02em] text-rouh-ink sm:text-5xl lg:text-[3.05rem]">
             ابدئي رحلتك المجانية مع الترددات والصوت
           </h1>
           <p className="text-pretty mx-auto mt-4 max-w-xl text-base leading-8 text-rouh-ink/72 sm:text-lg sm:leading-9">
-            شاهدي الورشة المجانية وحمّلي الكتيّب المرافق لتتعرّفي بشكل أوضح على هذا العالم،
+            شاهدي رحلة استرخاء مجانية وحمّلي الكتيّب المرافق لتتعرّفي بشكل أوضح على هذا العالم،
             وتبدئي بخطوة لطيفة نحو الهدوء والحضور الداخلي.
           </p>
         </div>
@@ -42,18 +42,18 @@ export default function FreeWorkshopPage() {
                 className="order-2 lg:order-none"
                 pdfUrl={siteMeta.booklet}
                 coverSrc={assets.bookletCover}
-                coverAlt="غلاف الكتيّب المرافق للورشة المجانية"
-                heading="الكتيّب المرافق للورشة"
-                modalTitle="معاينة الكتيّب — الورشة المجانية"
+                coverAlt="غلاف الكتيّب المرافق لرحلة استرخاء مجانية"
+                heading="الكتيّب المرافق للرحلة"
+                modalTitle="معاينة الكتيّب — رحلة استرخاء مجانية"
               />
 
               {/* عمود ثانٍ يسار = الفيديو (~ثُلثان) */}
               <div className="order-1 flex min-w-0 flex-col lg:order-none">
                 <p className="text-center text-xs font-bold tracking-[0.22em] text-rouh-blue">
-                  فيديو الورشة
+                  فيديو الرحلة
                 </p>
                 <h2 className="text-balance mt-2 text-center font-display text-2xl font-bold text-rouh-ink sm:text-3xl">
-                  شاهدي الورشة المجانية
+                  شاهدي رحلة استرخاء مجانية
                 </h2>
                 <p className="text-pretty mt-2 text-center text-sm leading-7 text-rouh-ink/58">
                   مساحة واسعة للمشاهدة — اضغطي للتشغيل في نافذة هادئة.
@@ -61,7 +61,7 @@ export default function FreeWorkshopPage() {
                 <VideoPreviewLightbox
                   className="mt-5"
                   videoId={FREE_WORKSHOP_VIDEO_ID}
-                  title="فيديو الورشة المجانية"
+                  title="فيديو رحلة استرخاء مجانية"
                 />
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function FreeWorkshopPage() {
       </section>
 
       <SectionShell
-        eyebrow="بعد الورشة"
+        eyebrow="بعد الرحلة"
         title="اختاري الخطوة التالية في رحلتك"
         className="pt-4"
       >

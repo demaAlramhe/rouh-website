@@ -34,7 +34,7 @@ export function HeroSection() {
             </p>
 
             <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <ButtonLink href="/free-workshop">الورشة المجانية</ButtonLink>
+              <ButtonLink href="/free-workshop">رحلة استرخاء مجانية</ButtonLink>
               <ButtonLink href={siteMeta.courseUrl} variant="secondary">
                 الكورس الحالي
               </ButtonLink>
@@ -75,10 +75,10 @@ export function HeroSection() {
 
             <div className="absolute inset-x-6 -bottom-2 mx-auto w-[calc(100%-3rem)] max-w-xs rounded-[1.6rem] bg-rouh-sand/96 px-5 py-4 text-center shadow-petal ring-1 ring-white/80 backdrop-blur sm:left-1/2 sm:-bottom-1 sm:right-auto sm:w-full sm:-translate-x-1/2 sm:px-6 sm:py-5">
               <p className="font-display text-xl font-bold text-rouh-wine sm:text-2xl">
-                أسيل عمر
+                اسيل عمر
               </p>
               <p className="mt-1.5 text-sm leading-6 text-rouh-ink/72">
-                معالجة ومدرّبة في العلاج بالصوت منذ 2019
+                معالجة ومدربة في الشفاء بالصوت منذ 2019
               </p>
             </div>
           </div>
