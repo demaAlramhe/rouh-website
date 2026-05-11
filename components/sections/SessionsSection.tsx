@@ -48,7 +48,7 @@ export function SessionsSection() {
               </div>
               <div className="mt-auto pt-7">
                 <ButtonLink
-                  href={`tel:${siteMeta.phone}`}
+                  href="/#contact"
                   variant="secondary"
                   className="w-full"
                 >

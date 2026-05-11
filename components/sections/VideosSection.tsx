@@ -1,14 +1,17 @@
 import Image from "next/image";
 import { videos } from "@/data/siteContent";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
+
+const YOUTUBE_PAGE_URL = "https://youtube.com/";
 
 export function VideosSection() {
   return (
     <SectionShell
       id="videos"
       eyebrow="فيديوهات وبودكاست"
-      title="مكتبة قابلة للتوسّع عن الصوت والطاسات التبتية"
-      description="بطاقات فيديو أنيقة وجاهزة لاستبدال الصور وروابط YouTube من ملف المحتوى."
+      title="مساحة للاستماع والتعرّف أكثر على عالم الصوت والترددات"
+      description="مجموعة مختارة من فيديوهات وبودكاست تساعدكِ على التعرّف أكثر على العلاج بالصوت، الطاسات التبتية، وتأثير الترددات على الجسد والحضور الداخلي."
     >
       <div className="grid gap-6 md:grid-cols-3">
         {videos.map((video) => (
@@ -49,6 +52,16 @@ export function VideosSection() {
             </div>
           </article>
         ))}
+      </div>
+      <div className="mt-10 flex justify-center">
+        <ButtonLink
+          href={YOUTUBE_PAGE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="min-w-[15rem]"
+        >
+          شاهدي المزيد على يوتيوب
+        </ButtonLink>
       </div>
     </SectionShell>
   );

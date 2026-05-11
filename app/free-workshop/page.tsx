@@ -72,14 +72,13 @@ export default function FreeWorkshopPage() {
       <SectionShell
         eyebrow="بعد الورشة"
         title="اختاري الخطوة التالية في رحلتك"
-        description="هذه الصفحة تربط الورشة المجانية بمسارات Rouh المدفوعة بطريقة واضحة وناعمة."
         className="pt-4"
       >
         <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-10">
             <Badge>متاح الآن</Badge>
             <h2 className="text-balance mt-6 font-display text-4xl font-bold leading-tight text-rouh-ink">
-              الكورس الفرونتالي للعلاج بالصوت
+              كورس وجاهي للعلاج بالصوت
             </h2>
             <p className="text-pretty mt-5 max-w-2xl text-lg leading-9 text-rouh-ink/70">
               مسار حضوري عميق للتدرّب على الطاسات التبتية والترددات العلاجية بوعي، مهنية،

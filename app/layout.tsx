@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Amiri, Cairo } from "next/font/google";
+import { Cairo, Noto_Naskh_Arabic } from "next/font/google";
 import { AccessibilityWidget } from "@/components/accessibility/AccessibilityWidget";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -12,10 +12,10 @@ const cairo = Cairo({
   display: "swap",
 });
 
-const amiri = Amiri({
+const naskh = Noto_Naskh_Arabic({
   subsets: ["arabic", "latin"],
-  variable: "--font-amiri",
-  weight: ["400", "700"],
+  variable: "--font-naskh",
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${amiri.variable}`}>
+    <html lang="ar" dir="rtl" className={`${cairo.variable} ${naskh.variable}`}>
       <body>
         <Navbar />
         <main>{children}</main>

@@ -7,7 +7,6 @@ export function JourneySection() {
       id="journey"
       eyebrow="رحلتي المهنية"
       title="خبرة تجمع بين الوعي، الجسد، الإرشاد، والجمال"
-      description="مسار متعدّد الطبقات يمنح تجربة Rouh حساسية إنسانية ومهنية عالية."
     >
       <div>
         <div className="grid gap-4 md:grid-cols-2">

@@ -26,7 +26,7 @@ function SectionDivider() {
 
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="mt-6 space-y-3.5 text-rouh-ink/78">
+    <ul className="mt-6 space-y-3.5 text-rouh-ink">
       {items.map((item) => (
         <li
           key={item}
@@ -61,7 +61,7 @@ export default function FrontalCoursePage() {
             كورس فن العلاج بالطاسات التبتية
           </h1>
 
-          <p className="text-pretty mx-auto mt-8 max-w-2xl text-lg leading-[1.85] text-rouh-ink/74 sm:max-w-[36rem]">
+          <p className="text-pretty mx-auto mt-8 max-w-2xl text-lg leading-[1.85] text-rouh-ink sm:max-w-[36rem]">
             تعلمي كيف تستخدمي الصوت والترددات لدعم الاسترخاء، التوازن، والحضور العلاجي بوعي ومهنية 🤍
           </p>
 
@@ -82,7 +82,7 @@ export default function FrontalCoursePage() {
           <VideoPreviewLightbox
             videoId={FRONTAL_COURSE_VIDEO_ID}
             title="لمحة من رحلة الكورس — العلاج بالطاسات التبتية"
-            caption="يُشغَّل تلقائيًا بصمت عند التمرير — اضغطي «تشغيل الصوت» أعلى الفيديو أو من مشغّل YouTube لسماع الصوت"
+            caption="اضغطي «تشغيل الصوت» أعلى الفيديو أو من مشغّل YouTube لسماع الصوت"
             autoPlayWhenVisible
           />
         </div>
@@ -99,7 +99,7 @@ export default function FrontalCoursePage() {
                 مقدمة الكورس
               </h2>
             </div>
-            <div className="mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink/72">
+            <div className="mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink">
               <p>
                 الساوند هيلينغ مش بس صوت… هو مساحة تهدئة، حضور، وتنظيم للجسد والجهاز العصبي 🌿
               </p>
@@ -178,7 +178,7 @@ export default function FrontalCoursePage() {
                 "مساحة تساعدكِ تطوري ثقتك وحضورك كمعالِجة 🤍",
               ]}
             />
-            <p className="text-pretty mt-10 rounded-[1.5rem] bg-rouh-sand/55 px-6 py-5 text-lg leading-[1.85] text-rouh-ink/76 ring-1 ring-rouh-wine/10">
+            <p className="text-pretty mt-10 rounded-[1.5rem] bg-rouh-sand/55 px-6 py-5 text-lg leading-[1.85] text-rouh-ink ring-1 ring-rouh-wine/10">
               يشمل الكورس ملف تدريبي، شهادة مشاركة، ودعم ومتابعة بعد انتهاء الكورس.
             </p>
           </article>
@@ -189,11 +189,11 @@ export default function FrontalCoursePage() {
             <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
               المهنيّة بالكورس
             </h2>
-            <p className="text-pretty mt-8 text-lg leading-[1.85] text-rouh-ink/72">
+            <p className="text-pretty mt-8 text-lg leading-[1.85] text-rouh-ink">
               من المهم إلنا إنكِ تتعلمي الساوند هيلينغ بطريقة واعية، مهنية، وعميقة… مش بس كيف تعزفي
               الطاسات، بل كيف تستخدميها بمسؤولية وحضور حقيقي 🤍
             </p>
-            <p className="mt-6 font-bold text-rouh-ink">لذلك بالكورس رح نتعلّم:</p>
+            <p className="mt-6 font-bold text-rouh-wine">لذلك بالكورس رح نتعلّم:</p>
             <BulletList
               items={[
                 "كيف نستخدم الأدوات بشكل صحيح وآمن",
@@ -212,7 +212,7 @@ export default function FrontalCoursePage() {
             <h2 className="relative font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
               الجانب الشخصي بالكورس
             </h2>
-            <div className="relative mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink/72">
+            <div className="relative mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink">
               <p>
                 الكورس ليس فقط تعلّم تقنيات… بل أيضًا تجربة شخصية تساعدكِ تتواصلي أكثر مع إحساسك، تطوري
                 حضورك وثقتك، وتعيشي تأثير الصوت والترددات على حالتك الداخلية بشكل حقيقي 🤍
@@ -230,7 +230,7 @@ export default function FrontalCoursePage() {
             <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
               لمن يناسب الكورس؟
             </h2>
-            <p className="mt-6 text-lg font-bold text-rouh-ink/85">الكورس مناسب لـ:</p>
+            <p className="mt-6 text-lg font-bold text-rouh-wine">الكورس مناسب لـ:</p>
             <BulletList
               items={[
                 "المعالجين والمعالجات",
@@ -255,10 +255,10 @@ export default function FrontalCoursePage() {
                 <h3 className="font-display text-xl font-bold text-rouh-wine">
                   هل يجب أن أكون موسيقية؟
                 </h3>
-                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink/72">
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
                   أبدًا 🤍 ما بتحتاجي أي خبرة موسيقية أو معرفة سابقة.
                 </p>
-                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink/72">
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
                   الكورس مصمم بطريقة بسيطة وعملية، لكن بنفس الوقت بمهنية ووضوح، حتى تتعلمي استخدام
                   الطاسات والترددات بشكل صحيح، واعي، وآمن.
                 </p>
@@ -268,7 +268,7 @@ export default function FrontalCoursePage() {
                 <h3 className="font-display text-xl font-bold text-rouh-wine">
                   هل يمكنني العمل بعد الكورس؟
                 </h3>
-                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink/72">
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
                   نعم. الكورس يمنحكِ أساسًا عمليًا ونظريًا يساعدكِ على البدء بتقديم جلسات فردية
                   وجماعية.
                 </p>
@@ -282,7 +282,7 @@ export default function FrontalCoursePage() {
             <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
               نتائج وتجارب
             </h2>
-            <p className="mt-6 text-lg font-bold text-rouh-ink/85">الكثير من المشاركات بدأن:</p>
+            <p className="mt-6 text-lg font-bold text-rouh-wine">الكثير من المشاركات بدأن:</p>
             <BulletList
               items={[
                 "بدمج الطاسات بجلساتهن العلاجية",
@@ -300,6 +300,48 @@ export default function FrontalCoursePage() {
         <FrontalCourseGallerySection className="mt-14 lg:mt-16" />
 
         <div className="mx-auto mt-14 max-w-4xl space-y-14 lg:mt-16">
+          <SectionDivider />
+
+          <article className="luxury-card rounded-[2.4rem] bg-gradient-to-br from-white/82 via-rouh-mist/34 to-rouh-sand/45 p-8 shadow-soft ring-1 ring-white/80 sm:p-11">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-xs font-black tracking-[0.28em] text-rouh-wine sm:text-sm">
+                المجموعات القادمة
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+                المواعيد المتاحة حاليًا
+              </h2>
+              <p className="text-pretty mx-auto mt-5 max-w-2xl text-base leading-8 text-rouh-ink sm:text-lg sm:leading-9">
+                اختاري الموعد والموقع الأنسب لكِ، ثم انتقلي مباشرةً لخطوة الدفع والحجز.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+              <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
+                <h3 className="font-display text-2xl font-bold text-rouh-wine">زيمر 📍</h3>
+                <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
+                  <p>19/20 يونيو</p>
+                  <p>10:00–17:00 🕰️</p>
+                  <p>14 ساعة تعليمية</p>
+                </div>
+                <ButtonLink href={siteMeta.paymentUrl} className="mt-7 w-full">
+                  الدفع والحجز — زيمر
+                </ButtonLink>
+              </article>
+
+              <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
+                <h3 className="font-display text-2xl font-bold text-rouh-wine">مجدل شمس 📍</h3>
+                <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
+                  <p>26/27 يونيو</p>
+                  <p>10:00–17:00 🕰️</p>
+                  <p>14 ساعة تعليمية</p>
+                </div>
+                <ButtonLink href={siteMeta.paymentUrl} className="mt-7 w-full">
+                  الدفع والحجز — مجدل شمس
+                </ButtonLink>
+              </article>
+            </div>
+          </article>
+
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-ink-glow p-8 text-center text-white shadow-glow ring-1 ring-white/20 sm:p-12">

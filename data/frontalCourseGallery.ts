@@ -1,6 +1,6 @@
 /** Real photos from past in-person (frontal) course sessions — paths under `public/images/frontal-course-gallery/`. */
 export const frontalCourseGallery = {
-  title: "صور من الكورس الفرونتالي السابق",
+  title: "صور من كورس وجاهي السابق",
   subtitle:
     "لحظات حقيقية من تجربة التعلّم، الحضور، والعمل مع الترددات والطاسات التبتية",
   images: [

@@ -20,7 +20,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-cairo)", "system-ui", "sans-serif"],
-        display: ["var(--font-amiri)", "var(--font-cairo)", "serif"],
+        display: ["var(--font-naskh)", "var(--font-cairo)", "serif"],
       },
       boxShadow: {
         glow: "0 34px 110px rgba(127, 42, 70, 0.14)",

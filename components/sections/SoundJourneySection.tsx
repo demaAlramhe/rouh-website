@@ -33,7 +33,7 @@ export function SoundJourneySection() {
               </h3>
               <p className="mt-3 leading-8 text-rouh-ink/70">
                 شاهدي الفيديو، حمّلي الكتيّب المجاني، وتعرّفي على الخطوة التالية في الكورس
-                الفرونتالي.
+                الوجاهي.
               </p>
               <ButtonLink href="/free-workshop" className="mt-6">
                 الانتقال للورشة والكتيّب

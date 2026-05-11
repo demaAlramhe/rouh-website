@@ -9,7 +9,6 @@ export function CoursesSection() {
       id="courses"
       eyebrow="الورشات والكورسات"
       title="مسارات ناعمة للتعلّم، التجربة، والتوسّع"
-      description="صممت هذه المساحات لتناسب من تبدأ رحلتها، ومن ترغب بالتعمّق المهني في العلاج بالصوت."
     >
       <div className="grid gap-5 lg:grid-cols-3">
         {offerings.map((offering) => (
