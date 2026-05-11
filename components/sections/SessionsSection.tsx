@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { sessions, siteMeta } from "@/data/siteContent";
+import { sessions } from "@/data/siteContent";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
+
+const WHATSAPP_URL = "https://wa.me/972509071900";
 
 export function SessionsSection() {
   return (
@@ -48,9 +50,11 @@ export function SessionsSection() {
               </div>
               <div className="mt-auto pt-7">
                 <ButtonLink
-                  href="/#contact"
+                  href={WHATSAPP_URL}
                   variant="secondary"
                   className="w-full"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   حجز الجلسة
                 </ButtonLink>

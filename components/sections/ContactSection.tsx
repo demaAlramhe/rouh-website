@@ -2,6 +2,8 @@ import { siteMeta } from "@/data/siteContent";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
 
+const WHATSAPP_URL = "https://wa.me/972509071900";
+
 export function ContactSection() {
   return (
     <SectionShell
@@ -22,9 +24,19 @@ export function ContactSection() {
           <p className="mt-4 leading-8 text-rouh-ink/68">
             للحجز، مواعيد الجلسات، أو أسئلة حول الورشات والكورسات.
           </p>
-          <ButtonLink href={`tel:${siteMeta.phone}`} className="mt-7">
-            اتصال مباشر
-          </ButtonLink>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href={`tel:${siteMeta.phone}`} className="w-full sm:w-auto">
+              اتصال مباشر
+            </ButtonLink>
+            <ButtonLink
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              تواصل عبر واتساب
+            </ButtonLink>
+          </div>
         </div>
 
         <div className="luxury-card rounded-[2.2rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75">
