@@ -27,7 +27,7 @@ export function SectionShell({
             className={`mx-auto mb-12 max-w-[min(100%,21rem)] text-center sm:mb-16 sm:max-w-3xl ${headerClassName}`}
           >
             {eyebrow && (
-              <p className="mb-4 text-xs font-black tracking-[0.32em] text-rouh-blue sm:text-sm">
+              <p className="mb-4 font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-sm sm:font-black sm:leading-normal sm:tracking-[0.32em]">
                 {eyebrow}
               </p>
             )}

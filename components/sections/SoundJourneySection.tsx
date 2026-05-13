@@ -18,7 +18,7 @@ export function SoundJourneySection() {
         <div className="absolute inset-x-10 top-8 h-px bg-gradient-to-l from-transparent via-rouh-wine/16 to-transparent" />
         <div className="relative grid items-center gap-10 lg:grid-cols-[0.88fr_1.12fr]">
           <div>
-            <p className="mb-4 text-sm font-bold tracking-[0.28em] text-rouh-blue">
+            <p className="mb-4 font-sans text-sm font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:tracking-[0.28em]">
               الرحلة الصوتية الأساسية
             </p>
             <h2 className="text-pretty font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em]">

@@ -15,7 +15,7 @@ export function FrontalCourseGallerySection({ className = "" }: FrontalCourseGal
     >
       <div className="mx-auto max-w-7xl">
         <header className="mx-auto mb-9 max-w-[min(100%,21rem)] text-center sm:mb-11 sm:max-w-3xl">
-          <p className="mb-3 text-xs font-black tracking-[0.28em] text-rouh-blue sm:text-sm">
+          <p className="mb-3 font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-sm sm:font-black sm:leading-normal sm:tracking-[0.28em]">
             لقطات من الاستوديو
           </p>
           <h2

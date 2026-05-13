@@ -33,22 +33,22 @@ export function SessionsSection() {
               <h3 className="text-pretty font-display text-[1.82rem] font-bold leading-[1.34] tracking-normal text-rouh-ink sm:text-2xl sm:leading-tight sm:tracking-[-0.01em]">
                 {session.title}
               </h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="rounded-full bg-rouh-blue/10 px-3.5 py-1.5 text-xs font-bold text-rouh-blue ring-1 ring-rouh-blue/10">
-                  {session.duration}
-                </span>
-                <span className="rounded-full bg-rouh-wine/10 px-3.5 py-1.5 text-xs font-bold text-rouh-wine ring-1 ring-rouh-wine/10">
-                  {session.price}
-                </span>
-              </div>
-              <div className="mt-5 space-y-4 text-sm leading-7 text-rouh-ink/68">
+              <div className="mt-6 space-y-4 text-sm leading-7 text-rouh-ink/68">
                 {session.description.split("\n\n").map((paragraph) => (
                   <p key={paragraph} className="text-pretty">
                     {paragraph}
                   </p>
                 ))}
               </div>
-              <div className="mt-auto pt-7">
+              <div className="mt-auto flex w-full flex-col items-center gap-4 pt-7">
+                <div className="flex flex-wrap justify-center gap-2">
+                  <span className="rounded-full bg-rouh-blue/10 px-3.5 py-1.5 text-xs font-bold text-rouh-blue ring-1 ring-rouh-blue/10">
+                    {session.duration}
+                  </span>
+                  <span className="rounded-full bg-rouh-wine/10 px-3.5 py-1.5 text-xs font-bold text-rouh-wine ring-1 ring-rouh-wine/10">
+                    {session.price}
+                  </span>
+                </div>
                 <ButtonLink
                   href={WHATSAPP_URL}
                   variant="secondary"

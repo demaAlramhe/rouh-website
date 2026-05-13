@@ -49,7 +49,7 @@ export default function FreeWorkshopPage() {
 
               {/* عمود ثانٍ يسار = الفيديو (~ثُلثان) */}
               <div className="order-1 flex min-w-0 flex-col lg:order-none">
-                <p className="text-center text-xs font-bold tracking-[0.22em] text-rouh-blue">
+                <p className="text-center font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-xs sm:tracking-[0.22em]">
                   فيديو الرحلة
                 </p>
                 <h2 className="text-pretty mt-2 text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">

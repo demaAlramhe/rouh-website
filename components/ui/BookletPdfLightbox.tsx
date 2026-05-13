@@ -56,7 +56,7 @@ export function BookletPdfLightbox({
     <div className={`flex flex-col ${className}`}>
       {/* يطابق ارتفاع سطر «فيديو الرحلة» لمحاذاة العناوين أفقياً */}
       <p
-        className="invisible pointer-events-none select-none text-center text-xs font-bold tracking-[0.22em] text-rouh-blue"
+        className="invisible pointer-events-none select-none text-center font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-xs sm:tracking-[0.22em]"
         aria-hidden
       >
         فيديو الرحلة

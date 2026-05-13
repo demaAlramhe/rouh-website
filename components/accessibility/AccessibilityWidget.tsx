@@ -174,7 +174,7 @@ export function AccessibilityWidget() {
       >
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-bold tracking-[0.22em] text-rouh-blue">
+            <p className="font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-xs sm:tracking-[0.22em]">
               إمكانية الوصول
             </p>
             <h2 className="mt-1 font-display text-xl font-bold text-rouh-ink">
