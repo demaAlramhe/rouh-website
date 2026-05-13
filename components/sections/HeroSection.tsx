@@ -25,7 +25,7 @@ export function HeroSection() {
           <div className="mx-auto flex w-full max-w-md flex-col items-center">
             <Badge>{hero.eyebrow}</Badge>
 
-            <h1 className="text-balance mt-8 font-display text-[2.4rem] font-bold leading-[1.22] tracking-[-0.02em] text-rouh-ink sm:text-[2.85rem] lg:text-[3.2rem]">
+            <h1 className="text-pretty mx-auto mt-8 w-full max-w-[min(100%,22rem)] font-display text-[2.1rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:max-w-none sm:text-balance sm:text-[2.85rem] sm:leading-[1.22] sm:tracking-[-0.02em] lg:text-[3.2rem]">
               {hero.title}
             </h1>
 

@@ -61,7 +61,7 @@ export function BookletPdfLightbox({
       >
         فيديو الرحلة
       </p>
-      <h2 className="text-balance mt-2 text-center font-display text-2xl font-bold text-rouh-ink sm:text-3xl">
+      <h2 className="text-pretty mt-2 text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
         {heading}
       </h2>
       {/* يطابق فقرة الوصف تحت عنوان الفيديو لمحاذاة أعلى غلاف الكتيّب مع معاينة الفيديو */}

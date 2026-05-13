@@ -14,13 +14,13 @@ export function FrontalCourseGallerySection({ className = "" }: FrontalCourseGal
       aria-labelledby="frontal-course-gallery-heading"
     >
       <div className="mx-auto max-w-7xl">
-        <header className="mx-auto mb-9 max-w-3xl text-center sm:mb-11">
+        <header className="mx-auto mb-9 max-w-[min(100%,21rem)] text-center sm:mb-11 sm:max-w-3xl">
           <p className="mb-3 text-xs font-black tracking-[0.28em] text-rouh-blue sm:text-sm">
             لقطات من الاستوديو
           </p>
           <h2
             id="frontal-course-gallery-heading"
-            className="text-balance font-display text-[2.15rem] font-bold leading-[1.15] text-rouh-ink sm:text-4xl lg:text-[2.65rem]"
+            className="text-pretty font-display text-[1.95rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-[1.15] sm:tracking-[-0.02em] lg:text-[2.65rem]"
           >
             {title}
           </h2>

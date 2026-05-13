@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-10 text-center lg:grid-cols-[1.2fr_1fr_1fr] lg:items-start">
           <div className="flex flex-col items-center">
             <div className="mb-5">
-              <p className="font-display text-4xl font-bold tracking-[-0.02em] text-rouh-ink">
+              <p className="text-pretty font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-4xl sm:leading-none sm:tracking-[-0.02em]">
                 Rouh
               </p>
               <p className="mt-1 text-sm tracking-[0.18em] text-rouh-ink/60">by Aseel Omar</p>

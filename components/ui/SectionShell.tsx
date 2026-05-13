@@ -23,14 +23,16 @@ export function SectionShell({
     <section id={id} className={`relative scroll-mt-28 px-5 py-[4.5rem] sm:px-8 sm:py-[5.5rem] lg:py-[7.5rem] ${className}`}>
       <div className="mx-auto max-w-7xl">
         {(eyebrow || title || description) && (
-          <div className={`mx-auto mb-12 max-w-3xl text-center sm:mb-16 ${headerClassName}`}>
+          <div
+            className={`mx-auto mb-12 max-w-[min(100%,21rem)] text-center sm:mb-16 sm:max-w-3xl ${headerClassName}`}
+          >
             {eyebrow && (
               <p className="mb-4 text-xs font-black tracking-[0.32em] text-rouh-blue sm:text-sm">
                 {eyebrow}
               </p>
             )}
             {title && (
-              <h2 className="text-balance font-display text-[2.45rem] font-bold leading-[1.18] text-rouh-ink sm:text-5xl lg:text-[3.35rem]">
+              <h2 className="text-pretty font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-5xl sm:leading-[1.18] sm:tracking-[-0.02em] lg:text-[3.35rem]">
                 {title}
               </h2>
             )}

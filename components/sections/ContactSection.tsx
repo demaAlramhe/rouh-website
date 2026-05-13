@@ -17,7 +17,7 @@ export function ContactSection() {
           <p className="text-sm font-bold text-rouh-blue">الهاتف</p>
           <a
             href={`tel:${siteMeta.phone}`}
-            className="mt-3 block font-display text-4xl font-bold tracking-[-0.02em] text-rouh-ink"
+            className="mt-3 block text-pretty font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-4xl sm:leading-none sm:tracking-[-0.02em]"
           >
             {siteMeta.phone}
           </a>
@@ -41,7 +41,7 @@ export function ContactSection() {
 
         <div className="luxury-card rounded-[2.2rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75">
           <p className="text-sm font-bold text-rouh-blue">Instagram</p>
-          <p className="mt-3 break-words font-display text-4xl font-bold tracking-[-0.02em] text-rouh-ink">
+          <p className="mt-3 break-words text-pretty font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-4xl sm:leading-none sm:tracking-[-0.02em]">
             @_aseelomar_
           </p>
           <p className="mt-4 leading-8 text-rouh-ink/68">

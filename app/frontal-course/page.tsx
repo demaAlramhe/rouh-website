@@ -49,7 +49,7 @@ export default function FrontalCoursePage() {
         <div className="absolute -right-16 bottom-24 -z-10 size-64 rounded-full bg-rouh-rose/16 blur-3xl" />
 
         <div className="mx-auto max-w-4xl text-center sm:max-w-[42rem]">
-          <p className="animate-reveal font-display text-xl font-bold text-rouh-ink sm:text-2xl">
+          <p className="animate-reveal font-display text-lg font-bold leading-snug text-rouh-ink sm:text-2xl sm:leading-normal">
             رحلة استرخاء مجانية برفقة الترددات
           </p>
 
@@ -57,7 +57,7 @@ export default function FrontalCoursePage() {
             <Badge>كورس حضوري — الطاسات التبتية</Badge>
           </div>
 
-          <h1 className="text-balance mt-7 font-display text-[2.65rem] font-bold leading-[1.12] tracking-[-0.02em] text-rouh-ink sm:text-6xl">
+          <h1 className="text-pretty mx-auto mt-7 max-w-[min(100%,22rem)] font-display text-[2.35rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:max-w-none sm:text-balance sm:text-6xl sm:leading-[1.12] sm:tracking-[-0.02em]">
             كورس فن العلاج بالطاسات التبتية
           </h1>
 
@@ -96,7 +96,7 @@ export default function FrontalCoursePage() {
               <span className="text-2xl" aria-hidden>
                 ✦
               </span>
-              <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+              <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
                 مقدمة الكورس
               </h2>
             </div>
@@ -121,13 +121,13 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
-            <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               ماذا ستتعلمين في الكورس؟
             </h2>
 
             <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-12">
               <div className="rounded-[1.75rem] bg-white/45 p-7 ring-1 ring-rouh-ink/8 backdrop-blur-sm">
-                <h3 className="font-display text-xl font-bold text-rouh-wine">الجانب النظري</h3>
+                <h3 className="text-pretty font-display text-lg font-bold leading-snug text-rouh-wine sm:text-xl sm:leading-normal">الجانب النظري</h3>
                 <BulletList
                   items={[
                     "ما هو العلاج بالصوت؟",
@@ -141,7 +141,7 @@ export default function FrontalCoursePage() {
               </div>
 
               <div className="rounded-[1.75rem] bg-white/45 p-7 ring-1 ring-rouh-ink/8 backdrop-blur-sm">
-                <h3 className="font-display text-xl font-bold text-rouh-wine">الجانب العملي</h3>
+                <h3 className="text-pretty font-display text-lg font-bold leading-snug text-rouh-wine sm:text-xl sm:leading-normal">الجانب العملي</h3>
                 <BulletList
                   items={[
                     "كيفية استخدام الطاسات التبتية بشكل صحيح",
@@ -162,7 +162,7 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
-            <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               ماذا يميز هذا الكورس؟
             </h2>
             <BulletList
@@ -187,7 +187,7 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
-            <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               المهنيّة بالكورس
             </h2>
             <p className="text-pretty mt-8 text-lg leading-[1.85] text-rouh-ink">
@@ -210,7 +210,7 @@ export default function FrontalCoursePage() {
 
           <article className="luxury-card relative overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/82 via-rouh-mist/45 to-rouh-sand/55 p-8 shadow-petal ring-1 ring-white/75 sm:p-11">
             <div className="absolute -left-8 top-1/2 size-40 -translate-y-1/2 rounded-full bg-rouh-blue/10 blur-2xl" />
-            <h2 className="relative font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="relative text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               الجانب الشخصي بالكورس
             </h2>
             <div className="relative mt-8 space-y-7 text-pretty text-lg leading-[1.85] text-rouh-ink">
@@ -228,7 +228,7 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
-            <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               لمن يناسب الكورس؟
             </h2>
             <p className="mt-6 text-lg font-bold text-rouh-wine">الكورس مناسب لـ:</p>
@@ -247,13 +247,13 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
-            <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               الأسئلة الشائعة
             </h2>
 
             <div className="mt-10 space-y-8">
               <div className="rounded-[1.75rem] bg-white/50 p-7 ring-1 ring-rouh-ink/8">
-                <h3 className="font-display text-xl font-bold text-rouh-wine">
+                <h3 className="text-pretty font-display text-lg font-bold leading-snug text-rouh-wine sm:text-xl sm:leading-normal">
                   هل يجب أن أكون موسيقية؟
                 </h3>
                 <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
@@ -266,7 +266,7 @@ export default function FrontalCoursePage() {
               </div>
 
               <div className="rounded-[1.75rem] bg-white/50 p-7 ring-1 ring-rouh-ink/8">
-                <h3 className="font-display text-xl font-bold text-rouh-wine">
+                <h3 className="text-pretty font-display text-lg font-bold leading-snug text-rouh-wine sm:text-xl sm:leading-normal">
                   هل يمكنني العمل بعد الكورس؟
                 </h3>
                 <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
@@ -280,7 +280,7 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-11">
-            <h2 className="font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               نتائج وتجارب
             </h2>
             <p className="mt-6 text-lg font-bold text-rouh-wine">الكثير من المشاركات بدأن:</p>
@@ -304,11 +304,11 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-gradient-to-br from-white/82 via-rouh-mist/34 to-rouh-sand/45 p-8 shadow-soft ring-1 ring-white/80 sm:p-11">
-            <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto max-w-[min(100%,21rem)] text-center sm:max-w-3xl">
               <p className="text-xs font-black tracking-[0.28em] text-rouh-wine sm:text-sm">
                 المجموعات القادمة
               </p>
-              <h2 className="mt-4 font-display text-3xl font-bold text-rouh-ink sm:text-4xl">
+              <h2 className="mt-4 text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
                 المواعيد المتاحة حاليًا
               </h2>
               <p className="text-pretty mx-auto mt-5 max-w-2xl text-base leading-8 text-rouh-ink sm:text-lg sm:leading-9">
@@ -318,7 +318,7 @@ export default function FrontalCoursePage() {
 
             <div className="mt-10 grid gap-5 md:grid-cols-2">
               <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
-                <h3 className="font-display text-2xl font-bold text-rouh-wine">زيمر 📍</h3>
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">زيمر 📍</h3>
                 <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
                   <p>19/20 يونيو</p>
                   <p>10:00–17:00 🕰️</p>
@@ -330,7 +330,7 @@ export default function FrontalCoursePage() {
               </article>
 
               <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
-                <h3 className="font-display text-2xl font-bold text-rouh-wine">مجدل شمس 📍</h3>
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">مجدل شمس 📍</h3>
                 <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
                   <p>26/27 يونيو</p>
                   <p>10:00–17:00 🕰️</p>
@@ -346,7 +346,7 @@ export default function FrontalCoursePage() {
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-ink-glow p-8 text-center text-white shadow-glow ring-1 ring-white/20 sm:p-12">
-            <h2 className="text-balance font-display text-3xl font-bold sm:text-4xl">
+            <h2 className="text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal sm:text-balance sm:text-3xl sm:leading-tight sm:tracking-[-0.02em] lg:text-4xl">
               الخاتمة
             </h2>
             <p className="text-pretty mx-auto mt-7 max-w-2xl text-lg leading-[1.85] text-white/88 sm:mt-8 sm:max-w-[36rem]">

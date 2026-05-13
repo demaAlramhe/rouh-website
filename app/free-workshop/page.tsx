@@ -25,7 +25,7 @@ export default function FreeWorkshopPage() {
 
         <div className="animate-reveal relative mx-auto max-w-3xl text-center">
           <Badge>رحلة استرخاء مجانية + كتيّب مرافق</Badge>
-          <h1 className="text-balance mt-5 font-display text-[2.35rem] font-bold leading-[1.18] tracking-[-0.02em] text-rouh-ink sm:text-5xl lg:text-[3.05rem]">
+          <h1 className="text-pretty mx-auto mt-5 max-w-[min(100%,22rem)] font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:max-w-none sm:text-balance sm:text-5xl sm:leading-[1.18] sm:tracking-[-0.02em] lg:text-[3.05rem]">
             ابدئي رحلتك المجانية مع الترددات والصوت
           </h1>
           <p className="text-pretty mx-auto mt-4 max-w-xl text-base leading-8 text-rouh-ink/72 sm:text-lg sm:leading-9">
@@ -52,7 +52,7 @@ export default function FreeWorkshopPage() {
                 <p className="text-center text-xs font-bold tracking-[0.22em] text-rouh-blue">
                   فيديو الرحلة
                 </p>
-                <h2 className="text-balance mt-2 text-center font-display text-2xl font-bold text-rouh-ink sm:text-3xl">
+                <h2 className="text-pretty mt-2 text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
                   شاهدي رحلة استرخاء مجانية
                 </h2>
                 <p className="text-pretty mt-2 text-center text-sm leading-7 text-rouh-ink/58">
@@ -77,7 +77,7 @@ export default function FreeWorkshopPage() {
         <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-10">
             <Badge>متاح الآن</Badge>
-            <h2 className="text-balance mt-6 font-display text-4xl font-bold leading-tight text-rouh-ink">
+            <h2 className="text-pretty mt-6 font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               كورس وجاهي للعلاج بالصوت
             </h2>
             <p className="text-pretty mt-5 max-w-2xl text-lg leading-9 text-rouh-ink/70">
@@ -94,7 +94,7 @@ export default function FreeWorkshopPage() {
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-10">
             <Badge>قريبًا</Badge>
-            <h2 className="text-balance mt-6 font-display text-4xl font-bold leading-tight text-rouh-ink">
+            <h2 className="text-pretty mt-6 font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
               الكورس الأونلاين
             </h2>
             <p className="text-pretty mt-5 text-lg leading-9 text-rouh-ink/70">
@@ -109,7 +109,7 @@ export default function FreeWorkshopPage() {
 
       <section className="px-5 py-16 sm:px-8">
         <div className="luxury-card mx-auto max-w-4xl rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:p-12">
-          <h2 className="text-balance font-display text-4xl font-bold text-rouh-ink">
+          <h2 className="text-pretty font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-none sm:tracking-[-0.02em]">
             هل ترغبين بالعودة للصفحة الرئيسية؟
           </h2>
           <p className="mx-auto mt-4 max-w-2xl leading-8 text-rouh-ink/68">

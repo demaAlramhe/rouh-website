@@ -22,7 +22,7 @@ export function CoursesSection() {
                 ✦
               </span>
             </div>
-            <h3 className="font-display text-[2.15rem] font-bold leading-tight">
+            <h3 className="text-pretty font-display text-[1.95rem] font-bold leading-[1.34] tracking-normal sm:text-[2.15rem] sm:leading-tight sm:tracking-[-0.01em]">
               {offering.title}
             </h3>
             <p className="text-pretty mt-5 grow leading-8 text-rouh-ink/68">

@@ -47,7 +47,9 @@ export function VideosSection() {
               )}
             </div>
             <div className="p-6">
-              <h3 className="font-display text-2xl font-bold text-rouh-ink">{video.title}</h3>
+              <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-ink sm:text-2xl sm:leading-normal">
+                {video.title}
+              </h3>
               <p className="text-pretty mt-3 leading-7 text-rouh-ink/66">{video.description}</p>
             </div>
           </article>

@@ -21,14 +21,14 @@ export function SoundJourneySection() {
             <p className="mb-4 text-sm font-bold tracking-[0.28em] text-rouh-blue">
               الرحلة الصوتية الأساسية
             </p>
-            <h2 className="text-balance font-display text-[2.45rem] font-bold leading-[1.17] text-rouh-ink sm:text-5xl">
+            <h2 className="text-pretty font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em]">
               {soundJourney.title}
             </h2>
             <p className="text-pretty mt-6 text-lg leading-9 text-rouh-ink/72">
               {soundJourney.text}
             </p>
             <div className="mt-8 rounded-[1.9rem] bg-white/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/70 backdrop-blur">
-              <h3 className="font-display text-2xl font-bold text-rouh-wine">
+              <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
                 ابدئي من رحلة استرخاء مجانية
               </h3>
               <p className="mt-3 leading-8 text-rouh-ink/70">

@@ -30,7 +30,7 @@ export function SessionsSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-rouh-ink/52 via-transparent to-transparent" />
             </div>
             <div className="relative flex flex-1 flex-col p-7">
-              <h3 className="font-display text-[2rem] font-bold leading-tight text-rouh-ink">
+              <h3 className="text-pretty font-display text-[1.82rem] font-bold leading-[1.34] tracking-normal text-rouh-ink sm:text-2xl sm:leading-tight sm:tracking-[-0.01em]">
                 {session.title}
               </h3>
               <div className="mt-4 flex flex-wrap gap-2">

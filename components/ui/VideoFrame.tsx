@@ -23,7 +23,9 @@ export function VideoFrame({ title, embedUrl, className = "" }: VideoFrameProps)
             <div className="mb-5 grid size-20 place-items-center rounded-full bg-white/16 text-3xl shadow-[0_18px_42px_rgba(0,0,0,0.16)] ring-1 ring-white/30 backdrop-blur">
               ▶
             </div>
-            <p className="text-balance font-display text-3xl font-bold">{title}</p>
+            <p className="text-pretty px-2 font-display text-[1.65rem] font-bold leading-[1.36] tracking-normal sm:text-balance sm:text-3xl sm:leading-none sm:tracking-normal">
+              {title}
+            </p>
             <p className="mt-3 max-w-md text-sm leading-7 text-white/78">
               مساحة مهيّأة لفيديو YouTube أو Vimeo. أضيفي رابط التضمين لاحقًا من ملف المحتوى.
             </p>
