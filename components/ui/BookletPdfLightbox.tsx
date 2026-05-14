@@ -10,6 +10,8 @@ type BookletPdfLightboxProps = {
   heading: string;
   modalTitle: string;
   className?: string;
+  /** فقرتان بنفس كلاس عمود الفيديو (مخفيتان) لمحاذاة غلاف الكتيّب مع معاينة الفيديو */
+  columnSyncDescriptionLines?: readonly [string, string];
 };
 
 export function BookletPdfLightbox({
@@ -19,6 +21,7 @@ export function BookletPdfLightbox({
   heading,
   modalTitle,
   className = "",
+  columnSyncDescriptionLines,
 }: BookletPdfLightboxProps) {
   const [open, setOpen] = useState(false);
   const [showFrame, setShowFrame] = useState(false);
@@ -54,23 +57,18 @@ export function BookletPdfLightbox({
 
   return (
     <div className={`flex flex-col ${className}`}>
-      {/* يطابق ارتفاع سطر «فيديو الرحلة» لمحاذاة العناوين أفقياً */}
-      <p
-        className="invisible pointer-events-none select-none text-center font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-xs sm:tracking-[0.22em]"
-        aria-hidden
-      >
-        فيديو الرحلة
-      </p>
-      <h2 className="text-pretty mt-2 text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
+      <h2 className="text-pretty text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
         {heading}
       </h2>
-      {/* يطابق فقرة الوصف تحت عنوان الفيديو لمحاذاة أعلى غلاف الكتيّب مع معاينة الفيديو */}
-      <p
-        className="invisible text-pretty mt-2 text-center text-sm leading-7 text-rouh-ink/58"
-        aria-hidden
-      >
-        مساحة واسعة للمشاهدة — اضغطي للتشغيل في نافذة هادئة.
-      </p>
+      {columnSyncDescriptionLines ? (
+        <div
+          aria-hidden
+          className="invisible pointer-events-none select-none text-pretty mx-auto mt-3 max-w-xl text-center text-sm leading-7 text-rouh-ink/68 sm:mt-4 sm:text-base sm:leading-8"
+        >
+          <p>{columnSyncDescriptionLines[0]}</p>
+          <p className="mt-2.5 text-rouh-ink/62 sm:mt-3">{columnSyncDescriptionLines[1]}</p>
+        </div>
+      ) : null}
       <button
         ref={openRef}
         type="button"

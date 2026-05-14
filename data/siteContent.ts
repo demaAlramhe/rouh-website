@@ -65,7 +65,7 @@ export const journeyItems = [
 export const soundJourney = {
   title: "رحلة صوت… تعيدكِ إلى نفسك وسط ضجيج العالم الخارجي 🍃",
   text: "في Rouh، نستخدم الترددات العلاجية والطاسات التبتية لنخلق مساحة من الهدوء، الحضور، والوعي… مساحة تلامس الروح بلطف وتترك أثرًا حقيقيًا في الداخل",
-  videoId: "8gFt-RCiFlI",
+  videoId: "tisi5HDtkCY",
 };
 
 export const offerings = [

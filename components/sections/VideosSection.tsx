@@ -11,7 +11,25 @@ export function VideosSection() {
       id="videos"
       eyebrow="فيديوهات وبودكاست"
       title="مساحة للاستماع والتعرّف أكثر على عالم الصوت والترددات"
-      description="مجموعة مختارة من فيديوهات وبودكاست تساعدكِ على التعرّف أكثر على العلاج بالصوت، الطاسات التبتية، وتأثير الترددات على الجسد والحضور الداخلي."
+      headerClassName="sm:max-w-[min(100%,52rem)] lg:max-w-[56rem]"
+      description={
+        <div className="mx-auto max-w-[min(100%,48rem)] space-y-3.5 text-pretty text-[0.9375rem] leading-[1.78] text-rouh-ink/68 sm:max-w-[52rem] sm:text-[1.015rem] sm:leading-[1.82] lg:max-w-[56rem] lg:text-[1.045rem] lg:leading-[1.84]">
+          <p>
+            <span className="font-display font-semibold text-rouh-ink">عبارة عن علاج بالصوت</span>{" "}
+            الطاسات بتطلع ترددات «أصوات» اللي بنسمعها بشكل عميق، مش زي أي موسيقى عادية. بإمكانها تخترق جسمنا
+            وتؤثر علينا نفسيًا وجسديًا 🤍 وبتأثر على الجهاز العصبي بشكل مباشر، فبتفعّل الجهاز العصبي اللاودي
+            (Parasympathetic Nervous System) المسؤول عن التهدئة، تنظيم التنفّس، خفض معدل ضربات القلب، والشعور
+            بالأمان ✨
+          </p>
+          <p>
+            كمان بتوازن وبتحرر مراكز الطاقة السبعة بالجسم 🧘🏻‍♀️ وغير هيك، بتدخلنا بحالة تأمل عميقة وبتساعد على
+            تهدئة كل الأفكار اللي بتمرّ بمخنا.
+          </p>
+          <p>
+            بنقدر نقول إنه علاج بالموسيقى، لكن بشكل مختلف وأعمق بكثير. وتجربة جديدة وشعور جديد 🌸
+          </p>
+        </div>
+      }
     >
       <div className="grid gap-6 md:grid-cols-3">
         {videos.map((video) => (

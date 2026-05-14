@@ -5,9 +5,15 @@ import { BookletPdfLightbox } from "@/components/ui/BookletPdfLightbox";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
+import { SoundJourneyPromoCard } from "@/components/sections/SoundJourneyPromoCard";
 import { assets, siteMeta } from "@/data/siteContent";
 
 const FREE_WORKSHOP_VIDEO_ID = "tisi5HDtkCY";
+
+const FREE_WORKSHOP_VIDEO_INTRO_LINES = [
+  "رحلة صوت تعيدكِ إلى نفسك وسط ضجيج العالم الخارجي.",
+  "مساحة من الهدوء، الحضور، والوعي عبر الترددات العلاجية والطاسات التبتية.",
+] as const;
 
 export const metadata: Metadata = {
   title: "رحلة استرخاء مجانية والكتيّب | Rouh by Aseel Omar",
@@ -35,7 +41,10 @@ export default function FreeWorkshopPage() {
         </div>
 
         <div className="relative mx-auto mt-8 max-w-7xl sm:mt-10">
-          <article className="luxury-card overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10">
+          <article
+            id="free-workshop-media"
+            className="luxury-card overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10"
+          >
             <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12 lg:gap-x-14">
               {/* RTL: عمود أول يمين = الكتيّب (~ثُلث) */}
               <BookletPdfLightbox
@@ -45,27 +54,37 @@ export default function FreeWorkshopPage() {
                 coverAlt="غلاف الكتيّب المرافق لرحلة استرخاء مجانية"
                 heading="الكتيّب المرافق للرحلة"
                 modalTitle="معاينة الكتيّب — رحلة استرخاء مجانية"
+                columnSyncDescriptionLines={FREE_WORKSHOP_VIDEO_INTRO_LINES}
               />
 
               {/* عمود ثانٍ يسار = الفيديو (~ثُلثان) */}
               <div className="order-1 flex min-w-0 flex-col lg:order-none">
-                <p className="text-center font-sans text-[0.8125rem] font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:text-xs sm:tracking-[0.22em]">
-                  فيديو الرحلة
-                </p>
-                <h2 className="text-pretty mt-2 text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
-                  شاهدي رحلة استرخاء مجانية
+                <h2 className="text-pretty text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
+                  الرحلة الصوتية الأساسية
                 </h2>
-                <p className="text-pretty mt-2 text-center text-sm leading-7 text-rouh-ink/58">
-                  مساحة واسعة للمشاهدة — اضغطي للتشغيل في نافذة هادئة.
-                </p>
+                <div className="text-pretty mx-auto mt-3 max-w-xl text-center text-sm leading-7 text-rouh-ink/68 sm:mt-4 sm:text-base sm:leading-8">
+                  <p>{FREE_WORKSHOP_VIDEO_INTRO_LINES[0]}</p>
+                  <p className="mt-2.5 text-rouh-ink/62 sm:mt-3">{FREE_WORKSHOP_VIDEO_INTRO_LINES[1]}</p>
+                </div>
                 <VideoPreviewLightbox
                   className="mt-5"
                   videoId={FREE_WORKSHOP_VIDEO_ID}
-                  title="فيديو رحلة استرخاء مجانية"
+                  title="الرحلة الصوتية الأساسية"
                 />
               </div>
             </div>
           </article>
+
+          <SoundJourneyPromoCard
+            className="mt-10 scroll-mt-28 sm:mt-12"
+            showFreeJourneyCta={false}
+            copyEyebrow="فيديو الرحلة"
+            copyTitle="شاهدي رحلة استرخاء مجانية"
+            copyLead=""
+            copyTitleClassName="!text-[1.68rem] !leading-snug sm:!text-[2rem] sm:!leading-[1.22] md:!text-[2.2rem] lg:!text-[clamp(1.85rem,2.1vw+1.35rem,2.55rem)] lg:!whitespace-nowrap xl:!text-[clamp(2rem,2.2vw+1.2rem,2.85rem)]"
+            videoOverlayTitle="فيديو الرحلة"
+            embedVideoId="8gFt-RCiFlI"
+          />
         </div>
       </section>
 
@@ -81,15 +100,11 @@ export default function FreeWorkshopPage() {
               كورس وجاهي للعلاج بالصوت
             </h2>
             <p className="text-pretty mt-5 max-w-2xl text-lg leading-9 text-rouh-ink/70">
-              مسار حضوري عميق للتدرّب على الطاسات التبتية والترددات العلاجية بوعي، مهنية،
-              وحضور. زر الدفع أدناه رابط خارجي وهمي وجاهز للاستبدال.
+              مسار حضوري عميق للتدرّب على الطاسات التبتية والترددات العلاجية بوعي، مهنية، وحضور.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={siteMeta.paymentUrl}>الدفع والحجز</ButtonLink>
-              <ButtonLink href={siteMeta.courseUrl} variant="primary">
-                تعرّفي أكثر على الكورس
-              </ButtonLink>
-            </div>
+            <ButtonLink href={siteMeta.courseUrl} variant="primary" className="mt-8">
+              تعرّفي أكثر على الكورس
+            </ButtonLink>
           </article>
 
           <article className="luxury-card rounded-[2.4rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75 sm:p-10">
@@ -100,7 +115,7 @@ export default function FreeWorkshopPage() {
             <p className="text-pretty mt-5 text-lg leading-9 text-rouh-ink/70">
               نسخة رقمية قيد التحضير لمن ترغب بتعلّم أساسيات الرحلة من البيت وبإيقاع مرن.
             </p>
-            <ButtonLink href={siteMeta.instagram} variant="secondary" className="mt-8">
+            <ButtonLink href={siteMeta.instagram} variant="primary" className="mt-8">
               تابعي موعد الإطلاق
             </ButtonLink>
           </article>

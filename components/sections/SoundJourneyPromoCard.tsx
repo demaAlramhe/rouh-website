@@ -1,0 +1,109 @@
+import Image from "next/image";
+import { assets, soundJourney } from "@/data/siteContent";
+import { ButtonLink } from "@/components/ui/ButtonLink";
+import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
+
+type SoundJourneyPromoCardProps = {
+  className?: string;
+  /** زر الانتقال للرحلة والكتيّب — على صفحة الرحلة المجانية يُفضّل التمرير لأعلى المربع */
+  journeyCtaHref?: string;
+  /** إخفاء مربع «ابدئي من رحلة استرخاء مجانية» والزر (مثلاً على صفحة الرحلة نفسها) */
+  showFreeJourneyCta?: boolean;
+  /** نصوص بديلة بجانب الفيديو (مثلاً صفحة الرحلة المجانية) — الافتراضي من `soundJourney` */
+  copyEyebrow?: string;
+  copyTitle?: string;
+  copyLead?: string;
+  videoOverlayTitle?: string;
+  videoCaption?: string;
+  /** كلاسات إضافية لعنوان النسخة البديلة (مثلاً ضبط الحجم لسطر واحد) */
+  copyTitleClassName?: string;
+  /** معرّف فيديو يوتيوب للمعاينة — الافتراضي من `soundJourney.videoId` */
+  embedVideoId?: string;
+};
+
+export function SoundJourneyPromoCard({
+  className = "",
+  journeyCtaHref = "/free-workshop",
+  showFreeJourneyCta = true,
+  copyEyebrow,
+  copyTitle,
+  copyLead,
+  videoOverlayTitle,
+  videoCaption,
+  copyTitleClassName,
+  embedVideoId,
+}: SoundJourneyPromoCardProps) {
+  const resolvedVideoId = embedVideoId ?? soundJourney.videoId;
+  const eyebrow = copyEyebrow ?? "الرحلة الصوتية الأساسية";
+  const title = copyTitle ?? soundJourney.title;
+  const lead = copyLead ?? soundJourney.text;
+  const showLead = lead.trim().length > 0;
+  const overlayTitle = videoOverlayTitle ?? "فيديو الرحلة الصوتية";
+  const hasCopyOverrides = copyEyebrow != null || copyTitle != null || copyLead != null;
+  const caption: string | undefined =
+    videoCaption !== undefined
+      ? videoCaption || undefined
+      : hasCopyOverrides
+        ? undefined
+        : "اضغطي للتشغيل والمشاهدة في مساحة هادئة";
+  return (
+    <div className={`luxury-card relative overflow-hidden rounded-[3rem] bg-premium-card p-6 text-rouh-ink shadow-glow ring-1 ring-white/75 sm:p-8 lg:p-12 ${className}`}>
+      <Image
+        src={assets.rose}
+        alt=""
+        width={520}
+        height={520}
+        className="pointer-events-none absolute -left-24 -top-24 opacity-[0.18]"
+      />
+      <div className="absolute inset-x-10 top-8 h-px bg-gradient-to-l from-transparent via-rouh-wine/16 to-transparent" />
+      <div className="relative grid items-center gap-10 lg:grid-cols-[0.88fr_1.12fr]">
+        <div>
+          {hasCopyOverrides ? (
+            <div className="inline-flex max-w-full flex-col items-center gap-1.5 self-start text-pretty sm:gap-2">
+              <p className="shrink-0 text-center font-sans text-sm font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:tracking-[0.28em]">
+                {eyebrow}
+              </p>
+              <h2
+                className={`w-max max-w-full text-pretty text-start font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em] ${copyTitleClassName ?? ""}`}
+              >
+                {title}
+              </h2>
+            </div>
+          ) : (
+            <>
+              <p className="mb-4 font-sans text-sm font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:tracking-[0.28em]">
+                {eyebrow}
+              </p>
+              <h2
+                className={`text-pretty font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em] ${copyTitleClassName ?? ""}`}
+              >
+                {title}
+              </h2>
+            </>
+          )}
+          {showLead ? (
+            <p className="text-pretty mt-6 text-lg leading-9 text-rouh-ink/72">{lead}</p>
+          ) : null}
+          {showFreeJourneyCta ? (
+            <div className="mt-8 rounded-[1.9rem] bg-white/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/70 backdrop-blur">
+              <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
+                ابدئي من رحلة استرخاء مجانية
+              </h3>
+              <p className="mt-3 leading-8 text-rouh-ink/70">
+                شاهدي الفيديو، حمّلي الكتيّب المجاني، وتعرّفي على الخطوة التالية في الكورس الوجاهي.
+              </p>
+              <ButtonLink href={journeyCtaHref} className="mt-6">
+                الانتقال للرحلة والكتيّب
+              </ButtonLink>
+            </div>
+          ) : null}
+        </div>
+        <VideoPreviewLightbox
+          videoId={resolvedVideoId}
+          title={overlayTitle}
+          caption={caption}
+        />
+      </div>
+    </div>
+  );
+}

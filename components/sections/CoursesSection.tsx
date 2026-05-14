@@ -7,7 +7,7 @@ export function CoursesSection() {
   return (
     <SectionShell
       id="courses"
-      eyebrow="الورشات والكورسات"
+      eyebrow="الكورسات"
       title="مسارات ناعمة للتعلّم، التجربة، والتوسّع"
     >
       <div className="grid gap-5 lg:grid-cols-3">

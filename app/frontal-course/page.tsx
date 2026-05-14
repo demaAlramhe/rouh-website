@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FrontalCourseGallerySection } from "@/components/sections/FrontalCourseGallerySection";
+import { FrontalCourseTestimonialsSection } from "@/components/sections/FrontalCourseTestimonialsSection";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
@@ -39,6 +40,23 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
+function FrontalDateCardInvestment() {
+  return (
+    <p
+      className="flex min-w-0 flex-nowrap items-baseline justify-start gap-x-1.5 overflow-x-auto text-[clamp(0.75rem,1.8vw+0.42rem,1.0625rem)] tabular-nums leading-snug [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-x-2.5 sm:overflow-visible [&::-webkit-scrollbar]:hidden"
+      aria-label="الاستثمار في نفسك: السعر الحالي 2500 شيكل، السعر السابق 2700 شيكل"
+    >
+      <span className="shrink-0 font-semibold text-rouh-ink/58">الاستثمار في نفسك:</span>
+      <span className="shrink-0 font-semibold text-rouh-ink/42 line-through decoration-rouh-ink/22 decoration-1">
+        2700₪
+      </span>
+      <span className="shrink-0 font-bold text-rouh-ink [font-size:max(1em,1.05rem)] sm:[font-size:1.08em]">
+        2500₪
+      </span>
+    </p>
+  );
+}
+
 export default function FrontalCoursePage() {
   return (
     <>
@@ -71,7 +89,7 @@ export default function FrontalCoursePage() {
               العودة للرئيسية
             </ButtonLink>
             <ButtonLink href="/#courses" variant="ghost">
-              قسم الورشات والكورسات
+              قسم الكورسات
             </ButtonLink>
           </div>
         </div>
@@ -298,11 +316,7 @@ export default function FrontalCoursePage() {
           <SectionDivider />
         </div>
 
-        <FrontalCourseGallerySection className="mt-14 lg:mt-16" />
-
-        <div className="mx-auto mt-14 max-w-4xl space-y-14 lg:mt-16">
-          <SectionDivider />
-
+        <div className="mx-auto mt-14 max-w-4xl lg:mt-16">
           <article className="luxury-card rounded-[2.4rem] bg-gradient-to-br from-white/82 via-rouh-mist/34 to-rouh-sand/45 p-8 shadow-soft ring-1 ring-white/80 sm:p-11">
             <div className="mx-auto max-w-[min(100%,21rem)] text-center sm:max-w-3xl">
               <p className="text-xs font-black tracking-[0.28em] text-rouh-wine sm:text-sm">
@@ -323,6 +337,7 @@ export default function FrontalCoursePage() {
                   <p>19/20 يونيو</p>
                   <p>10:00–17:00 🕰️</p>
                   <p>14 ساعة تعليمية</p>
+                  <FrontalDateCardInvestment />
                 </div>
                 <ButtonLink href={siteMeta.paymentUrl} className="mt-7 w-full">
                   الدفع والحجز — زيمر
@@ -335,6 +350,7 @@ export default function FrontalCoursePage() {
                   <p>26/27 يونيو</p>
                   <p>10:00–17:00 🕰️</p>
                   <p>14 ساعة تعليمية</p>
+                  <FrontalDateCardInvestment />
                 </div>
                 <ButtonLink href={siteMeta.paymentUrl} className="mt-7 w-full">
                   الدفع والحجز — مجدل شمس
@@ -342,7 +358,13 @@ export default function FrontalCoursePage() {
               </article>
             </div>
           </article>
+        </div>
 
+        <FrontalCourseGallerySection className="mt-14 lg:mt-16" />
+
+        <FrontalCourseTestimonialsSection className="mt-14 lg:mt-16" />
+
+        <div className="mx-auto mt-14 max-w-4xl space-y-14 lg:mt-16">
           <SectionDivider />
 
           <article className="luxury-card rounded-[2.4rem] bg-ink-glow p-8 text-center text-white shadow-glow ring-1 ring-white/20 sm:p-12">
@@ -362,7 +384,7 @@ export default function FrontalCoursePage() {
                 variant="ghost"
                 className="!text-white !shadow-[0_14px_34px_rgba(0,0,0,0.18)] !ring-white/45 !bg-white/14 hover:!bg-white/22 hover:!text-white hover:!ring-white/55"
               >
-                قسم الورشات والكورسات
+                قسم الكورسات
               </ButtonLink>
             </div>
           </article>

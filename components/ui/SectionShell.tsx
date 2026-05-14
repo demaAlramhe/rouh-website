@@ -4,7 +4,7 @@ type SectionShellProps = {
   id?: string;
   eyebrow?: string;
   title?: string;
-  description?: string;
+  description?: ReactNode;
   children: ReactNode;
   className?: string;
   headerClassName?: string;
@@ -36,11 +36,11 @@ export function SectionShell({
                 {title}
               </h2>
             )}
-            {description && (
-              <p className="text-pretty mt-5 text-base leading-8 text-rouh-ink/68 sm:text-lg sm:leading-9">
+            {description ? (
+              <div className="text-pretty mt-5 text-base leading-8 text-rouh-ink/68 sm:text-lg sm:leading-9">
                 {description}
-              </p>
-            )}
+              </div>
+            ) : null}
           </div>
         )}
         <div className="animate-reveal">{children}</div>
