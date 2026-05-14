@@ -86,7 +86,7 @@ export default function FreeWorkshopPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={siteMeta.paymentUrl}>الدفع والحجز</ButtonLink>
-              <ButtonLink href={siteMeta.courseUrl} variant="secondary">
+              <ButtonLink href={siteMeta.courseUrl} variant="primary">
                 تعرّفي أكثر على الكورس
               </ButtonLink>
             </div>

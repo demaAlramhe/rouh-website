@@ -11,7 +11,9 @@ export function CoursesSection() {
       title="مسارات ناعمة للتعلّم، التجربة، والتوسّع"
     >
       <div className="grid gap-5 lg:grid-cols-3">
-        {offerings.map((offering) => (
+        {offerings.map((offering) => {
+          const price = (offering as { price?: string }).price;
+          return (
           <article
             key={offering.title}
             className="luxury-card group flex min-h-[380px] flex-col rounded-[2.15rem] bg-premium-card p-7 text-rouh-ink shadow-soft ring-1 ring-white/75 transition duration-500 hover:-translate-y-2 hover:bg-white/72"
@@ -28,21 +30,24 @@ export function CoursesSection() {
             <p className="text-pretty mt-5 grow leading-8 text-rouh-ink/68">
               {offering.description}
             </p>
-            {offering.price && (
+            {price && (
               <div className="mt-6 rounded-2xl bg-rouh-ink/[0.06] px-4 py-3 text-sm font-bold text-rouh-ink/78 ring-1 ring-rouh-ink/8">
-                {offering.price}
+                {price}
               </div>
             )}
             <div className="mt-auto flex flex-col gap-3 pt-7 sm:flex-row lg:flex-col xl:flex-row">
-              <ButtonLink href={offering.href}>{offering.cta}</ButtonLink>
+              {offering.cta && offering.href && (
+                <ButtonLink href={offering.href}>{offering.cta}</ButtonLink>
+              )}
               {offering.secondaryCta && offering.secondaryHref && (
-                <ButtonLink href={offering.secondaryHref} variant="secondary">
+                <ButtonLink href={offering.secondaryHref} variant="primary">
                   {offering.secondaryCta}
                 </ButtonLink>
               )}
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </SectionShell>
   );
