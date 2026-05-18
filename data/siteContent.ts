@@ -5,6 +5,7 @@ export const siteMeta = {
   description:
     "مساحة عربية هادئة للعلاج بالصوت، الطاسات التبتية، الورشات، الجلسات، والعودة إلى الذات مع أسيل عمر.",
   phone: "050-907-1900",
+  whatsappUrl: "https://wa.me/972509071900",
   instagram: "https://www.instagram.com/_aseelomar_?igsh=OWN2bHp6ZmIwdWRm",
   booklet: "/docs/free-booklet.pdf",
   paymentUrl: "https://example.com/payment",
@@ -14,13 +15,14 @@ export const siteMeta = {
 export const assets = {
   logo: "/images/logo.png",
   profile: "/images/img3.jpeg",
+  personalImg: "/images/personalimg.jpeg",
   rose: "/images/rose-reference.jpg",
   hero: "/images/hero-image.jpg",
   bookletCover: "/images/booklet-cover.png",
   workshopCover: "/images/workshop-cover.jpg",
-  individualSession: "/images/session-individual.jpg",
-  couplesSession: "/images/session-couples.jpg",
-  groupSession: "/images/session-group.jpg",
+  individualSession: "/images/frdyimg.jpeg",
+  couplesSession: "/images/zojeimg.jpeg",
+  groupSession: "/images/gropeimg.jpeg",
   podcastOne: "/images/podcast-cover-1.jpg",
   podcastTwo: "/images/podcast-cover-2.jpg",
   podcastThree: "/images/podcast-cover-3.jpg",
@@ -30,7 +32,7 @@ export const navItems = [
   { label: "الرئيسية", href: "/#home" },
   { label: "من أنا", href: "/#about" },
   { label: "رحلتي", href: "/#journey" },
-  { label: "الورشات والكورسات", href: "/#courses" },
+  { label: "الكورسات", href: "/#courses" },
   { label: "الجلسات", href: "/#sessions" },
   { label: "فيديوهات", href: "/#videos" },
   { label: "تواصل", href: "/#contact" },
@@ -91,13 +93,13 @@ export const offerings = [
     description:
       "نسخة رقمية مرنة قيد التحضير، لتعلّم أساسيات العلاج بالصوت من أي مكان وبإيقاع يناسبك.",
     cta: "أبلغيني عند الإطلاق",
-    href: `https://wa.me/972509071900`,
+    href: siteMeta.whatsappUrl,
   },
 ];
 
 export const sessions = [
   {
-    title: "رحلة للذات فردية 🍃",
+    title: "رحلة للذات فردية",
     image: assets.individualSession,
     duration: "ساعتان",
     price: "500₪",
@@ -113,7 +115,7 @@ export const sessions = [
       "الجلسات الزوجية هي تجربة مشتركة تجمع بين الهدوء، الحضور، والاتصال الأعمق بين الشريكين.\n\nفي أوقات كثيرة، نحتاج أن نهدأ معًا… أن نخرج قليلًا من ضغط الحياة اليومية، ونشارك مساحة من الراحة والإصغاء بدون كلام كثير.\n\nالترددات والصوت يساعدان على خلق حالة من الاسترخاء والتناغم، مما يمنح الشريكين فرصة للشعور بالقرب، الهدوء، والتواصل بطريقة أعمق وأكثر وعيًا.",
   },
   {
-    title: "الرحلات الصوتية الجماعية",
+    title: "رحلات دوائر نسائية",
     image: assets.groupSession,
     duration: "حسب نوع اللقاء",
     price: "تفاصيل حسب المجموعة",
@@ -127,18 +129,18 @@ export const videos = [
     title: "مدخل إلى العلاج بالصوت",
     description: "فيديو تعليمي قصير عن كيف يمكن للترددات أن تساعد الجسد على الاسترخاء والحضور.",
     image: assets.podcastOne,
-    embedUrl: "",
+    videoId: "qjw6DKAo024",
   },
   {
     title: "الطاسات التبتية والجهاز العصبي",
     description: "شرح مبسّط للعلاقة بين الصوت، التنفس، وتهدئة الجهاز العصبي.",
     image: assets.podcastTwo,
-    embedUrl: "",
+    videoId: "aLsyfvtwEaM",
   },
   {
     title: "مساحة إصغاء داخلية",
     description: "حلقة تأملية تعليمية عن العودة إلى الذات وسط ضغط الحياة اليومية.",
     image: assets.podcastThree,
-    embedUrl: "",
+    videoId: "84Mj40X-tPA",
   },
 ];

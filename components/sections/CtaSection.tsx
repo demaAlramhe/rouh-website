@@ -1,8 +1,9 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { siteMeta } from "@/data/siteContent";
 
 export function CtaSection() {
   return (
-    <section className="px-5 py-16 sm:px-8">
+    <section className="px-5 py-10 sm:px-8 sm:py-12 lg:py-14">
       <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[3rem] bg-[radial-gradient(circle_at_22%_14%,rgba(248,241,223,0.18),transparent_26%),linear-gradient(135deg,#5a9db0,#7f2a46)] p-8 text-center text-white shadow-glow ring-1 ring-white/20 sm:p-12 lg:p-16">
         <div className="absolute inset-x-10 top-8 h-px bg-gradient-to-l from-transparent via-white/22 to-transparent" />
         <p className="text-sm font-bold tracking-[0.28em] text-white/68">دعوة للبدء</p>
@@ -17,7 +18,13 @@ export function CtaSection() {
           <ButtonLink href="/free-workshop" variant="light">
             ابدئي رحلة استرخاء مجانية
           </ButtonLink>
-          <ButtonLink href="/#contact" variant="ghost" className="bg-white/10 text-white ring-white/20 hover:bg-white/18">
+          <ButtonLink
+            href={siteMeta.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="ghost"
+            className="bg-white/10 text-white ring-white/20 hover:bg-white/18"
+          >
             تواصلي مع أسيل
           </ButtonLink>
         </div>

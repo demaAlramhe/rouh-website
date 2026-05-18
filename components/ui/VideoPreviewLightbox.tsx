@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { lockBodyScroll } from "@/lib/bodyScrollLock";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type VideoPreviewLightboxProps = {
   videoId: string;
@@ -17,7 +19,17 @@ type VideoPreviewLightboxProps = {
    * autoplay on first paint even if the block is already visible.
    */
   autoPlayWhenVisible?: boolean;
+  /** Inside another card (e.g. podcast grid) — skips duplicate luxury shell. */
+  embedded?: boolean;
+  /** Title under the play icon on the poster; off when the parent card already shows it. */
+  showTitleOnPreview?: boolean;
 };
+
+function youtubePosterUrl(videoId: string, orientation: "landscape" | "portrait") {
+  return orientation === "portrait"
+    ? `https://i.ytimg.com/vi/${videoId}/oardefault.jpg`
+    : `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+}
 
 function PlayGlyph({ className = "" }: { className?: string }) {
   return (
@@ -40,15 +52,18 @@ export function VideoPreviewLightbox({
   caption,
   className = "",
   autoPlayWhenVisible = false,
+  embedded = false,
+  showTitleOnPreview = true,
 }: VideoPreviewLightboxProps) {
   const [open, setOpen] = useState(false);
   const [showIframe, setShowIframe] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [inView, setInView] = useState(false);
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   /** After a tap, reload embed with sound (browsers block unmuted autoplay without a gesture). */
   const [inlineSoundOn, setInlineSoundOn] = useState(false);
   const [posterUrl, setPosterUrl] = useState(
-    posterSrc ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+    posterSrc ?? youtubePosterUrl(videoId, orientation),
   );
   const titleId = useId();
   const dialogId = useId();
@@ -66,12 +81,15 @@ export function VideoPreviewLightbox({
   const inlineActiveSrc = inlineSoundEnabled ? inlineUnmutedSrc : inlineMutedSrc;
   const isPortrait = orientation === "portrait";
   const frameAspectClass = isPortrait ? "aspect-[9/16]" : "aspect-video";
-  const previewShellClass = isPortrait
-    ? "mx-auto max-w-[min(25rem,100%)] rounded-[2.5rem] bg-gradient-to-br from-white/72 via-rouh-sand/36 to-rouh-blue/10 p-3 shadow-glow ring-1 ring-white/70 sm:p-4"
-    : "";
-  const cardClass = isPortrait
-    ? "luxury-card relative overflow-hidden rounded-[2rem] shadow-[0_28px_90px_rgba(50,27,34,0.2)] ring-1 ring-white/65"
-    : "luxury-card relative overflow-hidden rounded-[2.25rem] shadow-glow ring-1 ring-white/35";
+  const previewShellClass =
+    embedded || !isPortrait
+      ? ""
+      : "mx-auto max-w-[min(25rem,100%)] rounded-[2.5rem] bg-gradient-to-br from-white/72 via-rouh-sand/36 to-rouh-blue/10 p-3 shadow-glow ring-1 ring-white/70 sm:p-4";
+  const cardClass = embedded
+    ? "relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.35rem] shadow-[0_18px_48px_rgba(50,27,34,0.14)] ring-1 ring-white/75"
+    : isPortrait
+      ? "luxury-card relative overflow-hidden rounded-[2rem] shadow-[0_28px_90px_rgba(50,27,34,0.2)] ring-1 ring-white/65"
+      : "luxury-card relative overflow-hidden rounded-[2.25rem] shadow-glow ring-1 ring-white/35";
   const modalClass = isPortrait
     ? "relative z-10 flex max-h-[92vh] w-full max-w-[min(28rem,calc((92vh-4.5rem)*9/16),calc(100vw-2rem))] flex-col overflow-hidden rounded-[2rem] bg-rouh-ink shadow-[0_40px_120px_rgba(0,0,0,0.45)] ring-1 ring-white/22"
     : "relative z-10 w-full max-w-5xl overflow-hidden rounded-[2rem] bg-rouh-ink shadow-[0_40px_120px_rgba(0,0,0,0.45)] ring-1 ring-white/22";
@@ -79,7 +97,7 @@ export function VideoPreviewLightbox({
   const close = useCallback(() => {
     setOpen(false);
     setShowIframe(false);
-    openRef.current?.focus();
+    openRef.current?.focus({ preventScroll: true });
   }, []);
 
   const openModal = useCallback(() => {
@@ -88,16 +106,24 @@ export function VideoPreviewLightbox({
   }, []);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
     document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
+    const unlockScroll = lockBodyScroll();
+
+    requestAnimationFrame(() => {
+      closeRef.current?.focus({ preventScroll: true });
+    });
+
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      unlockScroll();
     };
   }, [open, close]);
 
@@ -129,7 +155,16 @@ export function VideoPreviewLightbox({
   }, [autoPlayWhenVisible]);
 
   const onPosterError = () => {
-    setPosterUrl(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`);
+    setPosterUrl((current) => {
+      if (posterSrc) return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      if (current.includes("/oardefault.")) {
+        return `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+      }
+      if (current.includes("/maxresdefault.")) {
+        return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      }
+      return current;
+    });
   };
 
   return (
@@ -157,21 +192,27 @@ export function VideoPreviewLightbox({
                   ref={openRef}
                   type="button"
                   onClick={openModal}
-                  className="group absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-rouh-ink/40"
+                  className="group absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-0"
                   aria-haspopup="dialog"
                   aria-expanded={open}
                   aria-controls={dialogId}
                 >
                   <span className="sr-only">تشغيل الفيديو: {title}</span>
                   <span
-                    className="relative grid size-[4.25rem] place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition duration-300 group-hover:scale-105 group-hover:bg-white/26 group-hover:ring-white/60 sm:size-[4.75rem]"
+                    className={`relative grid place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition-[background-color,box-shadow,ring-color,opacity] duration-300 group-hover:bg-white/26 group-hover:ring-white/60 ${
+                      embedded ? "size-[3.75rem] sm:size-16" : "size-[4.25rem] sm:size-[4.75rem] group-hover:scale-105"
+                    }`}
                     aria-hidden
                   >
-                    <PlayGlyph className="ms-1 size-9 opacity-95 sm:size-10" />
+                    <PlayGlyph
+                      className={`ms-1 opacity-95 ${embedded ? "size-8 sm:size-9" : "size-9 sm:size-10"}`}
+                    />
                   </span>
-                  <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
-                    {title}
-                  </span>
+                  {showTitleOnPreview ? (
+                    <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
+                      {title}
+                    </span>
+                  ) : null}
                 </button>
               </>
             ) : (
@@ -207,11 +248,12 @@ export function VideoPreviewLightbox({
         </p>
       ) : null}
 
-      {open ? (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-          role="presentation"
-        >
+      {mounted && open
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-[200] flex items-center justify-center overscroll-none p-4 sm:p-8"
+              role="presentation"
+            >
           <div
             className="absolute inset-0 bg-rouh-ink/68 backdrop-blur-md"
             aria-hidden
@@ -253,8 +295,10 @@ export function VideoPreviewLightbox({
               ) : null}
             </div>
           </div>
-        </div>
-      ) : null}
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

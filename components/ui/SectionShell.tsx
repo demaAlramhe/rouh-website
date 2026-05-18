@@ -43,7 +43,7 @@ export function SectionShell({
             ) : null}
           </div>
         )}
-        <div className="animate-reveal">{children}</div>
+        <div className={id === "videos" ? "" : "animate-reveal"}>{children}</div>
       </div>
     </section>
   );

@@ -1,90 +1,103 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { BookletPdfLightbox } from "@/components/ui/BookletPdfLightbox";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
-import { SoundJourneyPromoCard } from "@/components/sections/SoundJourneyPromoCard";
 import { assets, siteMeta } from "@/data/siteContent";
 
-const FREE_WORKSHOP_VIDEO_ID = "tisi5HDtkCY";
-
-const FREE_WORKSHOP_VIDEO_INTRO_LINES = [
-  "رحلة صوت تعيدكِ إلى نفسك وسط ضجيج العالم الخارجي.",
-  "مساحة من الهدوء، الحضور، والوعي عبر الترددات العلاجية والطاسات التبتية.",
-] as const;
+const FIRST_VIDEO_ID = "tisi5HDtkCY";
+const RELAXATION_VIDEO_ID = "8gFt-RCiFlI";
 
 export const metadata: Metadata = {
   title: "رحلة استرخاء مجانية والكتيّب | Rouh by Aseel Omar",
   description: "صفحة رحلة استرخاء مجانية من Rouh مع فيديو تمهيدي وكتيّب PDF قابل للتحميل.",
 };
 
+function VideoBlock({
+  intro,
+  outro,
+  videoId,
+  videoTitle,
+}: {
+  intro: ReactNode;
+  outro?: ReactNode;
+  videoId: string;
+  videoTitle: string;
+}) {
+  return (
+    <article className="luxury-card overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10">
+      <div className="mx-auto max-w-3xl text-center">{intro}</div>
+      <VideoPreviewLightbox
+        className="mx-auto mt-8 max-w-4xl sm:mt-10"
+        videoId={videoId}
+        title={videoTitle}
+      />
+      {outro ? <div className="mx-auto mt-8 max-w-2xl text-center sm:mt-10">{outro}</div> : null}
+    </article>
+  );
+}
+
 export default function FreeWorkshopPage() {
   return (
     <>
-      <section className="relative overflow-hidden px-5 pb-14 pt-48 sm:px-8 lg:pb-16 lg:pt-44">
+      <section className="relative overflow-hidden px-5 pb-10 pt-48 sm:px-8 lg:pb-12 lg:pt-44">
         <div className="absolute inset-0 -z-10 bg-rouh-radial" />
         <div className="absolute inset-x-10 top-28 -z-10 h-px bg-gradient-to-l from-transparent via-rouh-wine/16 to-transparent" />
         <div className="pointer-events-none absolute left-1/2 top-[14%] -z-10 size-[min(28rem,85vw)] -translate-x-1/2 rounded-full bg-rouh-blue/11 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-[8%] left-1/2 -z-10 size-64 -translate-x-1/2 rounded-full bg-rouh-rose/12 blur-3xl" />
 
         <div className="animate-reveal relative mx-auto max-w-3xl text-center">
           <Badge>رحلة استرخاء مجانية + كتيّب مرافق</Badge>
           <h1 className="text-pretty mx-auto mt-5 max-w-[min(100%,22rem)] font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:max-w-none sm:text-balance sm:text-5xl sm:leading-[1.18] sm:tracking-[-0.02em] lg:text-[3.05rem]">
             ابدئي رحلتك المجانية مع الترددات والصوت
           </h1>
-          <p className="text-pretty mx-auto mt-4 max-w-xl text-base leading-8 text-rouh-ink/72 sm:text-lg sm:leading-9">
-            شاهدي رحلة استرخاء مجانية وحمّلي الكتيّب المرافق لتتعرّفي بشكل أوضح على هذا العالم،
-            وتبدئي بخطوة لطيفة نحو الهدوء والحضور الداخلي.
-          </p>
         </div>
 
-        <div className="relative mx-auto mt-8 max-w-7xl sm:mt-10">
-          <article
-            id="free-workshop-media"
-            className="luxury-card overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10"
-          >
-            <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12 lg:gap-x-14">
-              {/* RTL: عمود أول يمين = الكتيّب (~ثُلث) */}
-              <BookletPdfLightbox
-                className="order-2 lg:order-none"
-                pdfUrl={siteMeta.booklet}
-                coverSrc={assets.bookletCover}
-                coverAlt="غلاف الكتيّب المرافق لرحلة استرخاء مجانية"
-                heading="الكتيّب المرافق للرحلة"
-                modalTitle="معاينة الكتيّب — رحلة استرخاء مجانية"
-                columnSyncDescriptionLines={FREE_WORKSHOP_VIDEO_INTRO_LINES}
-              />
-
-              {/* عمود ثانٍ يسار = الفيديو (~ثُلثان) */}
-              <div className="order-1 flex min-w-0 flex-col lg:order-none">
-                <h2 className="text-pretty text-center font-display text-xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-3xl sm:leading-normal sm:tracking-[-0.02em]">
-                  الرحلة الصوتية الأساسية
-                </h2>
-                <div className="text-pretty mx-auto mt-3 max-w-xl text-center text-sm leading-7 text-rouh-ink/68 sm:mt-4 sm:text-base sm:leading-8">
-                  <p>{FREE_WORKSHOP_VIDEO_INTRO_LINES[0]}</p>
-                  <p className="mt-2.5 text-rouh-ink/62 sm:mt-3">{FREE_WORKSHOP_VIDEO_INTRO_LINES[1]}</p>
-                </div>
-                <VideoPreviewLightbox
-                  className="mt-5"
-                  videoId={FREE_WORKSHOP_VIDEO_ID}
-                  title="الرحلة الصوتية الأساسية"
-                />
+        <div className="relative mx-auto mt-10 flex max-w-4xl flex-col gap-10 sm:mt-12 sm:gap-12 lg:gap-14">
+          <VideoBlock
+            videoId={FIRST_VIDEO_ID}
+            videoTitle="قبل أن نفهم العالم بالكلمات"
+            intro={
+              <div className="space-y-4 text-pretty font-display text-xl font-bold leading-[1.55] text-rouh-ink sm:text-2xl sm:leading-[1.5]">
+                <p>قبل أن نفهم العالم بالكلمات...</p>
+                <p>عرفناه عبر الصوت</p>
+                <p className="pt-2 text-base font-sans font-semibold leading-8 text-rouh-ink/72 sm:text-lg sm:leading-9">
+                  فلماذا أصبح الصوت أداة يستخدمها كثير من المعالجين داخل جلساتهم؟
+                </p>
               </div>
-            </div>
-          </article>
-
-          <SoundJourneyPromoCard
-            className="mt-10 scroll-mt-28 sm:mt-12"
-            showFreeJourneyCta={false}
-            copyEyebrow="فيديو الرحلة"
-            copyTitle="شاهدي رحلة استرخاء مجانية"
-            copyLead=""
-            copyTitleClassName="!text-[1.68rem] !leading-snug sm:!text-[2rem] sm:!leading-[1.22] md:!text-[2.2rem] lg:!text-[clamp(1.85rem,2.1vw+1.35rem,2.55rem)] lg:!whitespace-nowrap xl:!text-[clamp(2rem,2.2vw+1.2rem,2.85rem)]"
-            videoOverlayTitle="فيديو الرحلة"
-            embedVideoId="8gFt-RCiFlI"
+            }
           />
+
+          <VideoBlock
+            videoId={RELAXATION_VIDEO_ID}
+            videoTitle="رحلة استرخاء مجانية"
+            intro={
+              <p className="text-pretty font-display text-xl font-bold leading-snug text-rouh-ink sm:text-3xl sm:leading-normal">
+                شاهدي رحلة استرخاء مجانية واحصلي على الكتيّب المرافق ✨
+              </p>
+            }
+            outro={
+              <div className="space-y-2 text-pretty text-base leading-8 text-rouh-ink/72 sm:text-lg sm:leading-9">
+                <p>لتتعرفي بشكل أعمق على تأثير الترددات والصوت،</p>
+                <p>وتبدئي خطوة لطيفة نحو الهدوء والحضور الداخلي</p>
+              </div>
+            }
+          />
+
+          <article
+            id="free-workshop-booklet"
+            className="luxury-card scroll-mt-28 overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10"
+          >
+            <BookletPdfLightbox
+              pdfUrl={siteMeta.booklet}
+              coverSrc={assets.bookletCover}
+              coverAlt="غلاف الكتيّب المرافق لرحلة استرخاء مجانية"
+              heading="الكتيّب المرافق للرحلة"
+              modalTitle="معاينة الكتيّب — رحلة استرخاء مجانية"
+            />
+          </article>
         </div>
       </section>
 

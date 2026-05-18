@@ -2,6 +2,7 @@ import { offerings } from "@/data/siteContent";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
+import { homeSectionHeaderSpacing, homeSectionSpacing } from "@/components/sections/homeSectionSpacing";
 
 export function CoursesSection() {
   return (
@@ -9,6 +10,8 @@ export function CoursesSection() {
       id="courses"
       eyebrow="الكورسات"
       title="مسارات ناعمة للتعلّم، التجربة، والتوسّع"
+      className={homeSectionSpacing}
+      headerClassName={homeSectionHeaderSpacing}
     >
       <div className="grid gap-5 lg:grid-cols-3">
         {offerings.map((offering) => {

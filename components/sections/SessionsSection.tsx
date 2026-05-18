@@ -1,9 +1,8 @@
 import Image from "next/image";
-import { sessions } from "@/data/siteContent";
+import { sessions, siteMeta } from "@/data/siteContent";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
-
-const WHATSAPP_URL = "https://wa.me/972509071900";
+import { homeSectionHeaderSpacing, homeSectionSpacing } from "@/components/sections/homeSectionSpacing";
 
 export function SessionsSection() {
   return (
@@ -12,6 +11,8 @@ export function SessionsSection() {
       eyebrow="الجلسات"
       title="رحلات صوتية مصممة حسب احتياجك"
       description="جلسات فردية، زوجية، وجماعية تفتح مساحة للهدوء، الاسترخاء، والاتصال الداخلي."
+      className={homeSectionSpacing}
+      headerClassName={homeSectionHeaderSpacing}
     >
       <div className="grid gap-6 lg:grid-cols-3">
         {sessions.map((session) => (
@@ -19,18 +20,21 @@ export function SessionsSection() {
             key={session.title}
             className="luxury-card group flex flex-col overflow-hidden rounded-[2.25rem] bg-premium-card shadow-soft ring-1 ring-white/75 transition duration-500 hover:-translate-y-2 hover:shadow-petal"
           >
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image
-                src={session.image}
-                alt={session.title}
-                fill
-                className="object-cover transition duration-700 group-hover:scale-105"
-                sizes="(min-width: 1024px) 33vw, 90vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-rouh-ink/52 via-transparent to-transparent" />
+            <div className="flex justify-center px-3 pb-1 pt-4 sm:px-4">
+              <div className="relative aspect-[3/4] w-full max-w-[15.75rem] overflow-hidden rounded-[1.35rem] shadow-[0_14px_44px_rgba(50,27,34,0.12)] ring-1 ring-white/80 sm:max-w-[16.75rem]">
+                <Image
+                  src={session.image}
+                  alt={session.title}
+                  fill
+                  unoptimized
+                  className="object-cover object-center transition duration-700 group-hover:scale-[1.03]"
+                  sizes="(min-width: 1024px) 280px, 72vw"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-rouh-ink/38 via-rouh-ink/8 to-transparent" />
+              </div>
             </div>
             <div className="relative flex flex-1 flex-col p-7">
-              <h3 className="text-pretty font-display text-[1.82rem] font-bold leading-[1.34] tracking-normal text-rouh-ink sm:text-2xl sm:leading-tight sm:tracking-[-0.01em]">
+              <h3 className="text-pretty text-center font-display text-[1.82rem] font-bold leading-[1.34] tracking-normal text-rouh-ink sm:text-2xl sm:leading-tight sm:tracking-[-0.01em]">
                 {session.title}
               </h3>
               <div className="mt-6 space-y-4 text-sm leading-7 text-rouh-ink/68">
@@ -50,7 +54,7 @@ export function SessionsSection() {
                   </span>
                 </div>
                 <ButtonLink
-                  href={WHATSAPP_URL}
+                  href={siteMeta.whatsappUrl}
                   variant="secondary"
                   className="w-full"
                   target="_blank"

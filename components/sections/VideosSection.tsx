@@ -1,9 +1,13 @@
-import Image from "next/image";
 import { videos } from "@/data/siteContent";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
+import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
+import { homeSectionHeaderSpacing, homeSectionSpacing } from "@/components/sections/homeSectionSpacing";
 
-const YOUTUBE_PAGE_URL = "https://youtube.com/";
+const YOUTUBE_PAGE_URL = "https://youtube.com/@aseelomar6707?si=4p2XMk5hMJnb_6Ve";
+
+const VIDEOS_SECTION_DESCRIPTION =
+  "العلاج بالطاسات التبتية هو نوع من العلاج بالصوت، يعتمد على الترددات والاهتزازات العميقة التي تُصدرها الطاسات لدعم الاسترخاء، التوازن، وتهدئة الجهاز العصبي 🌿 على عكس الموسيقى العادية، تحمل الطاسات ترددات يمكن للجسم أن يشعر بها بعمق، مما قد يؤثر علينا نفسيًا وجسديًا، ويساعد على إدخال الجسم بحالة أهدأ وأكثر حضورًا ✨ تُساهم هذه الترددات في تفعيل الجهاز العصبي اللاودي (Parasympathetic Nervous System)، المسؤول عن التهدئة، تنظيم التنفّس، خفض معدل ضربات القلب، والشعور بالأمان والراحة. كما تساعد الجلسات على تهدئة التفكير الزائد، دعم التأمل العميق، وخلق مساحة داخلية من السكون والتوازن 🧘🏻‍♀️ يمكن اعتباره نوعًا من العلاج بالموسيقى، لكن بطريقة أعمق وتجربة حسّية مختلفة يعيشها الجسد عبر الصوت والاهتزاز.";
 
 export function VideosSection() {
   return (
@@ -11,64 +15,34 @@ export function VideosSection() {
       id="videos"
       eyebrow="فيديوهات وبودكاست"
       title="مساحة للاستماع والتعرّف أكثر على عالم الصوت والترددات"
-      headerClassName="sm:max-w-[min(100%,52rem)] lg:max-w-[56rem]"
+      className={homeSectionSpacing}
+      headerClassName={`${homeSectionHeaderSpacing} sm:max-w-[min(100%,52rem)] lg:max-w-[56rem]`}
       description={
-        <div className="mx-auto max-w-[min(100%,48rem)] space-y-3.5 text-pretty text-[0.9375rem] leading-[1.78] text-rouh-ink/68 sm:max-w-[52rem] sm:text-[1.015rem] sm:leading-[1.82] lg:max-w-[56rem] lg:text-[1.045rem] lg:leading-[1.84]">
-          <p>
-            <span className="font-display font-semibold text-rouh-ink">عبارة عن علاج بالصوت</span>{" "}
-            الطاسات بتطلع ترددات «أصوات» اللي بنسمعها بشكل عميق، مش زي أي موسيقى عادية. بإمكانها تخترق جسمنا
-            وتؤثر علينا نفسيًا وجسديًا 🤍 وبتأثر على الجهاز العصبي بشكل مباشر، فبتفعّل الجهاز العصبي اللاودي
-            (Parasympathetic Nervous System) المسؤول عن التهدئة، تنظيم التنفّس، خفض معدل ضربات القلب، والشعور
-            بالأمان ✨
-          </p>
-          <p>
-            كمان بتوازن وبتحرر مراكز الطاقة السبعة بالجسم 🧘🏻‍♀️ وغير هيك، بتدخلنا بحالة تأمل عميقة وبتساعد على
-            تهدئة كل الأفكار اللي بتمرّ بمخنا.
-          </p>
-          <p>
-            بنقدر نقول إنه علاج بالموسيقى، لكن بشكل مختلف وأعمق بكثير. وتجربة جديدة وشعور جديد 🌸
-          </p>
-        </div>
+        <p className="text-pretty mx-auto max-w-[min(100%,48rem)] text-[0.9375rem] leading-[1.78] text-rouh-ink/68 sm:max-w-[52rem] sm:text-[1.015rem] sm:leading-[1.82] lg:max-w-[56rem] lg:text-[1.045rem] lg:leading-[1.84]">
+          {VIDEOS_SECTION_DESCRIPTION}
+        </p>
       }
     >
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3 md:items-start">
         {videos.map((video) => (
           <article
             key={video.title}
-            className="luxury-card group overflow-hidden rounded-[2.15rem] bg-premium-card shadow-soft ring-1 ring-white/75 transition duration-500 hover:-translate-y-2 hover:shadow-petal"
+            className="luxury-card flex flex-col overflow-hidden rounded-[2.15rem] bg-premium-card shadow-soft ring-1 ring-white/75"
           >
-            <div className="relative aspect-video overflow-hidden">
-              {video.embedUrl ? (
-                <iframe
-                  className="h-full w-full"
-                  src={video.embedUrl}
-                  title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              ) : (
-                <>
-                  <Image
-                    src={video.image}
-                    alt={video.title}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                    sizes="(min-width: 768px) 33vw, 90vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-rouh-ink/66 via-rouh-ink/8 to-transparent" />
-                  <div className="absolute inset-0 grid place-items-center">
-                    <span className="grid size-16 place-items-center rounded-full bg-white/20 text-white shadow-[0_14px_34px_rgba(0,0,0,0.16)] ring-1 ring-white/35 backdrop-blur transition duration-500 group-hover:scale-110">
-                      ▶
-                    </span>
-                  </div>
-                </>
-              )}
+            <div className="bg-gradient-to-b from-rouh-sand/28 via-rouh-sand/12 to-transparent px-3 pb-4 pt-5 sm:px-4 sm:pt-6">
+              <VideoPreviewLightbox
+                videoId={video.videoId}
+                title={video.title}
+                orientation="portrait"
+                embedded
+                showTitleOnPreview={false}
+              />
             </div>
-            <div className="p-6">
-              <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-ink sm:text-2xl sm:leading-normal">
+            <div className="flex flex-1 flex-col p-6 pt-4">
+              <h3 className="text-pretty text-center font-display text-xl font-bold leading-snug text-rouh-ink sm:text-2xl sm:leading-normal">
                 {video.title}
               </h3>
-              <p className="text-pretty mt-3 leading-7 text-rouh-ink/66">{video.description}</p>
+              <p className="text-pretty mt-3 flex-1 text-center leading-7 text-rouh-ink/66">{video.description}</p>
             </div>
           </article>
         ))}

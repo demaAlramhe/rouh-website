@@ -1,5 +1,6 @@
 import { journeyItems } from "@/data/siteContent";
 import { SectionShell } from "@/components/ui/SectionShell";
+import { homeSectionHeaderSpacing, homeSectionSpacing } from "@/components/sections/homeSectionSpacing";
 
 export function JourneySection() {
   return (
@@ -7,6 +8,8 @@ export function JourneySection() {
       id="journey"
       eyebrow="رحلتي المهنية"
       title="خبرة تجمع بين الوعي، الجسد، الإرشاد، والجمال"
+      className={homeSectionSpacing}
+      headerClassName={homeSectionHeaderSpacing}
     >
       <div>
         <div className="grid gap-4 md:grid-cols-2">

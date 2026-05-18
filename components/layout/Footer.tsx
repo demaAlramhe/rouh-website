@@ -40,9 +40,11 @@ export function Footer() {
             <div className="space-y-3 text-center text-sm text-rouh-ink/72">
               <a
                 className="block transition hover:text-rouh-wine"
-                href={`tel:${siteMeta.phone}`}
+                href={siteMeta.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {siteMeta.phone}
+                واتساب: {siteMeta.phone}
               </a>
               <a
                 className="block transition hover:text-rouh-wine"

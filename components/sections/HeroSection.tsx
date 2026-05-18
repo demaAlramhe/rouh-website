@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden px-5 pb-24 pt-40 sm:px-8 lg:pb-28 lg:pt-40"
+      className="relative overflow-hidden px-5 pb-10 pt-40 sm:px-8 sm:pb-16 lg:pb-20 lg:pt-40"
     >
       <div className="absolute inset-0 -z-10 bg-rouh-radial" />
       <Image
@@ -20,7 +20,7 @@ export function HeroSection() {
         className="pointer-events-none absolute -left-28 bottom-10 -z-10 hidden rotate-[-22deg] opacity-[0.1] blur-[1px] lg:block"
       />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-14 lg:grid-cols-2">
         <div className="animate-reveal order-2 flex flex-col items-center text-center lg:order-none">
           <div className="mx-auto flex w-full max-w-md flex-col items-center">
             <Badge>{hero.eyebrow}</Badge>
@@ -54,7 +54,7 @@ export function HeroSection() {
         </div>
 
         <div className="order-1 lg:order-none">
-          <div className="relative mx-auto w-full max-w-[480px] pb-16">
+          <div className="relative mx-auto w-full max-w-[480px] pb-10 sm:pb-16">
             <div className="absolute -right-10 top-6 size-44 rounded-full bg-rouh-blue/22 blur-3xl" />
             <div className="absolute -left-10 bottom-10 size-52 rounded-full bg-rouh-wine/16 blur-3xl" />
             <div className="absolute inset-x-6 top-2 h-[78%] rounded-full border border-rouh-rose/18" />

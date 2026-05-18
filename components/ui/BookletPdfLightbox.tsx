@@ -63,7 +63,7 @@ export function BookletPdfLightbox({
       {columnSyncDescriptionLines ? (
         <div
           aria-hidden
-          className="invisible pointer-events-none select-none text-pretty mx-auto mt-3 max-w-xl text-center text-sm leading-7 text-rouh-ink/68 sm:mt-4 sm:text-base sm:leading-8"
+          className="pointer-events-none mx-auto mt-3 hidden max-w-xl select-none text-pretty text-center text-sm leading-7 text-rouh-ink/68 sm:mt-4 sm:text-base sm:leading-8 lg:block lg:invisible"
         >
           <p>{columnSyncDescriptionLines[0]}</p>
           <p className="mt-2.5 text-rouh-ink/62 sm:mt-3">{columnSyncDescriptionLines[1]}</p>
@@ -73,7 +73,7 @@ export function BookletPdfLightbox({
         ref={openRef}
         type="button"
         onClick={openModal}
-        className="group mt-5 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-rouh-blue focus-visible:ring-offset-2 focus-visible:ring-offset-rouh-sand"
+        className="group mt-4 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-rouh-blue focus-visible:ring-offset-2 focus-visible:ring-offset-rouh-sand lg:mt-5"
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={dialogId}
