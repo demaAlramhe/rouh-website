@@ -267,37 +267,39 @@ export function VideoPreviewLightbox({
 
     const minVisibleHeight = () => (window.matchMedia("(pointer: coarse)").matches ? 56 : 100);
 
-    const syncInView = (entry?: IntersectionObserverEntry) => {
+    const syncInView = () => {
       const minH = minVisibleHeight();
-      if (entry) {
-        setInView(entry.isIntersecting && entry.intersectionRect.height >= minH);
-        return;
-      }
       const rect = el.getBoundingClientRect();
       const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
       setInView(visibleHeight >= minH && rect.bottom > 0 && rect.top < window.innerHeight);
     };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => syncInView(entry),
-      {
-        threshold: [0, 0.08, 0.2, 0.4, 0.65],
-        rootMargin: window.matchMedia("(pointer: coarse)").matches
-          ? "64px 0px 64px 0px"
-          : "0px 0px -4% 0px",
-      },
-    );
-    const syncInViewFromLayout = () => syncInView();
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      const entry = entries[0];
+      if (!entry) {
+        syncInView();
+        return;
+      }
+      const minH = minVisibleHeight();
+      setInView(entry.isIntersecting && entry.intersectionRect.height >= minH);
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: [0, 0.08, 0.2, 0.4, 0.65],
+      rootMargin: window.matchMedia("(pointer: coarse)").matches
+        ? "64px 0px 64px 0px"
+        : "0px 0px -4% 0px",
+    });
 
     observer.observe(el);
     requestAnimationFrame(() => syncInView());
-    window.addEventListener("scroll", syncInViewFromLayout, { passive: true });
-    window.addEventListener("resize", syncInViewFromLayout, { passive: true });
+    window.addEventListener("scroll", syncInView, { passive: true });
+    window.addEventListener("resize", syncInView, { passive: true });
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", syncInViewFromLayout);
-      window.removeEventListener("resize", syncInViewFromLayout);
+      window.removeEventListener("scroll", syncInView);
+      window.removeEventListener("resize", syncInView);
     };
   }, [autoPlayWhenVisible, isMobilePlayer]);
 
