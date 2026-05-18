@@ -119,7 +119,6 @@ export function VideoPreviewLightbox({
   const [embedOrigin, setEmbedOrigin] = useState("");
   const [isMobilePlayer, setIsMobilePlayer] = useState(() => isMobilePlaybackContext());
   const [modalIframeSrc, setModalIframeSrc] = useState<string | null>(null);
-  const [modalChromeless, setModalChromeless] = useState(false);
   const playLockRef = useRef(false);
   const titleId = useId();
   const dialogId = useId();
@@ -175,7 +174,6 @@ export function VideoPreviewLightbox({
     setOpen(false);
     setShowIframe(false);
     setModalIframeSrc(null);
-    setModalChromeless(false);
     openRef.current?.focus({ preventScroll: true });
   }, []);
 
@@ -188,22 +186,24 @@ export function VideoPreviewLightbox({
 
     setHasUserScrolled(true);
     const mobile = isMobilePlaybackContext();
-    const chromelessModal = mobile && autoPlayWhenVisible;
     const origin =
       typeof window !== "undefined" ? window.location.origin : embedOrigin || undefined;
 
-    setModalChromeless(chromelessModal);
+    /**
+     * النافذة على الموبايل: مشغّل تفاعلي (controls=1) — لا chromeless ولا pointer-events-none.
+     * صامت + autoplay بعد اللمس الأول غالبًا يشتغل على iOS؛ وإلا زر ▶ داخل المشغّل يعمل.
+     */
     setModalIframeSrc(
       youtubeEmbedUrl(videoId, {
         autoplay: true,
-        mute: false,
-        chromeless: chromelessModal,
+        mute: mobile,
+        chromeless: false,
         origin,
       }),
     );
     setOpen(true);
     setShowIframe(true);
-  }, [videoId, embedOrigin, autoPlayWhenVisible]);
+  }, [videoId, embedOrigin]);
 
   useEffect(() => {
     setMounted(true);
@@ -227,9 +227,11 @@ export function VideoPreviewLightbox({
     document.addEventListener("keydown", onKey);
     const unlockScroll = lockBodyScroll();
 
-    requestAnimationFrame(() => {
-      closeRef.current?.focus({ preventScroll: true });
-    });
+    if (!isMobilePlaybackContext()) {
+      requestAnimationFrame(() => {
+        closeRef.current?.focus({ preventScroll: true });
+      });
+    }
 
     return () => {
       document.removeEventListener("keydown", onKey);
@@ -459,36 +461,21 @@ export function VideoPreviewLightbox({
             </div>
             <div className={`relative overflow-hidden bg-black ${frameAspectClass}`}>
               {showIframe && modalIframeSrc ? (
-                modalChromeless ? (
-                  <>
-                    <iframe
-                      className="pointer-events-none absolute left-1/2 top-1/2 h-[118%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0 bg-black"
-                      src={modalIframeSrc}
-                      title={title}
-                      allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-12 bg-gradient-to-t from-black/55 via-black/20 to-transparent"
-                      aria-hidden
-                    />
-                    <div
-                      className="pointer-events-none absolute end-0 top-0 z-[1] h-16 w-24 bg-gradient-to-bl from-black/40 to-transparent"
-                      aria-hidden
-                    />
-                  </>
-                ) : (
-                  <iframe
-                    className="h-full w-full border-0"
-                    src={modalIframeSrc}
-                    title={title}
-                    allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    referrerPolicy="strict-origin-when-cross-origin"
-                  />
-                )
+                <iframe
+                  className="h-full w-full border-0"
+                  src={modalIframeSrc}
+                  title={title}
+                  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
               ) : null}
             </div>
+            {isMobilePlayer && showIframe && modalIframeSrc ? (
+              <p className="border-t border-white/10 px-4 py-2.5 text-center text-xs leading-6 text-white/65">
+                إن لم يبدأ الفيديو، اضغطي زر التشغيل ▶ في المشغّل
+              </p>
+            ) : null}
           </div>
             </div>,
             document.body,
