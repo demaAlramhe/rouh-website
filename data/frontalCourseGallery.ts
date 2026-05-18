@@ -5,6 +5,10 @@ export const frontalCourseGallery = {
     "لحظات حقيقية من تجربة التعلّم، الحضور، والعمل مع الترددات والطاسات التبتية",
   images: [
     {
+      src: "/images/newimgcorse.jpeg",
+      alt: "صورة جماعية للمشاركات مع شهادات الإنهاء وطاسات تبتية في الاستوديو",
+    },
+    {
       src: "/images/frontal-course-gallery/01-group-certificates-wood-studio.png",
       alt: "مجموعة من المشاركات يحملن الشهادات في استوديو بجدران خشبية دافئة مع طاسات تبتية في الخلفية",
     },
