@@ -86,6 +86,9 @@ export default function FreeWorkshopPage() {
           <VideoBlock
             videoId={RELAXATION_VIDEO_ID}
             videoTitle="رحلة استرخاء مجانية"
+            autoPlayWhenVisible
+            autoPlayImmediate
+            autoUnmuteOnInteraction
             intro={
               <p className="text-pretty font-display text-xl font-bold leading-snug text-rouh-ink sm:text-3xl sm:leading-normal">
                 شاهدي رحلة استرخاء مجانية واحصلي على الكتيّب المرافق ✨

@@ -40,7 +40,12 @@ function youtubePosterUrl(videoId: string, orientation: "landscape" | "portrait"
 
 function youtubeEmbedUrl(
   videoId: string,
-  { autoplay = false, mute = false, chromeless = false }: { autoplay?: boolean; mute?: boolean; chromeless?: boolean },
+  {
+    autoplay = false,
+    mute = false,
+    chromeless = false,
+    origin,
+  }: { autoplay?: boolean; mute?: boolean; chromeless?: boolean; origin?: string },
 ) {
   const params = new URLSearchParams({
     playsinline: "1",
@@ -49,6 +54,10 @@ function youtubeEmbedUrl(
   });
   if (autoplay) params.set("autoplay", "1");
   if (mute) params.set("mute", "1");
+  if (origin) {
+    params.set("origin", origin);
+    params.set("widget_referrer", origin);
+  }
   if (chromeless) {
     params.set("controls", "0");
     params.set("iv_load_policy", "3");
@@ -98,6 +107,8 @@ export function VideoPreviewLightbox({
   const [posterUrl, setPosterUrl] = useState(
     posterSrc ?? youtubePosterUrl(videoId, orientation),
   );
+  const [embedOrigin, setEmbedOrigin] = useState("");
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
   const titleId = useId();
   const dialogId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -105,13 +116,29 @@ export function VideoPreviewLightbox({
   const viewportTargetRef = useRef<HTMLDivElement>(null);
 
   const inlineChromeless = autoPlayWhenVisible;
-  const embedSrc = youtubeEmbedUrl(videoId, { autoplay: true });
-  const inlineMutedSrc = youtubeEmbedUrl(videoId, { autoplay: true, mute: true, chromeless: inlineChromeless });
-  const inlineUnmutedSrc = youtubeEmbedUrl(videoId, { autoplay: true, mute: false, chromeless: inlineChromeless });
+  const embedOpts = { origin: embedOrigin || undefined };
+  const embedSrc = youtubeEmbedUrl(videoId, { autoplay: true, ...embedOpts });
+  const inlineMutedSrc = youtubeEmbedUrl(videoId, {
+    autoplay: true,
+    mute: true,
+    chromeless: inlineChromeless,
+    ...embedOpts,
+  });
+  const inlineUnmutedSrc = youtubeEmbedUrl(videoId, {
+    autoplay: true,
+    mute: false,
+    chromeless: inlineChromeless,
+    ...embedOpts,
+  });
 
+  /** على الموبايل: لمسة واحدة تكفي (iOS لا يشغّل بدون تفاعل). على الحاسوب: فوري مع autoPlayImmediate */
+  const canStartAutoplay =
+    autoPlayImmediate && !isCoarsePointer ? true : hasUserScrolled;
   const shouldPlayInline =
-    autoPlayWhenVisible && inView && (autoPlayImmediate || hasUserScrolled) && !open;
-  const inlineSoundEnabled = shouldPlayInline && inlineSoundOn;
+    autoPlayWhenVisible && inView && canStartAutoplay && !open;
+  /** على الموبايل نبدأ صامتًا ثم نفعّل الصوت بعد بدء التشغيل */
+  const inlineSoundEnabled =
+    shouldPlayInline && inlineSoundOn && (!isCoarsePointer || hasUserScrolled);
   const inlineActiveSrc = inlineSoundEnabled ? inlineUnmutedSrc : inlineMutedSrc;
   const isPortrait = orientation === "portrait";
   const frameAspectClass = isPortrait ? "aspect-[9/16]" : "aspect-video";
@@ -141,6 +168,12 @@ export function VideoPreviewLightbox({
 
   useEffect(() => {
     setMounted(true);
+    setEmbedOrigin(window.location.origin);
+    const mq = window.matchMedia("(pointer: coarse)");
+    const syncCoarse = () => setIsCoarsePointer(mq.matches);
+    syncCoarse();
+    mq.addEventListener("change", syncCoarse);
+    return () => mq.removeEventListener("change", syncCoarse);
   }, []);
 
   useEffect(() => {
@@ -165,7 +198,7 @@ export function VideoPreviewLightbox({
     if (!autoPlayWhenVisible) return;
     const onPageInteraction = () => {
       setHasUserScrolled(true);
-      if (autoUnmuteOnInteraction) setInlineSoundOn(true);
+      if (autoUnmuteOnInteraction && !isCoarsePointer) setInlineSoundOn(true);
     };
     const events = ["scroll", "wheel", "touchstart", "touchmove", "pointerdown", "click", "keydown"] as const;
     for (const event of events) {
@@ -176,20 +209,51 @@ export function VideoPreviewLightbox({
         window.removeEventListener(event, onPageInteraction);
       }
     };
-  }, [autoPlayWhenVisible, autoUnmuteOnInteraction]);
+  }, [autoPlayWhenVisible, autoUnmuteOnInteraction, isCoarsePointer]);
+
+  useEffect(() => {
+    if (!shouldPlayInline || !autoUnmuteOnInteraction || !isCoarsePointer || inlineSoundOn) return;
+    const timer = window.setTimeout(() => setInlineSoundOn(true), 750);
+    return () => window.clearTimeout(timer);
+  }, [shouldPlayInline, autoUnmuteOnInteraction, isCoarsePointer, inlineSoundOn]);
 
   useEffect(() => {
     if (!autoPlayWhenVisible) return;
     const el = viewportTargetRef.current;
     if (!el) return;
+
+    const minVisibleHeight = () => (window.matchMedia("(pointer: coarse)").matches ? 56 : 100);
+
+    const syncInView = (entry?: IntersectionObserverEntry) => {
+      const minH = minVisibleHeight();
+      if (entry) {
+        setInView(entry.isIntersecting && entry.intersectionRect.height >= minH);
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      setInView(visibleHeight >= minH && rect.bottom > 0 && rect.top < window.innerHeight);
+    };
+
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting && entry.intersectionRatio >= 0.32);
+      ([entry]) => syncInView(entry),
+      {
+        threshold: [0, 0.08, 0.2, 0.4, 0.65],
+        rootMargin: window.matchMedia("(pointer: coarse)").matches
+          ? "64px 0px 64px 0px"
+          : "0px 0px -4% 0px",
       },
-      { threshold: [0, 0.32, 0.55, 0.85], rootMargin: "0px 0px -6% 0px" },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    requestAnimationFrame(() => syncInView());
+    window.addEventListener("scroll", () => syncInView(), { passive: true });
+    window.addEventListener("resize", () => syncInView(), { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", syncInView);
+      window.removeEventListener("resize", syncInView);
+    };
   }, [autoPlayWhenVisible]);
 
   const onPosterError = () => {
@@ -265,7 +329,7 @@ export function VideoPreviewLightbox({
                     }
                     src={inlineActiveSrc}
                     title={title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen={!inlineChromeless}
                     referrerPolicy="strict-origin-when-cross-origin"
                   />
@@ -344,7 +408,7 @@ export function VideoPreviewLightbox({
                   className="h-full w-full"
                   src={embedSrc}
                   title={title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
               ) : null}

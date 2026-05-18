@@ -64,6 +64,13 @@ body::before {
   text-wrap: pretty;
 }
 
+/* Session cards — avoid pretty-wrap glitches on mobile Arabic */
+.session-prose p {
+  text-wrap: wrap;
+  text-decoration: none;
+  -webkit-text-decoration: none;
+}
+
 .luxury-card {
   position: relative;
   overflow: hidden;
