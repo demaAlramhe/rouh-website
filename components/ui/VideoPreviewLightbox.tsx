@@ -74,13 +74,10 @@ function youtubeEmbedUrl(
   return `${host}/${videoId}?${params.toString()}`;
 }
 
+/** شاشات الهاتف فقط — الحاسوب يبقى بتشغيل تلقائي داخل الصفحة */
 function isMobilePlaybackContext() {
-  if (typeof window === "undefined") return true;
-  return (
-    window.matchMedia("(pointer: coarse)").matches ||
-    window.matchMedia("(max-width: 767px)").matches ||
-    "ontouchstart" in window
-  );
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(max-width: 767px)").matches;
 }
 
 function PlayGlyph({ className = "" }: { className?: string }) {
@@ -120,9 +117,9 @@ export function VideoPreviewLightbox({
     posterSrc ?? youtubePosterUrl(videoId, orientation),
   );
   const [embedOrigin, setEmbedOrigin] = useState("");
-  /** افتراضيًا true حتى لا يُخفى زر التشغيل قبل اكتشاف الجهاز (سبب شائع لعطل اللمس على iOS) */
-  const [isMobilePlayer, setIsMobilePlayer] = useState(true);
+  const [isMobilePlayer, setIsMobilePlayer] = useState(() => isMobilePlaybackContext());
   const [modalIframeSrc, setModalIframeSrc] = useState<string | null>(null);
+  const [modalChromeless, setModalChromeless] = useState(false);
   const playLockRef = useRef(false);
   const titleId = useId();
   const dialogId = useId();
@@ -178,19 +175,9 @@ export function VideoPreviewLightbox({
     setOpen(false);
     setShowIframe(false);
     setModalIframeSrc(null);
+    setModalChromeless(false);
     openRef.current?.focus({ preventScroll: true });
   }, []);
-
-  const buildModalSrc = useCallback(
-    (unmuted: boolean) =>
-      youtubeEmbedUrl(videoId, {
-        autoplay: true,
-        mute: !unmuted,
-        chromeless: false,
-        origin: typeof window !== "undefined" ? window.location.origin : embedOrigin || undefined,
-      }),
-    [videoId, embedOrigin],
-  );
 
   const activatePlayback = useCallback(() => {
     if (playLockRef.current) return;
@@ -201,10 +188,22 @@ export function VideoPreviewLightbox({
 
     setHasUserScrolled(true);
     const mobile = isMobilePlaybackContext();
-    setModalIframeSrc(buildModalSrc(!mobile));
+    const chromelessModal = mobile && autoPlayWhenVisible;
+    const origin =
+      typeof window !== "undefined" ? window.location.origin : embedOrigin || undefined;
+
+    setModalChromeless(chromelessModal);
+    setModalIframeSrc(
+      youtubeEmbedUrl(videoId, {
+        autoplay: true,
+        mute: false,
+        chromeless: chromelessModal,
+        origin,
+      }),
+    );
     setOpen(true);
     setShowIframe(true);
-  }, [buildModalSrc]);
+  }, [videoId, embedOrigin, autoPlayWhenVisible]);
 
   useEffect(() => {
     setMounted(true);
@@ -212,13 +211,10 @@ export function VideoPreviewLightbox({
     const syncMobile = () => setIsMobilePlayer(isMobilePlaybackContext());
     syncMobile();
     window.addEventListener("resize", syncMobile, { passive: true });
-    const coarseMq = window.matchMedia("(pointer: coarse)");
     const narrowMq = window.matchMedia("(max-width: 767px)");
-    coarseMq.addEventListener("change", syncMobile);
     narrowMq.addEventListener("change", syncMobile);
     return () => {
       window.removeEventListener("resize", syncMobile);
-      coarseMq.removeEventListener("change", syncMobile);
       narrowMq.removeEventListener("change", syncMobile);
     };
   }, []);
@@ -242,7 +238,7 @@ export function VideoPreviewLightbox({
   }, [open, close]);
 
   useEffect(() => {
-    if (!autoPlayWhenVisible) return;
+    if (!autoPlayWhenVisible || isMobilePlayer) return;
     const onPageInteraction = () => {
       setHasUserScrolled(true);
       if (autoUnmuteOnInteraction && !isMobilePlayer) setInlineSoundOn(true);
@@ -265,7 +261,7 @@ export function VideoPreviewLightbox({
   }, [shouldPlayInline, autoUnmuteOnInteraction, isMobilePlayer, inlineSoundOn]);
 
   useEffect(() => {
-    if (!autoPlayWhenVisible) return;
+    if (!autoPlayWhenVisible || isMobilePlayer) return;
     const el = viewportTargetRef.current;
     if (!el) return;
 
@@ -291,17 +287,19 @@ export function VideoPreviewLightbox({
           : "0px 0px -4% 0px",
       },
     );
+    const syncInViewFromLayout = () => syncInView();
+
     observer.observe(el);
     requestAnimationFrame(() => syncInView());
-    window.addEventListener("scroll", () => syncInView(), { passive: true });
-    window.addEventListener("resize", () => syncInView(), { passive: true });
+    window.addEventListener("scroll", syncInViewFromLayout, { passive: true });
+    window.addEventListener("resize", syncInViewFromLayout, { passive: true });
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", syncInView);
-      window.removeEventListener("resize", syncInView);
+      window.removeEventListener("scroll", syncInViewFromLayout);
+      window.removeEventListener("resize", syncInViewFromLayout);
     };
-  }, [autoPlayWhenVisible]);
+  }, [autoPlayWhenVisible, isMobilePlayer]);
 
   const onPosterError = () => {
     setPosterUrl((current) => {
@@ -341,11 +339,6 @@ export function VideoPreviewLightbox({
                   ref={openRef}
                   type="button"
                   onClick={activatePlayback}
-                  onTouchEnd={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    activatePlayback();
-                  }}
                   className="group absolute inset-0 z-10 flex touch-manipulation cursor-pointer flex-col items-center justify-center gap-3 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-0"
                   aria-haspopup="dialog"
                   aria-expanded={open}
@@ -370,8 +363,8 @@ export function VideoPreviewLightbox({
                     <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
                       {title}
                     </span>
-                  ) : isMobilePlayer ? (
-                    <span className="max-w-[90%] text-center text-sm font-bold text-white/92 sm:text-base">
+                  ) : isMobilePlayer || autoPlayWhenVisible ? (
+                    <span className="max-w-[90%] text-center text-sm font-bold text-white/92 md:hidden">
                       اضغطي للمشاهدة
                     </span>
                   ) : null}
@@ -462,16 +455,36 @@ export function VideoPreviewLightbox({
                 </svg>
               </button>
             </div>
-            <div className={`relative ${frameAspectClass} bg-black`}>
+            <div className={`relative overflow-hidden bg-black ${frameAspectClass}`}>
               {showIframe && modalIframeSrc ? (
-                <iframe
-                  className="h-full w-full border-0"
-                  src={modalIframeSrc}
-                  title={title}
-                  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
+                modalChromeless ? (
+                  <>
+                    <iframe
+                      className="pointer-events-none absolute left-1/2 top-1/2 h-[118%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0 bg-black"
+                      src={modalIframeSrc}
+                      title={title}
+                      allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-12 bg-gradient-to-t from-black/55 via-black/20 to-transparent"
+                      aria-hidden
+                    />
+                    <div
+                      className="pointer-events-none absolute end-0 top-0 z-[1] h-16 w-24 bg-gradient-to-bl from-black/40 to-transparent"
+                      aria-hidden
+                    />
+                  </>
+                ) : (
+                  <iframe
+                    className="h-full w-full border-0"
+                    src={modalIframeSrc}
+                    title={title}
+                    allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                )
               ) : null}
             </div>
           </div>
