@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { lockBodyScroll } from "@/lib/bodyScrollLock";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { createPortal, flushSync } from "react-dom";
 
 type VideoPreviewLightboxProps = {
   videoId: string;
@@ -67,6 +67,7 @@ function youtubeEmbedUrl(
     params.set("color", "white");
   } else {
     params.set("controls", "1");
+    params.set("enablejsapi", "1");
   }
   const host = chromeless
     ? "https://www.youtube-nocookie.com/embed"
@@ -119,7 +120,6 @@ export function VideoPreviewLightbox({
   const [embedOrigin, setEmbedOrigin] = useState("");
   const [isMobilePlayer, setIsMobilePlayer] = useState(() => isMobilePlaybackContext());
   const [modalIframeSrc, setModalIframeSrc] = useState<string | null>(null);
-  const playLockRef = useRef(false);
   const titleId = useId();
   const dialogId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -178,38 +178,33 @@ export function VideoPreviewLightbox({
   }, []);
 
   const activatePlayback = useCallback(() => {
-    if (playLockRef.current) return;
-    playLockRef.current = true;
-    window.setTimeout(() => {
-      playLockRef.current = false;
-    }, 500);
-
-    setHasUserScrolled(true);
-    const mobile = isMobilePlaybackContext();
     const origin =
       typeof window !== "undefined" ? window.location.origin : embedOrigin || undefined;
 
-    /**
-     * النافذة على الموبايل: مشغّل تفاعلي (controls=1) — لا chromeless ولا pointer-events-none.
-     * صامت + autoplay بعد اللمس الأول غالبًا يشتغل على iOS؛ وإلا زر ▶ داخل المشغّل يعمل.
-     */
-    setModalIframeSrc(
-      youtubeEmbedUrl(videoId, {
-        autoplay: true,
-        mute: mobile,
-        chromeless: false,
-        origin,
-      }),
-    );
-    setOpen(true);
-    setShowIframe(true);
+    const src = youtubeEmbedUrl(videoId, {
+      autoplay: true,
+      mute: false,
+      chromeless: false,
+      origin,
+    });
+
+    setHasUserScrolled(true);
+    /** flushSync يحافظ على سلسلة اللمس على iOS لتشغيل بصوت بعد ضغطة واحدة */
+    flushSync(() => {
+      setModalIframeSrc(src);
+      setOpen(true);
+      setShowIframe(true);
+    });
   }, [videoId, embedOrigin]);
+
+  useLayoutEffect(() => {
+    setIsMobilePlayer(isMobilePlaybackContext());
+  }, []);
 
   useEffect(() => {
     setMounted(true);
     setEmbedOrigin(window.location.origin);
     const syncMobile = () => setIsMobilePlayer(isMobilePlaybackContext());
-    syncMobile();
     window.addEventListener("resize", syncMobile, { passive: true });
     const narrowMq = window.matchMedia("(max-width: 767px)");
     narrowMq.addEventListener("change", syncMobile);
@@ -471,11 +466,6 @@ export function VideoPreviewLightbox({
                 />
               ) : null}
             </div>
-            {isMobilePlayer && showIframe && modalIframeSrc ? (
-              <p className="border-t border-white/10 px-4 py-2.5 text-center text-xs leading-6 text-white/65">
-                إن لم يبدأ الفيديو، اضغطي زر التشغيل ▶ في المشغّل
-              </p>
-            ) : null}
           </div>
             </div>,
             document.body,
