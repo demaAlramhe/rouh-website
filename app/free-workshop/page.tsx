@@ -21,11 +21,17 @@ function VideoBlock({
   outro,
   videoId,
   videoTitle,
+  autoPlayWhenVisible = false,
+  autoPlayImmediate = false,
+  autoUnmuteOnInteraction = false,
 }: {
   intro: ReactNode;
   outro?: ReactNode;
   videoId: string;
   videoTitle: string;
+  autoPlayWhenVisible?: boolean;
+  autoPlayImmediate?: boolean;
+  autoUnmuteOnInteraction?: boolean;
 }) {
   return (
     <article className="luxury-card overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-white/88 via-rouh-mist/35 to-rouh-sand/42 p-6 shadow-glow ring-1 ring-white/80 sm:p-8 lg:p-10">
@@ -34,6 +40,10 @@ function VideoBlock({
         className="mx-auto mt-8 max-w-4xl sm:mt-10"
         videoId={videoId}
         title={videoTitle}
+        autoPlayWhenVisible={autoPlayWhenVisible}
+        autoPlayImmediate={autoPlayImmediate}
+        autoUnmuteOnInteraction={autoUnmuteOnInteraction}
+        showTitleOnPreview={false}
       />
       {outro ? <div className="mx-auto mt-8 max-w-2xl text-center sm:mt-10">{outro}</div> : null}
     </article>
@@ -59,6 +69,9 @@ export default function FreeWorkshopPage() {
           <VideoBlock
             videoId={FIRST_VIDEO_ID}
             videoTitle="قبل أن نفهم العالم بالكلمات"
+            autoPlayWhenVisible
+            autoPlayImmediate
+            autoUnmuteOnInteraction
             intro={
               <div className="space-y-4 text-pretty font-display text-xl font-bold leading-[1.55] text-rouh-ink sm:text-2xl sm:leading-[1.5]">
                 <p>قبل أن نفهم العالم بالكلمات...</p>

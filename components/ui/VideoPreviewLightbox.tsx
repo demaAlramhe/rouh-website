@@ -19,6 +19,13 @@ type VideoPreviewLightboxProps = {
    * autoplay on first paint even if the block is already visible.
    */
   autoPlayWhenVisible?: boolean;
+  /** مع `autoPlayWhenVisible`: تشغيل صامت عند الظهور دون انتظار تمرير الصفحة أولًا */
+  autoPlayImmediate?: boolean;
+  /**
+   * مع `autoPlayWhenVisible`: تشغيل الصوت بعد أول تمرير/لمس/نقرة على الصفحة (سياسة المتصفح).
+   * لا يُفعَّل الصوت من أول ثانية دون أي تفاعل.
+   */
+  autoUnmuteOnInteraction?: boolean;
   /** Inside another card (e.g. podcast grid) — skips duplicate luxury shell. */
   embedded?: boolean;
   /** Title under the play icon on the poster; off when the parent card already shows it. */
@@ -29,6 +36,30 @@ function youtubePosterUrl(videoId: string, orientation: "landscape" | "portrait"
   return orientation === "portrait"
     ? `https://i.ytimg.com/vi/${videoId}/oardefault.jpg`
     : `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+}
+
+function youtubeEmbedUrl(
+  videoId: string,
+  { autoplay = false, mute = false, chromeless = false }: { autoplay?: boolean; mute?: boolean; chromeless?: boolean },
+) {
+  const params = new URLSearchParams({
+    playsinline: "1",
+    rel: "0",
+    modestbranding: "1",
+  });
+  if (autoplay) params.set("autoplay", "1");
+  if (mute) params.set("mute", "1");
+  if (chromeless) {
+    params.set("controls", "0");
+    params.set("iv_load_policy", "3");
+    params.set("fs", "0");
+    params.set("disablekb", "1");
+    params.set("cc_load_policy", "3");
+    params.set("color", "white");
+  } else {
+    params.set("controls", "1");
+  }
+  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
 }
 
 function PlayGlyph({ className = "" }: { className?: string }) {
@@ -52,6 +83,8 @@ export function VideoPreviewLightbox({
   caption,
   className = "",
   autoPlayWhenVisible = false,
+  autoPlayImmediate = false,
+  autoUnmuteOnInteraction = false,
   embedded = false,
   showTitleOnPreview = true,
 }: VideoPreviewLightboxProps) {
@@ -71,12 +104,13 @@ export function VideoPreviewLightbox({
   const openRef = useRef<HTMLButtonElement>(null);
   const viewportTargetRef = useRef<HTMLDivElement>(null);
 
-  const embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-  const inlineMutedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1`;
-  const inlineUnmutedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1&controls=1`;
+  const inlineChromeless = autoPlayWhenVisible;
+  const embedSrc = youtubeEmbedUrl(videoId, { autoplay: true });
+  const inlineMutedSrc = youtubeEmbedUrl(videoId, { autoplay: true, mute: true, chromeless: inlineChromeless });
+  const inlineUnmutedSrc = youtubeEmbedUrl(videoId, { autoplay: true, mute: false, chromeless: inlineChromeless });
 
   const shouldPlayInline =
-    autoPlayWhenVisible && inView && hasUserScrolled && !open;
+    autoPlayWhenVisible && inView && (autoPlayImmediate || hasUserScrolled) && !open;
   const inlineSoundEnabled = shouldPlayInline && inlineSoundOn;
   const inlineActiveSrc = inlineSoundEnabled ? inlineUnmutedSrc : inlineMutedSrc;
   const isPortrait = orientation === "portrait";
@@ -129,16 +163,20 @@ export function VideoPreviewLightbox({
 
   useEffect(() => {
     if (!autoPlayWhenVisible) return;
-    const markScrolled = () => setHasUserScrolled(true);
-    window.addEventListener("scroll", markScrolled, { passive: true });
-    window.addEventListener("wheel", markScrolled, { passive: true });
-    window.addEventListener("touchmove", markScrolled, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", markScrolled);
-      window.removeEventListener("wheel", markScrolled);
-      window.removeEventListener("touchmove", markScrolled);
+    const onPageInteraction = () => {
+      setHasUserScrolled(true);
+      if (autoUnmuteOnInteraction) setInlineSoundOn(true);
     };
-  }, [autoPlayWhenVisible]);
+    const events = ["scroll", "wheel", "touchstart", "touchmove", "pointerdown", "click", "keydown"] as const;
+    for (const event of events) {
+      window.addEventListener(event, onPageInteraction, { passive: true });
+    }
+    return () => {
+      for (const event of events) {
+        window.removeEventListener(event, onPageInteraction);
+      }
+    };
+  }, [autoPlayWhenVisible, autoUnmuteOnInteraction]);
 
   useEffect(() => {
     if (!autoPlayWhenVisible) return;
@@ -217,17 +255,34 @@ export function VideoPreviewLightbox({
               </>
             ) : (
               <>
-                <iframe
-                  key={inlineActiveSrc}
-                  className="absolute inset-0 z-[3] h-full w-full bg-black"
-                  style={{ border: 0 }}
-                  src={inlineActiveSrc}
-                  title={title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
-                {!inlineSoundEnabled ? (
+                <div className="absolute inset-0 z-[3] overflow-hidden bg-black">
+                  <iframe
+                    key={inlineActiveSrc}
+                    className={
+                      inlineChromeless
+                        ? "pointer-events-none absolute left-1/2 top-1/2 h-[118%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0 bg-black"
+                        : "absolute inset-0 h-full w-full border-0 bg-black"
+                    }
+                    src={inlineActiveSrc}
+                    title={title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen={!inlineChromeless}
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                  {inlineChromeless ? (
+                    <>
+                      <div
+                        className="pointer-events-none absolute inset-x-0 bottom-0 z-[4] h-12 bg-gradient-to-t from-black/55 via-black/20 to-transparent"
+                        aria-hidden
+                      />
+                      <div
+                        className="pointer-events-none absolute end-0 top-0 z-[4] h-16 w-24 bg-gradient-to-bl from-black/40 to-transparent"
+                        aria-hidden
+                      />
+                    </>
+                  ) : null}
+                </div>
+                {!inlineSoundEnabled && !autoUnmuteOnInteraction ? (
                   <button
                     type="button"
                     onClick={() => setInlineSoundOn(true)}
