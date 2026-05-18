@@ -264,21 +264,15 @@ export function VideoPreviewLightbox({
 
     const minVisibleHeight = () => (window.matchMedia("(pointer: coarse)").matches ? 56 : 100);
 
-    const syncInView = () => {
+    const syncInView: () => void = () => {
       const minH = minVisibleHeight();
       const rect = el.getBoundingClientRect();
       const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
       setInView(visibleHeight >= minH && rect.bottom > 0 && rect.top < window.innerHeight);
     };
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      const entry = entries[0];
-      if (!entry) {
-        syncInView();
-        return;
-      }
-      const minH = minVisibleHeight();
-      setInView(entry.isIntersecting && entry.intersectionRect.height >= minH);
+    const handleIntersection: IntersectionObserverCallback = () => {
+      syncInView();
     };
 
     const observer = new IntersectionObserver(handleIntersection, {
