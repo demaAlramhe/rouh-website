@@ -68,7 +68,19 @@ function youtubeEmbedUrl(
   } else {
     params.set("controls", "1");
   }
-  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+  const host = chromeless
+    ? "https://www.youtube-nocookie.com/embed"
+    : "https://www.youtube.com/embed";
+  return `${host}/${videoId}?${params.toString()}`;
+}
+
+function isMobilePlaybackContext() {
+  if (typeof window === "undefined") return true;
+  return (
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.matchMedia("(max-width: 767px)").matches ||
+    "ontouchstart" in window
+  );
 }
 
 function PlayGlyph({ className = "" }: { className?: string }) {
@@ -108,7 +120,10 @@ export function VideoPreviewLightbox({
     posterSrc ?? youtubePosterUrl(videoId, orientation),
   );
   const [embedOrigin, setEmbedOrigin] = useState("");
-  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  /** افتراضيًا true حتى لا يُخفى زر التشغيل قبل اكتشاف الجهاز (سبب شائع لعطل اللمس على iOS) */
+  const [isMobilePlayer, setIsMobilePlayer] = useState(true);
+  const [modalIframeSrc, setModalIframeSrc] = useState<string | null>(null);
+  const playLockRef = useRef(false);
   const titleId = useId();
   const dialogId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -117,28 +132,32 @@ export function VideoPreviewLightbox({
 
   const inlineChromeless = autoPlayWhenVisible;
   const embedOpts = { origin: embedOrigin || undefined };
-  const embedSrc = youtubeEmbedUrl(videoId, { autoplay: true, ...embedOpts });
+
+  /** على الموبايل: لمسة واحدة تكفي (iOS لا يشغّل بدون تفاعل). على الحاسوب: فوري مع autoPlayImmediate */
+  const canStartAutoplay =
+    autoPlayImmediate && !isMobilePlayer ? true : hasUserScrolled;
+  /**
+   * التشغيل داخل الصفحة على الحاسوب فقط — على الموبايل/اللمس نافذة كاملة بعد الضغط.
+   */
+  const shouldPlayInline =
+    autoPlayWhenVisible && inView && canStartAutoplay && !open && !isMobilePlayer;
+  const inlineChromelessActive = inlineChromeless && shouldPlayInline;
+
   const inlineMutedSrc = youtubeEmbedUrl(videoId, {
     autoplay: true,
     mute: true,
-    chromeless: inlineChromeless,
+    chromeless: inlineChromelessActive,
     ...embedOpts,
   });
   const inlineUnmutedSrc = youtubeEmbedUrl(videoId, {
     autoplay: true,
     mute: false,
-    chromeless: inlineChromeless,
+    chromeless: inlineChromelessActive,
     ...embedOpts,
   });
-
-  /** على الموبايل: لمسة واحدة تكفي (iOS لا يشغّل بدون تفاعل). على الحاسوب: فوري مع autoPlayImmediate */
-  const canStartAutoplay =
-    autoPlayImmediate && !isCoarsePointer ? true : hasUserScrolled;
-  const shouldPlayInline =
-    autoPlayWhenVisible && inView && canStartAutoplay && !open;
   /** على الموبايل نبدأ صامتًا ثم نفعّل الصوت بعد بدء التشغيل */
   const inlineSoundEnabled =
-    shouldPlayInline && inlineSoundOn && (!isCoarsePointer || hasUserScrolled);
+    shouldPlayInline && inlineSoundOn && (!isMobilePlayer || hasUserScrolled);
   const inlineActiveSrc = inlineSoundEnabled ? inlineUnmutedSrc : inlineMutedSrc;
   const isPortrait = orientation === "portrait";
   const frameAspectClass = isPortrait ? "aspect-[9/16]" : "aspect-video";
@@ -158,22 +177,50 @@ export function VideoPreviewLightbox({
   const close = useCallback(() => {
     setOpen(false);
     setShowIframe(false);
+    setModalIframeSrc(null);
     openRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const openModal = useCallback(() => {
+  const buildModalSrc = useCallback(
+    (unmuted: boolean) =>
+      youtubeEmbedUrl(videoId, {
+        autoplay: true,
+        mute: !unmuted,
+        chromeless: false,
+        origin: typeof window !== "undefined" ? window.location.origin : embedOrigin || undefined,
+      }),
+    [videoId, embedOrigin],
+  );
+
+  const activatePlayback = useCallback(() => {
+    if (playLockRef.current) return;
+    playLockRef.current = true;
+    window.setTimeout(() => {
+      playLockRef.current = false;
+    }, 500);
+
+    setHasUserScrolled(true);
+    const mobile = isMobilePlaybackContext();
+    setModalIframeSrc(buildModalSrc(!mobile));
     setOpen(true);
     setShowIframe(true);
-  }, []);
+  }, [buildModalSrc]);
 
   useEffect(() => {
     setMounted(true);
     setEmbedOrigin(window.location.origin);
-    const mq = window.matchMedia("(pointer: coarse)");
-    const syncCoarse = () => setIsCoarsePointer(mq.matches);
-    syncCoarse();
-    mq.addEventListener("change", syncCoarse);
-    return () => mq.removeEventListener("change", syncCoarse);
+    const syncMobile = () => setIsMobilePlayer(isMobilePlaybackContext());
+    syncMobile();
+    window.addEventListener("resize", syncMobile, { passive: true });
+    const coarseMq = window.matchMedia("(pointer: coarse)");
+    const narrowMq = window.matchMedia("(max-width: 767px)");
+    coarseMq.addEventListener("change", syncMobile);
+    narrowMq.addEventListener("change", syncMobile);
+    return () => {
+      window.removeEventListener("resize", syncMobile);
+      coarseMq.removeEventListener("change", syncMobile);
+      narrowMq.removeEventListener("change", syncMobile);
+    };
   }, []);
 
   useEffect(() => {
@@ -198,9 +245,9 @@ export function VideoPreviewLightbox({
     if (!autoPlayWhenVisible) return;
     const onPageInteraction = () => {
       setHasUserScrolled(true);
-      if (autoUnmuteOnInteraction && !isCoarsePointer) setInlineSoundOn(true);
+      if (autoUnmuteOnInteraction && !isMobilePlayer) setInlineSoundOn(true);
     };
-    const events = ["scroll", "wheel", "touchstart", "touchmove", "pointerdown", "click", "keydown"] as const;
+    const events = ["scroll", "wheel", "touchmove", "pointerdown", "keydown"] as const;
     for (const event of events) {
       window.addEventListener(event, onPageInteraction, { passive: true });
     }
@@ -209,13 +256,13 @@ export function VideoPreviewLightbox({
         window.removeEventListener(event, onPageInteraction);
       }
     };
-  }, [autoPlayWhenVisible, autoUnmuteOnInteraction, isCoarsePointer]);
+  }, [autoPlayWhenVisible, autoUnmuteOnInteraction, isMobilePlayer]);
 
   useEffect(() => {
-    if (!shouldPlayInline || !autoUnmuteOnInteraction || !isCoarsePointer || inlineSoundOn) return;
+    if (!shouldPlayInline || !autoUnmuteOnInteraction || !isMobilePlayer || inlineSoundOn) return;
     const timer = window.setTimeout(() => setInlineSoundOn(true), 750);
     return () => window.clearTimeout(timer);
-  }, [shouldPlayInline, autoUnmuteOnInteraction, isCoarsePointer, inlineSoundOn]);
+  }, [shouldPlayInline, autoUnmuteOnInteraction, isMobilePlayer, inlineSoundOn]);
 
   useEffect(() => {
     if (!autoPlayWhenVisible) return;
@@ -273,13 +320,13 @@ export function VideoPreviewLightbox({
     <div className={className}>
       <div className={previewShellClass}>
         <div ref={viewportTargetRef} className={cardClass}>
-          <div className={`relative ${frameAspectClass} bg-black`}>
+          <div className={`relative isolate ${frameAspectClass} bg-black`}>
             {/* Poster stays under the iframe so scroll-autoplay never shows an empty frame while YouTube loads */}
             <Image
               src={posterUrl}
               alt=""
               fill
-              className="z-0 object-cover"
+              className="pointer-events-none z-0 object-cover"
               sizes={isPortrait ? "400px" : "(min-width: 1024px) 1024px, 100vw"}
               priority={false}
               onError={onPosterError}
@@ -293,8 +340,13 @@ export function VideoPreviewLightbox({
                 <button
                   ref={openRef}
                   type="button"
-                  onClick={openModal}
-                  className="group absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-0"
+                  onClick={activatePlayback}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    activatePlayback();
+                  }}
+                  className="group absolute inset-0 z-10 flex touch-manipulation cursor-pointer flex-col items-center justify-center gap-3 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-0"
                   aria-haspopup="dialog"
                   aria-expanded={open}
                   aria-controls={dialogId}
@@ -302,7 +354,11 @@ export function VideoPreviewLightbox({
                   <span className="sr-only">تشغيل الفيديو: {title}</span>
                   <span
                     className={`relative grid place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition-[background-color,box-shadow,ring-color,opacity] duration-300 group-hover:bg-white/26 group-hover:ring-white/60 ${
-                      embedded ? "size-[3.75rem] sm:size-16" : "size-[4.25rem] sm:size-[4.75rem] group-hover:scale-105"
+                      embedded
+                        ? "size-[3.75rem] sm:size-16"
+                        : isMobilePlayer
+                          ? "size-[4.75rem] sm:size-[4.75rem]"
+                          : "size-[4.25rem] sm:size-[4.75rem] group-hover:scale-105"
                     }`}
                     aria-hidden
                   >
@@ -314,6 +370,10 @@ export function VideoPreviewLightbox({
                     <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
                       {title}
                     </span>
+                  ) : isMobilePlayer ? (
+                    <span className="max-w-[90%] text-center text-sm font-bold text-white/92 sm:text-base">
+                      اضغطي للمشاهدة
+                    </span>
                   ) : null}
                 </button>
               </>
@@ -323,17 +383,17 @@ export function VideoPreviewLightbox({
                   <iframe
                     key={inlineActiveSrc}
                     className={
-                      inlineChromeless
+                      inlineChromelessActive
                         ? "pointer-events-none absolute left-1/2 top-1/2 h-[118%] w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0 bg-black"
                         : "absolute inset-0 h-full w-full border-0 bg-black"
                     }
                     src={inlineActiveSrc}
                     title={title}
                     allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen={!inlineChromeless}
+                    allowFullScreen={!inlineChromelessActive}
                     referrerPolicy="strict-origin-when-cross-origin"
                   />
-                  {inlineChromeless ? (
+                  {inlineChromelessActive ? (
                     <>
                       <div
                         className="pointer-events-none absolute inset-x-0 bottom-0 z-[4] h-12 bg-gradient-to-t from-black/55 via-black/20 to-transparent"
@@ -403,13 +463,14 @@ export function VideoPreviewLightbox({
               </button>
             </div>
             <div className={`relative ${frameAspectClass} bg-black`}>
-              {showIframe ? (
+              {showIframe && modalIframeSrc ? (
                 <iframe
-                  className="h-full w-full"
-                  src={embedSrc}
+                  className="h-full w-full border-0"
+                  src={modalIframeSrc}
                   title={title}
                   allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
                 />
               ) : null}
             </div>
