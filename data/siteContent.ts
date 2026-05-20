@@ -8,8 +8,27 @@ export const siteMeta = {
   whatsappUrl: "https://wa.me/972509071900",
   instagram: "https://www.instagram.com/_aseelomar_?igsh=OWN2bHp6ZmIwdWRm",
   booklet: "/docs/free-booklet.pdf",
+  /** محجوز لاحقًا — الكورس الوجاهي يُحجَّز عبر واتساب */
   paymentUrl: "https://example.com/payment",
   courseUrl: "/frontal-course",
+};
+
+export function whatsappUrlWithText(message: string) {
+  const separator = siteMeta.whatsappUrl.includes("?") ? "&" : "?";
+  return `${siteMeta.whatsappUrl}${separator}text=${encodeURIComponent(message)}`;
+}
+
+/** روابط واتساب للكورس الوجاهي (بدل الدفع الإلكتروني حاليًا) */
+export const frontalCourseWhatsApp = {
+  general: whatsappUrlWithText(
+    "مرحباً أسيل، أود الاستفسار عن الكورس الوجاهي — فن العلاج بالطاسات التبتية والحجز 🤍",
+  ),
+  zimmer: whatsappUrlWithText(
+    "مرحباً، أود الحجز لموعد زيمر (19–20 يونيو) — كورس الطاسات التبتية الوجاهي",
+  ),
+  majdalShams: whatsappUrlWithText(
+    "مرحباً، أود الحجز لموعد مجدل شمس (26–27 يونيو) — كورس الطاسات التبتية الوجاهي",
+  ),
 };
 
 export const assets = {
@@ -84,8 +103,8 @@ export const offerings = [
     label: "متاح الآن",
     description:
       "مسار تدريبي حضوري عميق لمن ترغب بتعلّم استخدام الطاسات التبتية والترددات العلاجية بمهنية، وعي، وحضور.",
-    secondaryCta: "تعرّفي أكثر على الكورس",
-    secondaryHref: siteMeta.courseUrl,
+    cta: "تعرّفي أكثر على الكورس",
+    href: siteMeta.courseUrl,
   },
   {
     title: "الكورس الأونلاين",

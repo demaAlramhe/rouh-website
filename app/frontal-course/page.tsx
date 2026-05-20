@@ -4,7 +4,12 @@ import { FrontalCourseTestimonialsSection } from "@/components/sections/FrontalC
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { VideoPreviewLightbox } from "@/components/ui/VideoPreviewLightbox";
-import { siteMeta } from "@/data/siteContent";
+import { frontalCourseWhatsApp } from "@/data/siteContent";
+
+const whatsappLinkProps = {
+  target: "_blank" as const,
+  rel: "noopener noreferrer",
+};
 
 const FRONTAL_COURSE_VIDEO_ID = "BSBgYBJi9jQ";
 
@@ -84,7 +89,9 @@ export default function FrontalCoursePage() {
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink href={siteMeta.paymentUrl}>الدفع والحجز</ButtonLink>
+            <ButtonLink href={frontalCourseWhatsApp.general} {...whatsappLinkProps}>
+              تواصلي للحجز عبر واتساب
+            </ButtonLink>
             <ButtonLink href="/" variant="secondary">
               العودة للرئيسية
             </ButtonLink>
@@ -328,7 +335,7 @@ export default function FrontalCoursePage() {
                 المواعيد المتاحة حاليًا
               </h2>
               <p className="text-pretty mx-auto mt-5 max-w-2xl text-base leading-8 text-rouh-ink sm:text-lg sm:leading-9">
-                اختاري الموعد والموقع الأنسب لكِ، ثم انتقلي مباشرةً لخطوة الدفع والحجز.
+                اختاري الموعد والموقع الأنسب لكِ، ثم تواصلي معنا عبر واتساب لتأكيد الحجز.
               </p>
             </div>
 
@@ -341,8 +348,12 @@ export default function FrontalCoursePage() {
                   <p>14 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
                 </div>
-                <ButtonLink href={siteMeta.paymentUrl} className="mt-7 w-full">
-                  الدفع والحجز — زيمر
+                <ButtonLink
+                  href={frontalCourseWhatsApp.zimmer}
+                  className="mt-7 w-full"
+                  {...whatsappLinkProps}
+                >
+                  حجز زيمر — واتساب
                 </ButtonLink>
               </article>
 
@@ -354,8 +365,12 @@ export default function FrontalCoursePage() {
                   <p>14 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
                 </div>
-                <ButtonLink href={siteMeta.paymentUrl} className="mt-7 w-full">
-                  الدفع والحجز — مجدل شمس
+                <ButtonLink
+                  href={frontalCourseWhatsApp.majdalShams}
+                  className="mt-7 w-full"
+                  {...whatsappLinkProps}
+                >
+                  حجز مجدل شمس — واتساب
                 </ButtonLink>
               </article>
             </div>
@@ -377,7 +392,9 @@ export default function FrontalCoursePage() {
               إذا كنتِ تشعرين بنداء تجاه الصوت والترددات… ربما هذه بداية طريق جديد لكِ
             </p>
             <div className="mt-9 flex flex-col items-center gap-3.5 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
-              <ButtonLink href={siteMeta.paymentUrl}>الدفع والحجز</ButtonLink>
+              <ButtonLink href={frontalCourseWhatsApp.general} {...whatsappLinkProps}>
+              تواصلي للحجز عبر واتساب
+            </ButtonLink>
               <ButtonLink href="/" variant="light">
                 العودة للرئيسية
               </ButtonLink>
