@@ -37,7 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${naskh.variable}`}>
+    <html
+      lang="ar"
+      dir="rtl"
+      data-scroll-behavior="smooth"
+      className={`${cairo.variable} ${naskh.variable}`}
+    >
       <body>
         <Navbar />
         <main>{children}</main>

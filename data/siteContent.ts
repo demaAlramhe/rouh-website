@@ -1,3 +1,14 @@
+export interface Offering {
+  title: string;
+  label: string;
+  description: string;
+  cta: string;
+  href: string;
+  secondaryCta?: string;
+  secondaryHref?: string;
+  price?: string;
+}
+
 export const siteMeta = {
   name: "Rouh",
   founder: "أسيل عمر",
@@ -88,10 +99,6 @@ export const soundJourney = {
   text: "في Rouh، نستخدم الترددات العلاجية والطاسات التبتية لنخلق مساحة من الهدوء، الحضور، والوعي… مساحة تلامس الروح بلطف وتترك أثرًا حقيقيًا في الداخل",
   videoId: "8gFt-RCiFlI",
 };
-
-import type { Offering } from "@/data/offering";
-
-export type { Offering } from "@/data/offering";
 
 export const offerings: Offering[] = [
   {

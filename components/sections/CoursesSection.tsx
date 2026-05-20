@@ -1,5 +1,4 @@
-import type { Offering } from "@/data/offering";
-import { offerings } from "@/data/siteContent";
+import { offerings, type Offering } from "@/data/siteContent";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionShell } from "@/components/ui/SectionShell";
