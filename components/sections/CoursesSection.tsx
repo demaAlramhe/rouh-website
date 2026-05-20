@@ -1,3 +1,4 @@
+import type { Offering } from "@/data/offering";
 import { offerings } from "@/data/siteContent";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -14,7 +15,7 @@ export function CoursesSection() {
       headerClassName={homeSectionHeaderSpacing}
     >
       <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
-        {offerings.map((offering) => {
+        {offerings.map((offering: Offering) => {
           const price = offering.price;
           return (
           <article

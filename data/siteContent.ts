@@ -89,16 +89,9 @@ export const soundJourney = {
   videoId: "8gFt-RCiFlI",
 };
 
-export type Offering = {
-  title: string;
-  label: string;
-  description: string;
-  cta: string;
-  href: string;
-  secondaryCta?: string;
-  secondaryHref?: string;
-  price?: string;
-};
+import type { Offering } from "@/data/offering";
+
+export type { Offering } from "@/data/offering";
 
 export const offerings: Offering[] = [
   {
