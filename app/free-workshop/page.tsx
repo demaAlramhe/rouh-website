@@ -122,31 +122,40 @@ export default function FreeWorkshopPage() {
         title="اختاري الخطوة التالية في رحلتك"
         className="pt-4"
       >
-        <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-          <article className="luxury-card flex flex-col items-center rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:p-10">
-            <Badge>متاح الآن</Badge>
-            <h2 className="text-pretty mt-6 w-full font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
-              كورس وجاهي للعلاج بالصوت
-            </h2>
-            <p className="text-pretty mx-auto mt-5 max-w-[34ch] text-lg leading-9 text-rouh-ink/70">
-              مسار حضوري عميق للتدرّب على الطاسات التبتية والترددات العلاجية بوعي، مهنية، وحضور.
-            </p>
-            <ButtonLink href={siteMeta.courseUrl} variant="primary" className="mt-8 w-full max-w-xs">
-              تعرّفي أكثر على الكورس
-            </ButtonLink>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:items-stretch">
+          <article className="luxury-card flex min-h-[26rem] w-full flex-col items-center self-stretch rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:min-h-[28rem] sm:p-10">
+            <div className="flex w-full flex-1 flex-col items-center">
+              <Badge>متاح الآن</Badge>
+              <h2 className="text-pretty mt-6 flex min-h-[4.75rem] w-full items-center justify-center font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:min-h-[5.5rem] sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
+                انتقلي من التجربة… إلى التعلّم المهني المتكامل
+              </h2>
+              <p className="text-pretty mx-auto mt-5 max-w-[38ch] text-lg leading-9 text-rouh-ink/70">
+                اكتشفي تفاصيل الكورس الكامل — المحاور التعليمية، التطبيق العملي، وتجربة التعلّم
+                خطوة بخطوة.
+              </p>
+            </div>
+            <div className="mt-auto w-full max-w-xs shrink-0 pt-8">
+              <ButtonLink href={siteMeta.courseUrl} variant="primary" className="w-full">
+                تعرّفي أكثر على الكورس
+              </ButtonLink>
+            </div>
           </article>
 
-          <article className="luxury-card flex flex-col items-center rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:p-10">
-            <Badge>قريبًا</Badge>
-            <h2 className="text-pretty mt-6 w-full font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
-              الكورس الأونلاين
-            </h2>
-            <p className="text-pretty mx-auto mt-5 max-w-[34ch] text-lg leading-9 text-rouh-ink/70">
-              نسخة رقمية قيد التحضير لمن ترغب بتعلّم أساسيات الرحلة من البيت وبإيقاع مرن.
-            </p>
-            <ButtonLink href={siteMeta.instagram} variant="primary" className="mt-8 w-full max-w-xs">
-              تابعي موعد الإطلاق
-            </ButtonLink>
+          <article className="luxury-card flex min-h-[26rem] w-full flex-col items-center self-stretch rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:min-h-[28rem] sm:p-10">
+            <div className="flex w-full flex-1 flex-col items-center">
+              <Badge>قريبًا</Badge>
+              <h2 className="text-pretty mt-6 flex min-h-[4.75rem] w-full items-center justify-center font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:min-h-[5.5rem] sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
+                الكورس الأونلاين
+              </h2>
+              <p className="text-pretty mx-auto mt-5 max-w-[38ch] text-lg leading-9 text-rouh-ink/70">
+                نسخة رقمية قيد التحضير لمن ترغب بتعلّم أساسيات الرحلة من البيت وبإيقاع مرن.
+              </p>
+            </div>
+            <div className="mt-auto w-full max-w-xs shrink-0 pt-8">
+              <ButtonLink href={siteMeta.instagram} variant="primary" className="w-full">
+                تابعي موعد الإطلاق
+              </ButtonLink>
+            </div>
           </article>
         </div>
       </SectionShell>

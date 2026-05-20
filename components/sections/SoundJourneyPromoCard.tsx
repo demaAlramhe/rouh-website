@@ -34,7 +34,7 @@ export function SoundJourneyPromoCard({
   embedVideoId,
 }: SoundJourneyPromoCardProps) {
   const resolvedVideoId = embedVideoId ?? soundJourney.videoId;
-  const eyebrow = copyEyebrow ?? "الرحلة الصوتية الأساسية";
+  const eyebrow = copyEyebrow ?? "جلسة استرخاء";
   const title = copyTitle ?? soundJourney.title;
   const lead = copyLead ?? soundJourney.text;
   const showLead = lead.trim().length > 0;
@@ -57,43 +57,40 @@ export function SoundJourneyPromoCard({
       />
       <div className="absolute inset-x-10 top-8 h-px bg-gradient-to-l from-transparent via-rouh-wine/16 to-transparent" />
       <div className="relative grid items-center gap-10 lg:grid-cols-[0.88fr_1.12fr]">
-        <div>
+        <div className="flex flex-col items-center text-center">
           {hasCopyOverrides ? (
-            <div className="inline-flex max-w-full flex-col items-center gap-1.5 self-start text-pretty sm:gap-2">
+            <div className="flex w-full max-w-full flex-col items-center gap-1.5 text-pretty sm:gap-2">
               <p className="shrink-0 text-center font-sans text-sm font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:tracking-[0.28em]">
                 {eyebrow}
               </p>
               <h2
-                className={`w-max max-w-full text-pretty text-start font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em] ${copyTitleClassName ?? ""}`}
+                className={`max-w-full text-pretty text-center font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em] ${copyTitleClassName ?? ""}`}
               >
                 {title}
               </h2>
             </div>
           ) : (
-            <>
-              <p className="mb-4 font-sans text-sm font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:tracking-[0.28em]">
+            <div className="flex w-full flex-col items-center">
+              <p className="mb-4 text-center font-sans text-sm font-bold leading-snug tracking-normal text-rouh-blue antialiased sm:tracking-[0.28em]">
                 {eyebrow}
               </p>
               <h2
-                className={`text-pretty font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em] ${copyTitleClassName ?? ""}`}
+                className={`text-pretty mx-auto max-w-[22rem] text-center font-display text-[2.12rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:max-w-2xl sm:text-balance sm:text-5xl sm:leading-[1.17] sm:tracking-[-0.02em] ${copyTitleClassName ?? ""}`}
               >
                 {title}
               </h2>
-            </>
+            </div>
           )}
           {showLead ? (
-            <p className="text-pretty mt-6 text-lg leading-9 text-rouh-ink/72">{lead}</p>
+            <p className="text-pretty mx-auto mt-6 max-w-2xl text-lg leading-9 text-rouh-ink/72">{lead}</p>
           ) : null}
           {showFreeJourneyCta ? (
-            <div className="mt-8 rounded-[1.9rem] bg-white/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/70 backdrop-blur">
+            <div className="mt-8 flex w-full max-w-md flex-col items-center rounded-[1.9rem] bg-white/55 p-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/70 backdrop-blur sm:p-8">
               <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
                 ابدئي من رحلة استرخاء مجانية
               </h3>
-              <p className="mt-3 leading-8 text-rouh-ink/70">
-                شاهدي الفيديو، حمّلي الكتيّب المجاني، وتعرّفي على الخطوة التالية في الكورس الوجاهي.
-              </p>
-              <ButtonLink href={journeyCtaHref} className="mt-6">
-                الانتقال للرحلة والكتيّب
+              <ButtonLink href={journeyCtaHref} className="mt-6 w-full max-w-xs">
+                الانتقال للكورس المصغّر
               </ButtonLink>
             </div>
           ) : null}
