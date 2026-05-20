@@ -15,7 +15,7 @@ export function CoursesSection() {
     >
       <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
         {offerings.map((offering) => {
-          const price = (offering as { price?: string }).price;
+          const price = offering.price;
           return (
           <article
             key={offering.title}

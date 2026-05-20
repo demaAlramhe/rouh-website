@@ -89,7 +89,18 @@ export const soundJourney = {
   videoId: "8gFt-RCiFlI",
 };
 
-export const offerings = [
+export type Offering = {
+  title: string;
+  label: string;
+  description: string;
+  cta: string;
+  href: string;
+  secondaryCta?: string;
+  secondaryHref?: string;
+  price?: string;
+};
+
+export const offerings: Offering[] = [
   {
     title: "كورس فن العلاج بالطاسات التبتية",
     label: "متاح الآن",
