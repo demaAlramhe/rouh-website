@@ -19,7 +19,7 @@ export function ContactSection() {
       headerClassName={homeSectionHeaderSpacing}
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <div className="luxury-card rounded-[2.2rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75">
+        <div className="luxury-card flex flex-col items-center rounded-[2.2rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75">
           <p className="text-sm font-bold text-rouh-blue">واتساب</p>
           <a
             href={siteMeta.whatsappUrl}
@@ -28,27 +28,34 @@ export function ContactSection() {
           >
             {siteMeta.phone}
           </a>
-          <p className="mt-4 leading-8 text-rouh-ink/68">
-            للحجز، مواعيد الجلسات، أو أسئلة حول الكورسات — راسليني على واتساب وسأردّ بأقرب وقت.
+          <p className="mx-auto mt-4 max-w-[34ch] leading-8 text-rouh-ink/68">
+            للحجز، مواعيد الجلسات، أو أسئلة حول الكورسات
+            <br />
+            راسليني على واتساب وسأردّ بأقرب وقت.
           </p>
           <ButtonLink
             href={siteMeta.whatsappUrl}
-            className="mt-7 w-full sm:w-auto"
+            className="mt-7 w-full max-w-xs"
             {...whatsappLinkProps}
           >
             تواصل عبر واتساب
           </ButtonLink>
         </div>
 
-        <div className="luxury-card rounded-[2.2rem] bg-premium-card p-8 shadow-soft ring-1 ring-white/75">
+        <div className="luxury-card flex flex-col items-center rounded-[2.2rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75">
           <p className="text-sm font-bold text-rouh-blue">Instagram</p>
           <p className="mt-3 break-words text-pretty font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:text-4xl sm:leading-none sm:tracking-[-0.02em]">
-            @_aseelomar_
+            {siteMeta.instagramHandle}
           </p>
-          <p className="mt-4 leading-8 text-rouh-ink/68">
+          <p className="mx-auto mt-4 max-w-[34ch] leading-8 text-rouh-ink/68">
             تابعي الرحلات، الفيديوهات، الورشات القادمة، ولمحات من مساحات Rouh.
           </p>
-          <ButtonLink href={siteMeta.instagram} className="mt-7" target="_blank" rel="noopener noreferrer">
+          <ButtonLink
+            href={siteMeta.instagram}
+            className="mt-7 w-full max-w-xs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             زيارة إنستغرام
           </ButtonLink>
         </div>

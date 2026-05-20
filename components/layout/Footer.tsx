@@ -50,7 +50,7 @@ export function Footer() {
                 className="block transition hover:text-rouh-wine"
                 href={siteMeta.instagram}
               >
-                Instagram @_aseelomar_
+                Instagram {siteMeta.instagramHandle}
               </a>
             </div>
           </div>

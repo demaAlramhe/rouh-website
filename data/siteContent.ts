@@ -6,7 +6,8 @@ export const siteMeta = {
     "مساحة عربية هادئة للعلاج بالصوت، الطاسات التبتية، الورشات، الجلسات، والعودة إلى الذات مع أسيل عمر.",
   phone: "050-907-1900",
   whatsappUrl: "https://wa.me/972509071900",
-  instagram: "https://www.instagram.com/_aseelomar_?igsh=OWN2bHp6ZmIwdWRm",
+  instagram: "https://www.instagram.com/rouh.by.aseel?igsh=dXdka3hqNXh6Y3Z6",
+  instagramHandle: "@rouh.by.aseel",
   booklet: "/docs/free-booklet.pdf",
   /** محجوز لاحقًا — الكورس الوجاهي يُحجَّز عبر واتساب */
   paymentUrl: "https://example.com/payment",
@@ -50,7 +51,6 @@ export const assets = {
 export const navItems = [
   { label: "الرئيسية", href: "/#home" },
   { label: "من أنا", href: "/#about" },
-  { label: "رحلتي", href: "/#journey" },
   { label: "الكورسات", href: "/#courses" },
   { label: "الجلسات", href: "/#sessions" },
   { label: "فيديوهات", href: "/#videos" },
@@ -86,7 +86,7 @@ export const journeyItems = [
 export const soundJourney = {
   title: "رحلة صوت… تعيدكِ إلى نفسك وسط ضجيج العالم الخارجي 🍃",
   text: "في Rouh، نستخدم الترددات العلاجية والطاسات التبتية لنخلق مساحة من الهدوء، الحضور، والوعي… مساحة تلامس الروح بلطف وتترك أثرًا حقيقيًا في الداخل",
-  videoId: "tisi5HDtkCY",
+  videoId: "8gFt-RCiFlI",
 };
 
 export const offerings = [
@@ -97,14 +97,6 @@ export const offerings = [
       "كورس حضوري للتعرّف على الطاسات التبتية والترددات العلاجية، مع تجربة عملية في مساحة هادئة ومهنية.",
     cta: "تعرّفي أكثر على الكورس",
     href: "/free-workshop",
-  },
-  {
-    title: "كورس وجاهي",
-    label: "متاح الآن",
-    description:
-      "مسار تدريبي حضوري عميق لمن ترغب بتعلّم استخدام الطاسات التبتية والترددات العلاجية بمهنية، وعي، وحضور.",
-    cta: "تعرّفي أكثر على الكورس",
-    href: siteMeta.courseUrl,
   },
   {
     title: "الكورس الأونلاين",

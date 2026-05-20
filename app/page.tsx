@@ -4,7 +4,6 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { CoursesSection } from "@/components/sections/CoursesSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { JourneySection } from "@/components/sections/JourneySection";
 import { HomeFeedbackSection } from "@/components/sections/HomeFeedbackSection";
 import { SessionsSection } from "@/components/sections/SessionsSection";
 import { SoundJourneySection } from "@/components/sections/SoundJourneySection";
@@ -16,7 +15,6 @@ export default function HomePage() {
       <HomeRoseBackdrop />
       <HeroSection />
       <AboutSection />
-      <JourneySection />
       <SoundJourneySection />
       <CoursesSection />
       <SessionsSection />
