@@ -5,16 +5,28 @@ export const frontalCourseGallery = {
     "لحظات حقيقية من تجربة التعلّم، الحضور، والعمل مع الترددات والطاسات التبتية",
   images: [
     {
+      src: "/images/frontal-course-gallery/111.jpeg",
+      alt: "لحظة من كورس وجاهي سابق — صورة 1",
+    },
+    {
+      src: "/images/frontal-course-gallery/222.jpeg",
+      alt: "لحظة من كورس وجاهي سابق — صورة 2",
+    },
+    {
+      src: "/images/frontal-course-gallery/333.jpeg",
+      alt: "لحظة من كورس وجاهي سابق — صورة 3",
+    },
+    {
+      src: "/images/frontal-course-gallery/444.jpeg",
+      alt: "لحظة من كورس وجاهي سابق — صورة 4",
+    },
+    {
+      src: "/images/frontal-course-gallery/555.jpeg",
+      alt: "لحظة من كورس وجاهي سابق — صورة 5",
+    },
+    {
       src: "/images/newimgcorse.jpeg",
       alt: "صورة جماعية للمشاركات مع شهادات الإنهاء وطاسات تبتية في الاستوديو",
-    },
-    {
-      src: "/images/frontal-course-gallery/01-group-certificates-wood-studio.png",
-      alt: "مجموعة من المشاركات يحملن الشهادات في استوديو بجدران خشبية دافئة مع طاسات تبتية في الخلفية",
-    },
-    {
-      src: "/images/frontal-course-gallery/02-participant-singing-bowl-portrait.png",
-      alt: "مشاركة تحتضن طاسة تبتية مزخرفة بابتسامة هادئة وعينان مغلقتان",
     },
     {
       src: "/images/frontal-course-gallery/03-graduation-four-standing.png",
@@ -25,16 +37,8 @@ export const frontalCourseGallery = {
       alt: "أربع مشاركات جالسات على السجاد وسط طاسات تبتية متنوعة الأحجام مع الشهادات",
     },
     {
-      src: "/images/frontal-course-gallery/05-graduation-selfie-bowls.png",
-      alt: "صورة جماعية احتفالية مع شهادات وطاسات مرتّبة على الأرض",
-    },
-    {
       src: "/images/frontal-course-gallery/06-participant-bowls-wood-studio.png",
       alt: "مشاركة جالسة بين مجموعة طاسات تبتية وكريستالية في غرفة بخشب دافئ",
-    },
-    {
-      src: "/images/frontal-course-gallery/07-instructor-teaching-bowls.png",
-      alt: "لحظة شرح أثناء الجلسة التدريبية وسط طاسات ومعدات العلاج بالصوت",
     },
     {
       src: "/images/frontal-course-gallery/08-group-certificates-wood-wall.png",

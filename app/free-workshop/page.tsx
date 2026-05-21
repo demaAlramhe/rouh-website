@@ -122,38 +122,21 @@ export default function FreeWorkshopPage() {
         title="اختاري الخطوة التالية في رحلتك"
         className="pt-4"
       >
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:items-stretch">
+        <div className="mx-auto flex max-w-lg justify-center">
           <article className="luxury-card flex min-h-[26rem] w-full flex-col items-center self-stretch rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:min-h-[28rem] sm:p-10">
             <div className="flex w-full flex-1 flex-col items-center">
               <Badge>متاح الآن</Badge>
               <h2 className="text-pretty mt-6 flex min-h-[4.75rem] w-full items-center justify-center font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:min-h-[5.5rem] sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
-                انتقلي من التجربة… إلى التعلّم المهني المتكامل
+                كورس حضوري في العلاج بالطاسات التبتيه
               </h2>
-              <p className="text-pretty mx-auto mt-5 max-w-[38ch] text-lg leading-9 text-rouh-ink/70">
-                اكتشفي تفاصيل الكورس الكامل — المحاور التعليمية، التطبيق العملي، وتجربة التعلّم
-                خطوة بخطوة.
+              <p className="text-pretty mx-auto mt-5 max-w-[42ch] text-lg leading-9 text-rouh-ink/70">
+                للمعالِجات، المدرّبات، والمهتمّات بتعلّم استخدام الصوت كأداة داعمة للجسد والجهاز
+                العصبي داخل الجلسات العلاجية بوعي، حضور، ومهنيّة ..
               </p>
             </div>
             <div className="mt-auto w-full max-w-xs shrink-0 pt-8">
               <ButtonLink href={siteMeta.courseUrl} variant="primary" className="w-full">
                 تعرّفي أكثر على الكورس
-              </ButtonLink>
-            </div>
-          </article>
-
-          <article className="luxury-card flex min-h-[26rem] w-full flex-col items-center self-stretch rounded-[2.4rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:min-h-[28rem] sm:p-10">
-            <div className="flex w-full flex-1 flex-col items-center">
-              <Badge>قريبًا</Badge>
-              <h2 className="text-pretty mt-6 flex min-h-[4.75rem] w-full items-center justify-center font-display text-3xl font-bold leading-snug tracking-normal text-rouh-ink sm:min-h-[5.5rem] sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
-                الكورس الأونلاين
-              </h2>
-              <p className="text-pretty mx-auto mt-5 max-w-[38ch] text-lg leading-9 text-rouh-ink/70">
-                نسخة رقمية قيد التحضير لمن ترغب بتعلّم أساسيات الرحلة من البيت وبإيقاع مرن.
-              </p>
-            </div>
-            <div className="mt-auto w-full max-w-xs shrink-0 pt-8">
-              <ButtonLink href={siteMeta.instagram} variant="primary" className="w-full">
-                تابعي موعد الإطلاق
               </ButtonLink>
             </div>
           </article>

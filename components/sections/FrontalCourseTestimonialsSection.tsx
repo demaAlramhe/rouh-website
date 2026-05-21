@@ -45,6 +45,7 @@ export function FrontalCourseTestimonialsSection({ className = "" }: FrontalCour
                       src={item.src}
                       alt={item.alt}
                       fill
+                      unoptimized
                       className="object-contain bg-white/40"
                       sizes="(min-width: 1024px) 312px, (min-width: 640px) 42vw, 82vw"
                     />

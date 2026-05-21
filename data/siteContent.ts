@@ -109,14 +109,6 @@ export const offerings: Offering[] = [
     cta: "تعرّفي أكثر على الكورس",
     href: "/free-workshop",
   },
-  {
-    title: "الكورس الأونلاين",
-    label: "قريبًا",
-    description:
-      "نسخة رقمية مرنة قيد التحضير، لتعلّم أساسيات العلاج بالصوت من أي مكان وبإيقاع يناسبك.",
-    cta: "أبلغيني عند الإطلاق",
-    href: siteMeta.whatsappUrl,
-  },
 ];
 
 export const sessions = [

@@ -47,6 +47,7 @@ export function FrontalCourseGallerySection({ className = "" }: FrontalCourseGal
                       src={item.src}
                       alt={item.alt}
                       fill
+                      unoptimized
                       className="object-cover"
                       sizes="(min-width: 1024px) 284px, (min-width: 640px) 38vw, 76vw"
                     />

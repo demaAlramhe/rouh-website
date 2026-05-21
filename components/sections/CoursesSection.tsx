@@ -13,7 +13,7 @@ export function CoursesSection() {
       className={homeSectionSpacing}
       headerClassName={homeSectionHeaderSpacing}
     >
-      <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
+      <div className="mx-auto flex max-w-lg justify-center">
         {offerings.map((offering: Offering) => {
           const price = offering.price;
           return (

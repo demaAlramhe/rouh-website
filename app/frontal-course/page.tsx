@@ -132,7 +132,7 @@ export default function FrontalCoursePage() {
                 الساوند هيلينغ مش بس صوت… هو مساحة تهدئة، حضور، وتنظيم للجسد والجهاز العصبي 🌿
               </p>
               <p>
-                بهالأكاديمية رح تتعلمي كيف تستخدمي الطاسات التبتية بشكل عملي ومهني، لتدعمي نفسك
+                باكاديميه روح رح تتعلمي كيف تستخدمي الطاسات التبتية بشكل عملي ومهني، لتدعمي نفسك
                 ومتعالجينك عبر الترددات والصوت بوعي وثقة.
               </p>
               <p>
@@ -264,9 +264,10 @@ export default function FrontalCoursePage() {
                 "المعالجين والمعالجات",
                 "مدربي اليوغا والبيلاتس",
                 "المعالجين الجسديين والسوماتيك",
-                "المدربين والمرافقين",
-                "المهتمين بعالم الترددات والوعي",
-                "أي شخص يشعر بانجذاب لعالم العلاج بالصوت",
+                "الأخصائيين النفسيين ومرافقي المساحات",
+                "المهتمين بالترددات، التأمل، والتنظيم العصبي",
+                "كل من يرغب بإضافة أداة داعمة لجلساته العلاجية بوعي ومهنيّة",
+                "وأي شخص يشعر بانجذاب حقيقي لعالم العلاج بالصوت",
               ]}
             />
           </article>
@@ -283,12 +284,16 @@ export default function FrontalCoursePage() {
                 <h3 className="text-pretty font-display text-lg font-bold leading-snug text-rouh-wine sm:text-xl sm:leading-normal">
                   هل يجب أن أكون موسيقية؟
                 </h3>
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">أبدًا 🤍</p>
                 <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
-                  أبدًا 🤍 ما بتحتاجي أي خبرة موسيقية أو معرفة سابقة.
+                  ما بتحتاجي أي خبرة موسيقية أو معرفة سابقة.
                 </p>
                 <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
-                  الكورس مصمم بطريقة بسيطة وعملية، لكن بنفس الوقت بمهنية ووضوح، حتى تتعلمي استخدام
-                  الطاسات والترددات بشكل صحيح، واعي، وآمن.
+                  الكورس مصمّم بطريقة بسيطة، عملية، ومهنية بنفس الوقت ، حتى تتعلّمي استخدام الطاسات
+                  والترددات بشكل صحيح، واعي، وآمن …
+                </p>
+                <p className="text-pretty mt-4 text-lg leading-[1.85] text-rouh-ink">
+                  ويكفي أن تشعري بانجذاب ونداء حقيقي لعالم الصوت والترددات 🎶
                 </p>
               </div>
 
@@ -326,15 +331,15 @@ export default function FrontalCoursePage() {
         </div>
 
         <div className="mx-auto mt-14 max-w-4xl lg:mt-16">
-          <article className="luxury-card rounded-[2.4rem] bg-gradient-to-br from-white/82 via-rouh-mist/34 to-rouh-sand/45 p-8 shadow-soft ring-1 ring-white/80 sm:p-11">
-            <div className="mx-auto max-w-[min(100%,21rem)] text-center sm:max-w-3xl">
-              <p className="text-xs font-black tracking-[0.28em] text-rouh-wine sm:text-sm">
+          <article className="luxury-card overflow-visible rounded-[2.4rem] bg-gradient-to-br from-white/82 via-rouh-mist/34 to-rouh-sand/45 p-6 shadow-soft ring-1 ring-white/80 sm:p-11">
+            <div className="relative z-10 mx-auto w-full min-w-0 max-w-3xl px-1 text-center sm:px-0">
+              <p className="text-xs font-black tracking-normal text-rouh-wine sm:text-sm sm:tracking-[0.28em]">
                 المجموعات القادمة
               </p>
-              <h2 className="mt-4 text-pretty font-display text-[1.68rem] font-bold leading-[1.36] tracking-normal text-rouh-ink sm:text-balance sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
+              <h2 className="mt-4 text-balance font-display text-[clamp(1.45rem,5.2vw,1.68rem)] font-bold leading-[1.42] tracking-normal text-rouh-ink sm:text-4xl sm:leading-tight sm:tracking-[-0.02em]">
                 المواعيد المتاحة حاليًا
               </h2>
-              <p className="text-pretty mx-auto mt-5 max-w-2xl text-base leading-8 text-rouh-ink sm:text-lg sm:leading-9">
+              <p className="cta-section-prose mx-auto mt-5 w-full max-w-[34rem] text-base leading-8 text-rouh-ink sm:text-lg sm:leading-9">
                 اختاري الموعد والموقع الأنسب لكِ، ثم تواصلي معنا عبر واتساب لتأكيد الحجز.
               </p>
             </div>

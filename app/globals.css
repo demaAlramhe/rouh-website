@@ -71,6 +71,13 @@ body::before {
   -webkit-text-decoration: none;
 }
 
+/* CTA band — keep Arabic body copy fully visible on narrow screens */
+.cta-section-prose {
+  text-wrap: wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 .luxury-card {
   position: relative;
   overflow: hidden;
