@@ -15,8 +15,8 @@ export const siteMeta = {
   title: "Rouh by Aseel Omar | رحلة صوت وعودة إلى الذات",
   description:
     "مساحة عربية هادئة للعلاج بالصوت، الطاسات التبتية، الورشات، الجلسات، والعودة إلى الذات مع أسيل عمر.",
-  phone: "050-907-1900",
-  whatsappUrl: "https://wa.me/972509071900",
+  phone: "050-349-0902",
+  whatsappUrl: "https://wa.me/972503490902",
   instagram: "https://www.instagram.com/rouh.by.aseel?igsh=dXdka3hqNXh6Y3Z6",
   instagramHandle: "@rouh.by.aseel",
   booklet: "/docs/free-booklet.pdf",
