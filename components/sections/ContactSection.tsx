@@ -22,8 +22,10 @@ export function ContactSection() {
         <div className="luxury-card flex min-h-[22rem] w-full flex-col items-center self-stretch rounded-[2.2rem] bg-premium-card p-8 text-center shadow-soft ring-1 ring-white/75 sm:min-h-[24rem]">
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="flex min-h-[7.5rem] w-full flex-col items-center justify-center sm:min-h-[8.25rem]">
-              <p className="text-pretty font-display text-xl font-bold leading-snug text-rouh-ink sm:text-2xl sm:leading-normal">
-                هنا تبدأ أول خطوة نحو التعلّم، الحضور، والتوسّع ✨
+              <p className="font-display text-xl font-bold leading-snug text-rouh-ink sm:text-2xl sm:leading-normal">
+                هنا تبدأ أول خطوة نحو
+                <br />
+                التعلّم، الحضور، والتوسّع ✨
               </p>
             </div>
             <p className="text-pretty mx-auto mt-5 max-w-[38ch] leading-8 text-rouh-ink/68">
