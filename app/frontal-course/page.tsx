@@ -336,7 +336,7 @@ export default function FrontalCoursePage() {
               <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
                 <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">زيمر 📍</h3>
                 <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p>19/20 يونيو</p>
+                  <p>3/4 يوليو</p>
                   <p>10:00–17:00 🕰️</p>
                   <p>14 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
@@ -351,9 +351,9 @@ export default function FrontalCoursePage() {
               </article>
 
               <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
-                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">مجدل شمس 📍</h3>
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">يركا 📍</h3>
                 <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p>10/11 يوليو</p>
+                  <p>24/25 يوليو</p>
                   <p>10:00–17:00 🕰️</p>
                   <p>14 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
@@ -363,7 +363,7 @@ export default function FrontalCoursePage() {
                   className="mt-7 w-full"
                   {...whatsappLinkProps}
                 >
-                  حجز مجدل شمس — واتساب
+                  حجز يركا — واتساب
                 </ButtonLink>
               </article>
             </div>
