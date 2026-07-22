@@ -118,7 +118,7 @@ export function VideoPreviewLightbox({
     posterSrc ?? youtubePosterUrl(videoId, orientation),
   );
   const [embedOrigin, setEmbedOrigin] = useState("");
-  const [isMobilePlayer, setIsMobilePlayer] = useState(() => isMobilePlaybackContext());
+  const [isMobilePlayer, setIsMobilePlayer] = useState(false);
   const [modalIframeSrc, setModalIframeSrc] = useState<string | null>(null);
   const titleId = useId();
   const dialogId = useId();
@@ -339,12 +339,10 @@ export function VideoPreviewLightbox({
                 >
                   <span className="sr-only">تشغيل الفيديو: {title}</span>
                   <span
-                    className={`relative grid place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition-[background-color,box-shadow,ring-color,opacity] duration-300 group-hover:bg-white/26 group-hover:ring-white/60 ${
+                    className={`relative grid place-items-center rounded-full bg-white/18 text-white shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/45 backdrop-blur-md transition-[background-color,box-shadow,ring-color,opacity,transform] duration-300 group-hover:bg-white/26 group-hover:ring-white/60 ${
                       embedded
                         ? "size-[3.75rem] sm:size-16"
-                        : isMobilePlayer
-                          ? "size-[4.75rem] sm:size-[4.75rem]"
-                          : "size-[4.25rem] sm:size-[4.75rem] group-hover:scale-105"
+                        : "size-[4.75rem] group-hover:scale-105 md:size-[4.25rem] lg:size-[4.75rem]"
                     }`}
                     aria-hidden
                   >
@@ -356,11 +354,11 @@ export function VideoPreviewLightbox({
                     <span className="max-w-[90%] text-center font-display text-base font-bold text-white/95 sm:text-lg">
                       {title}
                     </span>
-                  ) : isMobilePlayer || autoPlayWhenVisible ? (
+                  ) : (
                     <span className="max-w-[90%] text-center text-sm font-bold text-white/92 md:hidden">
                       اضغطي للمشاهدة
                     </span>
-                  ) : null}
+                  )}
                 </button>
               </>
             ) : (

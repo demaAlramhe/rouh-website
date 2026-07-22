@@ -48,16 +48,14 @@ function BulletList({ items }: { items: string[] }) {
 function FrontalDateCardInvestment() {
   return (
     <p
-      className="flex min-w-0 flex-nowrap items-baseline justify-start gap-x-1.5 overflow-x-auto text-[clamp(0.75rem,1.8vw+0.42rem,1.0625rem)] tabular-nums leading-snug [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-x-2.5 sm:overflow-visible [&::-webkit-scrollbar]:hidden"
+      className="flex flex-wrap items-baseline justify-center gap-x-2 gap-y-1 text-base tabular-nums leading-snug sm:text-lg"
       aria-label="الاستثمار في نفسك: السعر الحالي 2500 شيكل، السعر السابق 2700 شيكل"
     >
-      <span className="shrink-0 font-semibold text-rouh-ink/58">الاستثمار في نفسك:</span>
-      <span className="shrink-0 font-semibold text-rouh-ink/42 line-through decoration-rouh-ink/22 decoration-1">
+      <span className="font-semibold text-rouh-ink/58">الاستثمار في نفسك:</span>
+      <span className="font-semibold text-rouh-ink/42 line-through decoration-rouh-ink/22 decoration-1">
         2700₪
       </span>
-      <span className="shrink-0 font-bold text-rouh-ink [font-size:max(1em,1.05rem)] sm:[font-size:1.08em]">
-        2500₪
-      </span>
+      <span className="font-bold text-rouh-ink">2500₪</span>
     </p>
   );
 }
@@ -332,38 +330,61 @@ export default function FrontalCoursePage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
-              <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
-                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">زيمر 📍</h3>
-                <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p>3/4 يوليو</p>
-                  <p>10:00–17:00 🕰️</p>
-                  <p>14 ساعة تعليمية</p>
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <article className="flex flex-col items-center rounded-[1.85rem] bg-white/78 p-6 text-center shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
+                  يركا 📍
+                </h3>
+                <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
+                  <p>14/15 آب — جمعة وسبت</p>
+                  <p>10:00–18:00 🕰️</p>
+                  <p>16 ساعة تعليمية</p>
+                  <FrontalDateCardInvestment />
+                </div>
+                <ButtonLink
+                  href={frontalCourseWhatsApp.yarka}
+                  className="mt-7 w-full max-w-xs"
+                  {...whatsappLinkProps}
+                >
+                  حجز يركا — واتساب
+                </ButtonLink>
+              </article>
+
+              <article className="flex flex-col items-center rounded-[1.85rem] bg-white/78 p-6 text-center shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
+                  زيمر 📍
+                </h3>
+                <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
+                  <p>21/22 آب — جمعة وسبت</p>
+                  <p>10:00–18:00 🕰️</p>
+                  <p>16 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
                 </div>
                 <ButtonLink
                   href={frontalCourseWhatsApp.zimmer}
-                  className="mt-7 w-full"
+                  className="mt-7 w-full max-w-xs"
                   {...whatsappLinkProps}
                 >
                   حجز زيمر — واتساب
                 </ButtonLink>
               </article>
 
-              <article className="rounded-[1.85rem] bg-white/78 p-6 shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
-                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">يركا 📍</h3>
-                <div className="mt-5 space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p>24/25 يوليو</p>
-                  <p>10:00–17:00 🕰️</p>
-                  <p>14 ساعة تعليمية</p>
+              <article className="flex flex-col items-center rounded-[1.85rem] bg-white/78 p-6 text-center shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
+                  القدس 📍
+                </h3>
+                <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
+                  <p className="whitespace-nowrap">27/28 آب — خميس وجمعة</p>
+                  <p>10:00–18:00 🕰️</p>
+                  <p>16 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
                 </div>
                 <ButtonLink
-                  href={frontalCourseWhatsApp.majdalShams}
-                  className="mt-7 w-full"
+                  href={frontalCourseWhatsApp.jerusalem}
+                  className="mt-7 w-full max-w-xs"
                   {...whatsappLinkProps}
                 >
-                  حجز يركا — واتساب
+                  حجز القدس — واتساب
                 </ButtonLink>
               </article>
             </div>
