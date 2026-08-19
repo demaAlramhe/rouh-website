@@ -336,7 +336,7 @@ export default function FrontalCoursePage() {
                   يركا 📍
                 </h3>
                 <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p>14/15 آب — جمعة وسبت</p>
+                  <p>11/12 أيلول — جمعة وسبت</p>
                   <p>10:00–18:00 🕰️</p>
                   <p>16 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
@@ -352,10 +352,29 @@ export default function FrontalCoursePage() {
 
               <article className="flex flex-col items-center rounded-[1.85rem] bg-white/78 p-6 text-center shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
                 <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
+                  يركا 📍
+                </h3>
+                <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
+                  <p>30/31 تشرين الأول — جمعة وسبت</p>
+                  <p>10:00–18:00 🕰️</p>
+                  <p>16 ساعة تعليمية</p>
+                  <FrontalDateCardInvestment />
+                </div>
+                <ButtonLink
+                  href={frontalCourseWhatsApp.yarkaOctober}
+                  className="mt-7 w-full max-w-xs"
+                  {...whatsappLinkProps}
+                >
+                  حجز يركا — واتساب
+                </ButtonLink>
+              </article>
+
+              <article className="flex flex-col items-center rounded-[1.85rem] bg-white/78 p-6 text-center shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
+                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
                   زيمر 📍
                 </h3>
                 <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p>21/22 آب — جمعة وسبت</p>
+                  <p>6/7 تشرين الثاني — جمعة وسبت</p>
                   <p>10:00–18:00 🕰️</p>
                   <p>16 ساعة تعليمية</p>
                   <FrontalDateCardInvestment />
@@ -366,25 +385,6 @@ export default function FrontalCoursePage() {
                   {...whatsappLinkProps}
                 >
                   حجز زيمر — واتساب
-                </ButtonLink>
-              </article>
-
-              <article className="flex flex-col items-center rounded-[1.85rem] bg-white/78 p-6 text-center shadow-[0_18px_52px_rgba(50,27,34,0.08)] ring-1 ring-white/80 backdrop-blur sm:p-7">
-                <h3 className="text-pretty font-display text-xl font-bold leading-snug text-rouh-wine sm:text-2xl sm:leading-normal">
-                  القدس 📍
-                </h3>
-                <div className="mt-5 w-full space-y-2.5 text-base font-bold text-rouh-ink sm:text-lg">
-                  <p className="whitespace-nowrap">27/28 آب — خميس وجمعة</p>
-                  <p>10:00–18:00 🕰️</p>
-                  <p>16 ساعة تعليمية</p>
-                  <FrontalDateCardInvestment />
-                </div>
-                <ButtonLink
-                  href={frontalCourseWhatsApp.jerusalem}
-                  className="mt-7 w-full max-w-xs"
-                  {...whatsappLinkProps}
-                >
-                  حجز القدس — واتساب
                 </ButtonLink>
               </article>
             </div>
